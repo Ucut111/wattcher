@@ -1,0 +1,32 @@
+import 'package:watchers_widget/src/features/common/data/apis/auth/auth_api.dart';
+import 'package:watchers_widget/src/features/common/data/apis/auth/dtos/auth_register_dto.dart';
+import 'package:watchers_widget/src/features/common/data/repositories/responses/register_response.dart';
+import 'package:watchers_widget/src/features/common/data/shared_preferences_storage/shared_preferences_storage.dart';
+import 'package:watchers_widget/src/features/common/domain/models/app_settings.dart';
+
+abstract class IAuthRepository {
+  Future<RegisterResponse> register({
+    required String externalId,
+  });
+}
+
+class AuthRepository implements IAuthRepository {
+  final AuthApi _authApi;
+  final SharedPreferencesEntityStorage _entityStorage;
+
+  const AuthRepository(this._authApi, this._entityStorage);
+
+  @override
+  Future<RegisterResponse> register({
+    required String externalId,
+  }) async {
+    final responseData = await _authApi
+        .register(AuthRegisterDto(externalId: externalId))
+        .then((response) => RegisterResponse.fromMap(response.data));
+
+    await _entityStorage.save(responseData.accessToken, AppSettings.accessToken);
+    await _entityStorage.save(responseData.user.toJson(), AppSettings.user);
+
+    return responseData;
+  }
+}
