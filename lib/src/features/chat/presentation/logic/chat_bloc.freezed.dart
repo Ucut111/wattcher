@@ -20,84 +20,118 @@ mixin _$ChatEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,8 +147,7 @@ mixin _$ChatEvent {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -124,6 +157,7 @@ mixin _$ChatEvent {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -138,8 +172,7 @@ mixin _$ChatEvent {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -147,6 +180,7 @@ mixin _$ChatEvent {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -161,8 +195,7 @@ mixin _$ChatEvent {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -170,6 +203,7 @@ mixin _$ChatEvent {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -255,30 +289,44 @@ class _$_Init implements _Init {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return init(externalRoomId);
   }
@@ -288,27 +336,37 @@ class _$_Init implements _Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return init?.call(externalRoomId);
   }
@@ -318,27 +376,37 @@ class _$_Init implements _Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -360,8 +428,7 @@ class _$_Init implements _Init {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -371,6 +438,7 @@ class _$_Init implements _Init {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return init(this);
   }
@@ -388,8 +456,7 @@ class _$_Init implements _Init {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -397,6 +464,7 @@ class _$_Init implements _Init {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return init?.call(this);
   }
@@ -414,8 +482,7 @@ class _$_Init implements _Init {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -423,6 +490,7 @@ class _$_Init implements _Init {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -506,30 +574,44 @@ class _$_SendMessage implements _SendMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return sendMessage(text);
   }
@@ -539,27 +621,37 @@ class _$_SendMessage implements _SendMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return sendMessage?.call(text);
   }
@@ -569,27 +661,37 @@ class _$_SendMessage implements _SendMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -611,8 +713,7 @@ class _$_SendMessage implements _SendMessage {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -622,6 +723,7 @@ class _$_SendMessage implements _SendMessage {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return sendMessage(this);
   }
@@ -639,8 +741,7 @@ class _$_SendMessage implements _SendMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -648,6 +749,7 @@ class _$_SendMessage implements _SendMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return sendMessage?.call(this);
   }
@@ -665,8 +767,7 @@ class _$_SendMessage implements _SendMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -674,6 +775,7 @@ class _$_SendMessage implements _SendMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -702,7 +804,9 @@ abstract class _$$_FinishLoadingCopyWith<$Res> {
       List<Message> messages,
       List<Talker> talkers,
       Talker talker,
-      String externalRoomId});
+      String externalRoomId,
+      List<int> initiatorIds,
+      List<int> targetIds});
 }
 
 /// @nodoc
@@ -722,6 +826,8 @@ class __$$_FinishLoadingCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
     Object? talkers = freezed,
     Object? talker = freezed,
     Object? externalRoomId = freezed,
+    Object? initiatorIds = freezed,
+    Object? targetIds = freezed,
   }) {
     return _then(_$_FinishLoading(
       pinnedMessage: pinnedMessage == freezed
@@ -744,6 +850,14 @@ class __$$_FinishLoadingCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
           ? _value.externalRoomId
           : externalRoomId // ignore: cast_nullable_to_non_nullable
               as String,
+      initiatorIds: initiatorIds == freezed
+          ? _value._initiatorIds
+          : initiatorIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      targetIds: targetIds == freezed
+          ? _value._targetIds
+          : targetIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -756,9 +870,13 @@ class _$_FinishLoading implements _FinishLoading {
       required final List<Message> messages,
       required final List<Talker> talkers,
       required this.talker,
-      required this.externalRoomId})
+      required this.externalRoomId,
+      required final List<int> initiatorIds,
+      required final List<int> targetIds})
       : _messages = messages,
-        _talkers = talkers;
+        _talkers = talkers,
+        _initiatorIds = initiatorIds,
+        _targetIds = targetIds;
 
   @override
   final Message? pinnedMessage;
@@ -780,10 +898,23 @@ class _$_FinishLoading implements _FinishLoading {
   final Talker talker;
   @override
   final String externalRoomId;
+  final List<int> _initiatorIds;
+  @override
+  List<int> get initiatorIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_initiatorIds);
+  }
+
+  final List<int> _targetIds;
+  @override
+  List<int> get targetIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_targetIds);
+  }
 
   @override
   String toString() {
-    return 'ChatEvent.finishLoading(pinnedMessage: $pinnedMessage, messages: $messages, talkers: $talkers, talker: $talker, externalRoomId: $externalRoomId)';
+    return 'ChatEvent.finishLoading(pinnedMessage: $pinnedMessage, messages: $messages, talkers: $talkers, talker: $talker, externalRoomId: $externalRoomId, initiatorIds: $initiatorIds, targetIds: $targetIds)';
   }
 
   @override
@@ -797,7 +928,11 @@ class _$_FinishLoading implements _FinishLoading {
             const DeepCollectionEquality().equals(other._talkers, _talkers) &&
             const DeepCollectionEquality().equals(other.talker, talker) &&
             const DeepCollectionEquality()
-                .equals(other.externalRoomId, externalRoomId));
+                .equals(other.externalRoomId, externalRoomId) &&
+            const DeepCollectionEquality()
+                .equals(other._initiatorIds, _initiatorIds) &&
+            const DeepCollectionEquality()
+                .equals(other._targetIds, _targetIds));
   }
 
   @override
@@ -807,7 +942,9 @@ class _$_FinishLoading implements _FinishLoading {
       const DeepCollectionEquality().hash(_messages),
       const DeepCollectionEquality().hash(_talkers),
       const DeepCollectionEquality().hash(talker),
-      const DeepCollectionEquality().hash(externalRoomId));
+      const DeepCollectionEquality().hash(externalRoomId),
+      const DeepCollectionEquality().hash(_initiatorIds),
+      const DeepCollectionEquality().hash(_targetIds));
 
   @JsonKey(ignore: true)
   @override
@@ -819,33 +956,47 @@ class _$_FinishLoading implements _FinishLoading {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return finishLoading(
-        pinnedMessage, messages, talkers, talker, externalRoomId);
+    return finishLoading(pinnedMessage, messages, talkers, talker,
+        externalRoomId, initiatorIds, targetIds);
   }
 
   @override
@@ -853,30 +1004,40 @@ class _$_FinishLoading implements _FinishLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return finishLoading?.call(
-        pinnedMessage, messages, talkers, talker, externalRoomId);
+    return finishLoading?.call(pinnedMessage, messages, talkers, talker,
+        externalRoomId, initiatorIds, targetIds);
   }
 
   @override
@@ -884,32 +1045,42 @@ class _$_FinishLoading implements _FinishLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (finishLoading != null) {
-      return finishLoading(
-          pinnedMessage, messages, talkers, talker, externalRoomId);
+      return finishLoading(pinnedMessage, messages, talkers, talker,
+          externalRoomId, initiatorIds, targetIds);
     }
     return orElse();
   }
@@ -927,8 +1098,7 @@ class _$_FinishLoading implements _FinishLoading {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -938,6 +1108,7 @@ class _$_FinishLoading implements _FinishLoading {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return finishLoading(this);
   }
@@ -955,8 +1126,7 @@ class _$_FinishLoading implements _FinishLoading {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -964,6 +1134,7 @@ class _$_FinishLoading implements _FinishLoading {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return finishLoading?.call(this);
   }
@@ -981,8 +1152,7 @@ class _$_FinishLoading implements _FinishLoading {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -990,6 +1160,7 @@ class _$_FinishLoading implements _FinishLoading {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (finishLoading != null) {
@@ -1005,13 +1176,17 @@ abstract class _FinishLoading implements ChatEvent {
       required final List<Message> messages,
       required final List<Talker> talkers,
       required final Talker talker,
-      required final String externalRoomId}) = _$_FinishLoading;
+      required final String externalRoomId,
+      required final List<int> initiatorIds,
+      required final List<int> targetIds}) = _$_FinishLoading;
 
   Message? get pinnedMessage;
   List<Message> get messages;
   List<Talker> get talkers;
   Talker get talker;
   String get externalRoomId;
+  List<int> get initiatorIds;
+  List<int> get targetIds;
   @JsonKey(ignore: true)
   _$$_FinishLoadingCopyWith<_$_FinishLoading> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1118,30 +1293,44 @@ class _$_FetchChat implements _FetchChat {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return fetchChat(externalRoomId, messages, talkers);
   }
@@ -1151,27 +1340,37 @@ class _$_FetchChat implements _FetchChat {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return fetchChat?.call(externalRoomId, messages, talkers);
   }
@@ -1181,27 +1380,37 @@ class _$_FetchChat implements _FetchChat {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (fetchChat != null) {
@@ -1223,8 +1432,7 @@ class _$_FetchChat implements _FetchChat {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -1234,6 +1442,7 @@ class _$_FetchChat implements _FetchChat {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return fetchChat(this);
   }
@@ -1251,8 +1460,7 @@ class _$_FetchChat implements _FetchChat {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -1260,6 +1468,7 @@ class _$_FetchChat implements _FetchChat {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return fetchChat?.call(this);
   }
@@ -1277,8 +1486,7 @@ class _$_FetchChat implements _FetchChat {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -1286,6 +1494,7 @@ class _$_FetchChat implements _FetchChat {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (fetchChat != null) {
@@ -1386,30 +1595,44 @@ class _$_ShowEmotion implements _ShowEmotion {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return showEmotion(emotion, isMyEmotion);
   }
@@ -1419,27 +1642,37 @@ class _$_ShowEmotion implements _ShowEmotion {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return showEmotion?.call(emotion, isMyEmotion);
   }
@@ -1449,27 +1682,37 @@ class _$_ShowEmotion implements _ShowEmotion {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (showEmotion != null) {
@@ -1491,8 +1734,7 @@ class _$_ShowEmotion implements _ShowEmotion {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -1502,6 +1744,7 @@ class _$_ShowEmotion implements _ShowEmotion {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return showEmotion(this);
   }
@@ -1519,8 +1762,7 @@ class _$_ShowEmotion implements _ShowEmotion {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -1528,6 +1770,7 @@ class _$_ShowEmotion implements _ShowEmotion {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return showEmotion?.call(this);
   }
@@ -1545,8 +1788,7 @@ class _$_ShowEmotion implements _ShowEmotion {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -1554,6 +1796,7 @@ class _$_ShowEmotion implements _ShowEmotion {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (showEmotion != null) {
@@ -1642,30 +1885,44 @@ class _$_MentionMessage implements _MentionMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return mentionMessage(message);
   }
@@ -1675,27 +1932,37 @@ class _$_MentionMessage implements _MentionMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return mentionMessage?.call(message);
   }
@@ -1705,27 +1972,37 @@ class _$_MentionMessage implements _MentionMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (mentionMessage != null) {
@@ -1747,8 +2024,7 @@ class _$_MentionMessage implements _MentionMessage {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -1758,6 +2034,7 @@ class _$_MentionMessage implements _MentionMessage {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return mentionMessage(this);
   }
@@ -1775,8 +2052,7 @@ class _$_MentionMessage implements _MentionMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -1784,6 +2060,7 @@ class _$_MentionMessage implements _MentionMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return mentionMessage?.call(this);
   }
@@ -1801,8 +2078,7 @@ class _$_MentionMessage implements _MentionMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -1810,6 +2086,7 @@ class _$_MentionMessage implements _MentionMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (mentionMessage != null) {
@@ -1834,7 +2111,7 @@ abstract class _$$_CopyMessageCopyWith<$Res> {
   factory _$$_CopyMessageCopyWith(
           _$_CopyMessage value, $Res Function(_$_CopyMessage) then) =
       __$$_CopyMessageCopyWithImpl<$Res>;
-  $Res call({Message message});
+  $Res call({BuildContext context, Message message});
 }
 
 /// @nodoc
@@ -1849,9 +2126,14 @@ class __$$_CopyMessageCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? context = freezed,
     Object? message = freezed,
   }) {
     return _then(_$_CopyMessage(
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -1863,14 +2145,16 @@ class __$$_CopyMessageCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CopyMessage implements _CopyMessage {
-  const _$_CopyMessage({required this.message});
+  const _$_CopyMessage({required this.context, required this.message});
 
+  @override
+  final BuildContext context;
   @override
   final Message message;
 
   @override
   String toString() {
-    return 'ChatEvent.copyMessage(message: $message)';
+    return 'ChatEvent.copyMessage(context: $context, message: $message)';
   }
 
   @override
@@ -1878,12 +2162,15 @@ class _$_CopyMessage implements _CopyMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CopyMessage &&
+            const DeepCollectionEquality().equals(other.context, context) &&
             const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(context),
+      const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -1895,32 +2182,46 @@ class _$_CopyMessage implements _CopyMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return copyMessage(message);
+    return copyMessage(context, message);
   }
 
   @override
@@ -1928,29 +2229,39 @@ class _$_CopyMessage implements _CopyMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return copyMessage?.call(message);
+    return copyMessage?.call(context, message);
   }
 
   @override
@@ -1958,31 +2269,41 @@ class _$_CopyMessage implements _CopyMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (copyMessage != null) {
-      return copyMessage(message);
+      return copyMessage(context, message);
     }
     return orElse();
   }
@@ -2000,8 +2321,7 @@ class _$_CopyMessage implements _CopyMessage {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -2011,6 +2331,7 @@ class _$_CopyMessage implements _CopyMessage {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return copyMessage(this);
   }
@@ -2028,8 +2349,7 @@ class _$_CopyMessage implements _CopyMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2037,6 +2357,7 @@ class _$_CopyMessage implements _CopyMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return copyMessage?.call(this);
   }
@@ -2054,8 +2375,7 @@ class _$_CopyMessage implements _CopyMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2063,6 +2383,7 @@ class _$_CopyMessage implements _CopyMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (copyMessage != null) {
@@ -2073,8 +2394,11 @@ class _$_CopyMessage implements _CopyMessage {
 }
 
 abstract class _CopyMessage implements ChatEvent {
-  const factory _CopyMessage({required final Message message}) = _$_CopyMessage;
+  const factory _CopyMessage(
+      {required final BuildContext context,
+      required final Message message}) = _$_CopyMessage;
 
+  BuildContext get context;
   Message get message;
   @JsonKey(ignore: true)
   _$$_CopyMessageCopyWith<_$_CopyMessage> get copyWith =>
@@ -2147,30 +2471,44 @@ class _$_EditMessage implements _EditMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return editMessage(message);
   }
@@ -2180,27 +2518,37 @@ class _$_EditMessage implements _EditMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return editMessage?.call(message);
   }
@@ -2210,27 +2558,37 @@ class _$_EditMessage implements _EditMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (editMessage != null) {
@@ -2252,8 +2610,7 @@ class _$_EditMessage implements _EditMessage {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -2263,6 +2620,7 @@ class _$_EditMessage implements _EditMessage {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return editMessage(this);
   }
@@ -2280,8 +2638,7 @@ class _$_EditMessage implements _EditMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2289,6 +2646,7 @@ class _$_EditMessage implements _EditMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return editMessage?.call(this);
   }
@@ -2306,8 +2664,7 @@ class _$_EditMessage implements _EditMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2315,6 +2672,7 @@ class _$_EditMessage implements _EditMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (editMessage != null) {
@@ -2375,30 +2733,44 @@ class _$_CloseOverhang implements _CloseOverhang {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return closeOverhang();
   }
@@ -2408,27 +2780,37 @@ class _$_CloseOverhang implements _CloseOverhang {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return closeOverhang?.call();
   }
@@ -2438,27 +2820,37 @@ class _$_CloseOverhang implements _CloseOverhang {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (closeOverhang != null) {
@@ -2480,8 +2872,7 @@ class _$_CloseOverhang implements _CloseOverhang {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -2491,6 +2882,7 @@ class _$_CloseOverhang implements _CloseOverhang {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return closeOverhang(this);
   }
@@ -2508,8 +2900,7 @@ class _$_CloseOverhang implements _CloseOverhang {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2517,6 +2908,7 @@ class _$_CloseOverhang implements _CloseOverhang {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return closeOverhang?.call(this);
   }
@@ -2534,8 +2926,7 @@ class _$_CloseOverhang implements _CloseOverhang {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2543,6 +2934,7 @@ class _$_CloseOverhang implements _CloseOverhang {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (closeOverhang != null) {
@@ -2561,7 +2953,7 @@ abstract class _$$_DeleteMessageCopyWith<$Res> {
   factory _$$_DeleteMessageCopyWith(
           _$_DeleteMessage value, $Res Function(_$_DeleteMessage) then) =
       __$$_DeleteMessageCopyWithImpl<$Res>;
-  $Res call({Message message});
+  $Res call({Message message, BuildContext context});
 }
 
 /// @nodoc
@@ -2577,12 +2969,17 @@ class __$$_DeleteMessageCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = freezed,
+    Object? context = freezed,
   }) {
     return _then(_$_DeleteMessage(
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as Message,
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -2590,14 +2987,16 @@ class __$$_DeleteMessageCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DeleteMessage implements _DeleteMessage {
-  const _$_DeleteMessage({required this.message});
+  const _$_DeleteMessage({required this.message, required this.context});
 
   @override
   final Message message;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'ChatEvent.deleteMessage(message: $message)';
+    return 'ChatEvent.deleteMessage(message: $message, context: $context)';
   }
 
   @override
@@ -2605,12 +3004,15 @@ class _$_DeleteMessage implements _DeleteMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeleteMessage &&
-            const DeepCollectionEquality().equals(other.message, message));
+            const DeepCollectionEquality().equals(other.message, message) &&
+            const DeepCollectionEquality().equals(other.context, context));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(message),
+      const DeepCollectionEquality().hash(context));
 
   @JsonKey(ignore: true)
   @override
@@ -2622,32 +3024,46 @@ class _$_DeleteMessage implements _DeleteMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return deleteMessage(message);
+    return deleteMessage(message, context);
   }
 
   @override
@@ -2655,29 +3071,39 @@ class _$_DeleteMessage implements _DeleteMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return deleteMessage?.call(message);
+    return deleteMessage?.call(message, context);
   }
 
   @override
@@ -2685,31 +3111,41 @@ class _$_DeleteMessage implements _DeleteMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
-      return deleteMessage(message);
+      return deleteMessage(message, context);
     }
     return orElse();
   }
@@ -2727,8 +3163,7 @@ class _$_DeleteMessage implements _DeleteMessage {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -2738,6 +3173,7 @@ class _$_DeleteMessage implements _DeleteMessage {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return deleteMessage(this);
   }
@@ -2755,8 +3191,7 @@ class _$_DeleteMessage implements _DeleteMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2764,6 +3199,7 @@ class _$_DeleteMessage implements _DeleteMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return deleteMessage?.call(this);
   }
@@ -2781,8 +3217,7 @@ class _$_DeleteMessage implements _DeleteMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -2790,6 +3225,7 @@ class _$_DeleteMessage implements _DeleteMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (deleteMessage != null) {
@@ -2800,10 +3236,12 @@ class _$_DeleteMessage implements _DeleteMessage {
 }
 
 abstract class _DeleteMessage implements ChatEvent {
-  const factory _DeleteMessage({required final Message message}) =
-      _$_DeleteMessage;
+  const factory _DeleteMessage(
+      {required final Message message,
+      required final BuildContext context}) = _$_DeleteMessage;
 
   Message get message;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_DeleteMessageCopyWith<_$_DeleteMessage> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2814,7 +3252,7 @@ abstract class _$$_UpdateMessagesCopyWith<$Res> {
   factory _$$_UpdateMessagesCopyWith(
           _$_UpdateMessages value, $Res Function(_$_UpdateMessages) then) =
       __$$_UpdateMessagesCopyWithImpl<$Res>;
-  $Res call({List<Message> messages});
+  $Res call({ChatStateLoaded loaded});
 }
 
 /// @nodoc
@@ -2830,13 +3268,13 @@ class __$$_UpdateMessagesCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? messages = freezed,
+    Object? loaded = freezed,
   }) {
     return _then(_$_UpdateMessages(
-      messages == freezed
-          ? _value._messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<Message>,
+      loaded == freezed
+          ? _value.loaded
+          : loaded // ignore: cast_nullable_to_non_nullable
+              as ChatStateLoaded,
     ));
   }
 }
@@ -2844,18 +3282,14 @@ class __$$_UpdateMessagesCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UpdateMessages implements _UpdateMessages {
-  const _$_UpdateMessages(final List<Message> messages) : _messages = messages;
+  const _$_UpdateMessages(this.loaded);
 
-  final List<Message> _messages;
   @override
-  List<Message> get messages {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_messages);
-  }
+  final ChatStateLoaded loaded;
 
   @override
   String toString() {
-    return 'ChatEvent.updateMessages(messages: $messages)';
+    return 'ChatEvent.update(loaded: $loaded)';
   }
 
   @override
@@ -2863,12 +3297,12 @@ class _$_UpdateMessages implements _UpdateMessages {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateMessages &&
-            const DeepCollectionEquality().equals(other._messages, _messages));
+            const DeepCollectionEquality().equals(other.loaded, loaded));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_messages));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(loaded));
 
   @JsonKey(ignore: true)
   @override
@@ -2880,32 +3314,46 @@ class _$_UpdateMessages implements _UpdateMessages {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return updateMessages(messages);
+    return update(loaded);
   }
 
   @override
@@ -2913,29 +3361,39 @@ class _$_UpdateMessages implements _UpdateMessages {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return updateMessages?.call(messages);
+    return update?.call(loaded);
   }
 
   @override
@@ -2943,31 +3401,41 @@ class _$_UpdateMessages implements _UpdateMessages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
-    if (updateMessages != null) {
-      return updateMessages(messages);
+    if (update != null) {
+      return update(loaded);
     }
     return orElse();
   }
@@ -2985,8 +3453,7 @@ class _$_UpdateMessages implements _UpdateMessages {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -2996,8 +3463,9 @@ class _$_UpdateMessages implements _UpdateMessages {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
-    return updateMessages(this);
+    return update(this);
   }
 
   @override
@@ -3013,8 +3481,7 @@ class _$_UpdateMessages implements _UpdateMessages {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -3022,8 +3489,9 @@ class _$_UpdateMessages implements _UpdateMessages {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
-    return updateMessages?.call(this);
+    return update?.call(this);
   }
 
   @override
@@ -3039,8 +3507,7 @@ class _$_UpdateMessages implements _UpdateMessages {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -3048,278 +3515,23 @@ class _$_UpdateMessages implements _UpdateMessages {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
-    if (updateMessages != null) {
-      return updateMessages(this);
+    if (update != null) {
+      return update(this);
     }
     return orElse();
   }
 }
 
 abstract class _UpdateMessages implements ChatEvent {
-  const factory _UpdateMessages(final List<Message> messages) =
+  const factory _UpdateMessages(final ChatStateLoaded loaded) =
       _$_UpdateMessages;
 
-  List<Message> get messages;
+  ChatStateLoaded get loaded;
   @JsonKey(ignore: true)
   _$$_UpdateMessagesCopyWith<_$_UpdateMessages> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_UpdateTalkersCopyWith<$Res> {
-  factory _$$_UpdateTalkersCopyWith(
-          _$_UpdateTalkers value, $Res Function(_$_UpdateTalkers) then) =
-      __$$_UpdateTalkersCopyWithImpl<$Res>;
-  $Res call({List<Talker> talkers});
-}
-
-/// @nodoc
-class __$$_UpdateTalkersCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$$_UpdateTalkersCopyWith<$Res> {
-  __$$_UpdateTalkersCopyWithImpl(
-      _$_UpdateTalkers _value, $Res Function(_$_UpdateTalkers) _then)
-      : super(_value, (v) => _then(v as _$_UpdateTalkers));
-
-  @override
-  _$_UpdateTalkers get _value => super._value as _$_UpdateTalkers;
-
-  @override
-  $Res call({
-    Object? talkers = freezed,
-  }) {
-    return _then(_$_UpdateTalkers(
-      talkers == freezed
-          ? _value._talkers
-          : talkers // ignore: cast_nullable_to_non_nullable
-              as List<Talker>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_UpdateTalkers implements _UpdateTalkers {
-  const _$_UpdateTalkers(final List<Talker> talkers) : _talkers = talkers;
-
-  final List<Talker> _talkers;
-  @override
-  List<Talker> get talkers {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_talkers);
-  }
-
-  @override
-  String toString() {
-    return 'ChatEvent.updateTalkers(talkers: $talkers)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_UpdateTalkers &&
-            const DeepCollectionEquality().equals(other._talkers, _talkers));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_talkers));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$_UpdateTalkersCopyWith<_$_UpdateTalkers> get copyWith =>
-      __$$_UpdateTalkersCopyWithImpl<_$_UpdateTalkers>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String externalRoomId) init,
-    required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
-        finishLoading,
-    required TResult Function(
-            String externalRoomId, List<Message> messages, List<Talker> talkers)
-        fetchChat,
-    required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
-    required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
-    required TResult Function(Message message) editMessage,
-    required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
-    required TResult Function(BuildContext context, Message message)
-        reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
-        changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
-        changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
-    required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
-  }) {
-    return updateTalkers(talkers);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalRoomId)? init,
-    TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
-        finishLoading,
-    TResult Function(String externalRoomId, List<Message> messages,
-            List<Talker> talkers)?
-        fetchChat,
-    TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
-    TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
-    TResult Function(Message message)? editMessage,
-    TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
-    TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
-    TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
-  }) {
-    return updateTalkers?.call(talkers);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalRoomId)? init,
-    TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
-        finishLoading,
-    TResult Function(String externalRoomId, List<Message> messages,
-            List<Talker> talkers)?
-        fetchChat,
-    TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
-    TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
-    TResult Function(Message message)? editMessage,
-    TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
-    TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
-    TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
-    required TResult orElse(),
-  }) {
-    if (updateTalkers != null) {
-      return updateTalkers(talkers);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_SendMessage value) sendMessage,
-    required TResult Function(_FinishLoading value) finishLoading,
-    required TResult Function(_FetchChat value) fetchChat,
-    required TResult Function(_ShowEmotion value) showEmotion,
-    required TResult Function(_MentionMessage value) mentionMessage,
-    required TResult Function(_CopyMessage value) copyMessage,
-    required TResult Function(_EditMessage value) editMessage,
-    required TResult Function(_CloseOverhang value) closeOverhang,
-    required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
-    required TResult Function(_ReportMessage value) reportMessage,
-    required TResult Function(_BlockUser value) blockUser,
-    required TResult Function(_ChangeMessageVisibility value)
-        changeMessageVisibility,
-    required TResult Function(_ChangeMessagesVisibility value)
-        changeMessagesVisibility,
-    required TResult Function(_SetBan value) setBan,
-    required TResult Function(_UpdateTalker value) updateTalker,
-    required TResult Function(_LoadMoreMessages value) loadMoreMessages,
-  }) {
-    return updateTalkers(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_SendMessage value)? sendMessage,
-    TResult Function(_FinishLoading value)? finishLoading,
-    TResult Function(_FetchChat value)? fetchChat,
-    TResult Function(_ShowEmotion value)? showEmotion,
-    TResult Function(_MentionMessage value)? mentionMessage,
-    TResult Function(_CopyMessage value)? copyMessage,
-    TResult Function(_EditMessage value)? editMessage,
-    TResult Function(_CloseOverhang value)? closeOverhang,
-    TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
-    TResult Function(_ReportMessage value)? reportMessage,
-    TResult Function(_BlockUser value)? blockUser,
-    TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
-    TResult Function(_ChangeMessagesVisibility value)? changeMessagesVisibility,
-    TResult Function(_SetBan value)? setBan,
-    TResult Function(_UpdateTalker value)? updateTalker,
-    TResult Function(_LoadMoreMessages value)? loadMoreMessages,
-  }) {
-    return updateTalkers?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_SendMessage value)? sendMessage,
-    TResult Function(_FinishLoading value)? finishLoading,
-    TResult Function(_FetchChat value)? fetchChat,
-    TResult Function(_ShowEmotion value)? showEmotion,
-    TResult Function(_MentionMessage value)? mentionMessage,
-    TResult Function(_CopyMessage value)? copyMessage,
-    TResult Function(_EditMessage value)? editMessage,
-    TResult Function(_CloseOverhang value)? closeOverhang,
-    TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
-    TResult Function(_ReportMessage value)? reportMessage,
-    TResult Function(_BlockUser value)? blockUser,
-    TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
-    TResult Function(_ChangeMessagesVisibility value)? changeMessagesVisibility,
-    TResult Function(_SetBan value)? setBan,
-    TResult Function(_UpdateTalker value)? updateTalker,
-    TResult Function(_LoadMoreMessages value)? loadMoreMessages,
-    required TResult orElse(),
-  }) {
-    if (updateTalkers != null) {
-      return updateTalkers(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateTalkers implements ChatEvent {
-  const factory _UpdateTalkers(final List<Talker> talkers) = _$_UpdateTalkers;
-
-  List<Talker> get talkers;
-  @JsonKey(ignore: true)
-  _$$_UpdateTalkersCopyWith<_$_UpdateTalkers> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3399,30 +3611,44 @@ class _$_ReportMessage implements _ReportMessage {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return reportMessage(context, message);
   }
@@ -3432,27 +3658,37 @@ class _$_ReportMessage implements _ReportMessage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return reportMessage?.call(context, message);
   }
@@ -3462,27 +3698,37 @@ class _$_ReportMessage implements _ReportMessage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (reportMessage != null) {
@@ -3504,8 +3750,7 @@ class _$_ReportMessage implements _ReportMessage {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -3515,6 +3760,7 @@ class _$_ReportMessage implements _ReportMessage {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return reportMessage(this);
   }
@@ -3532,8 +3778,7 @@ class _$_ReportMessage implements _ReportMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -3541,6 +3786,7 @@ class _$_ReportMessage implements _ReportMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return reportMessage?.call(this);
   }
@@ -3558,8 +3804,7 @@ class _$_ReportMessage implements _ReportMessage {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -3567,6 +3812,7 @@ class _$_ReportMessage implements _ReportMessage {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (reportMessage != null) {
@@ -3593,7 +3839,7 @@ abstract class _$$_BlockUserCopyWith<$Res> {
   factory _$$_BlockUserCopyWith(
           _$_BlockUser value, $Res Function(_$_BlockUser) then) =
       __$$_BlockUserCopyWithImpl<$Res>;
-  $Res call({Message message});
+  $Res call({BuildContext context, Message message});
 }
 
 /// @nodoc
@@ -3608,9 +3854,14 @@ class __$$_BlockUserCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? context = freezed,
     Object? message = freezed,
   }) {
     return _then(_$_BlockUser(
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -3622,14 +3873,16 @@ class __$$_BlockUserCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BlockUser implements _BlockUser {
-  const _$_BlockUser({required this.message});
+  const _$_BlockUser({required this.context, required this.message});
 
+  @override
+  final BuildContext context;
   @override
   final Message message;
 
   @override
   String toString() {
-    return 'ChatEvent.blockUser(message: $message)';
+    return 'ChatEvent.blockUser(context: $context, message: $message)';
   }
 
   @override
@@ -3637,12 +3890,15 @@ class _$_BlockUser implements _BlockUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BlockUser &&
+            const DeepCollectionEquality().equals(other.context, context) &&
             const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(context),
+      const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -3654,32 +3910,46 @@ class _$_BlockUser implements _BlockUser {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return blockUser(message);
+    return blockUser(context, message);
   }
 
   @override
@@ -3687,29 +3957,39 @@ class _$_BlockUser implements _BlockUser {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return blockUser?.call(message);
+    return blockUser?.call(context, message);
   }
 
   @override
@@ -3717,31 +3997,41 @@ class _$_BlockUser implements _BlockUser {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (blockUser != null) {
-      return blockUser(message);
+      return blockUser(context, message);
     }
     return orElse();
   }
@@ -3759,8 +4049,7 @@ class _$_BlockUser implements _BlockUser {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -3770,6 +4059,7 @@ class _$_BlockUser implements _BlockUser {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return blockUser(this);
   }
@@ -3787,8 +4077,7 @@ class _$_BlockUser implements _BlockUser {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -3796,6 +4085,7 @@ class _$_BlockUser implements _BlockUser {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return blockUser?.call(this);
   }
@@ -3813,8 +4103,7 @@ class _$_BlockUser implements _BlockUser {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -3822,6 +4111,7 @@ class _$_BlockUser implements _BlockUser {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (blockUser != null) {
@@ -3832,8 +4122,11 @@ class _$_BlockUser implements _BlockUser {
 }
 
 abstract class _BlockUser implements ChatEvent {
-  const factory _BlockUser({required final Message message}) = _$_BlockUser;
+  const factory _BlockUser(
+      {required final BuildContext context,
+      required final Message message}) = _$_BlockUser;
 
+  BuildContext get context;
   Message get message;
   @JsonKey(ignore: true)
   _$$_BlockUserCopyWith<_$_BlockUser> get copyWith =>
@@ -3845,7 +4138,7 @@ abstract class _$$_ChangeMessageVisibilityCopyWith<$Res> {
   factory _$$_ChangeMessageVisibilityCopyWith(_$_ChangeMessageVisibility value,
           $Res Function(_$_ChangeMessageVisibility) then) =
       __$$_ChangeMessageVisibilityCopyWithImpl<$Res>;
-  $Res call({Message message, bool isVisible});
+  $Res call({Message message, bool isVisible, BuildContext context});
 }
 
 /// @nodoc
@@ -3864,6 +4157,7 @@ class __$$_ChangeMessageVisibilityCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
     Object? isVisible = freezed,
+    Object? context = freezed,
   }) {
     return _then(_$_ChangeMessageVisibility(
       message: message == freezed
@@ -3874,6 +4168,10 @@ class __$$_ChangeMessageVisibilityCopyWithImpl<$Res>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool,
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -3882,16 +4180,18 @@ class __$$_ChangeMessageVisibilityCopyWithImpl<$Res>
 
 class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
   const _$_ChangeMessageVisibility(
-      {required this.message, required this.isVisible});
+      {required this.message, required this.isVisible, required this.context});
 
   @override
   final Message message;
   @override
   final bool isVisible;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'ChatEvent.changeMessageVisibility(message: $message, isVisible: $isVisible)';
+    return 'ChatEvent.changeMessageVisibility(message: $message, isVisible: $isVisible, context: $context)';
   }
 
   @override
@@ -3900,14 +4200,16 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
         (other.runtimeType == runtimeType &&
             other is _$_ChangeMessageVisibility &&
             const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality().equals(other.isVisible, isVisible));
+            const DeepCollectionEquality().equals(other.isVisible, isVisible) &&
+            const DeepCollectionEquality().equals(other.context, context));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(message),
-      const DeepCollectionEquality().hash(isVisible));
+      const DeepCollectionEquality().hash(isVisible),
+      const DeepCollectionEquality().hash(context));
 
   @JsonKey(ignore: true)
   @override
@@ -3921,32 +4223,46 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return changeMessageVisibility(message, isVisible);
+    return changeMessageVisibility(message, isVisible, context);
   }
 
   @override
@@ -3954,29 +4270,39 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return changeMessageVisibility?.call(message, isVisible);
+    return changeMessageVisibility?.call(message, isVisible, context);
   }
 
   @override
@@ -3984,31 +4310,41 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (changeMessageVisibility != null) {
-      return changeMessageVisibility(message, isVisible);
+      return changeMessageVisibility(message, isVisible, context);
     }
     return orElse();
   }
@@ -4026,8 +4362,7 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -4037,6 +4372,7 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return changeMessageVisibility(this);
   }
@@ -4054,8 +4390,7 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4063,6 +4398,7 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return changeMessageVisibility?.call(this);
   }
@@ -4080,8 +4416,7 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4089,6 +4424,7 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (changeMessageVisibility != null) {
@@ -4101,10 +4437,12 @@ class _$_ChangeMessageVisibility implements _ChangeMessageVisibility {
 abstract class _ChangeMessageVisibility implements ChatEvent {
   const factory _ChangeMessageVisibility(
       {required final Message message,
-      required final bool isVisible}) = _$_ChangeMessageVisibility;
+      required final bool isVisible,
+      required final BuildContext context}) = _$_ChangeMessageVisibility;
 
   Message get message;
   bool get isVisible;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_ChangeMessageVisibilityCopyWith<_$_ChangeMessageVisibility>
       get copyWith => throw _privateConstructorUsedError;
@@ -4116,7 +4454,7 @@ abstract class _$$_ChangeMessagesVisibilityCopyWith<$Res> {
           _$_ChangeMessagesVisibility value,
           $Res Function(_$_ChangeMessagesVisibility) then) =
       __$$_ChangeMessagesVisibilityCopyWithImpl<$Res>;
-  $Res call({Message message, bool isVisible});
+  $Res call({Talker talker, bool isVisible, BuildContext context});
 }
 
 /// @nodoc
@@ -4133,18 +4471,23 @@ class __$$_ChangeMessagesVisibilityCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? message = freezed,
+    Object? talker = freezed,
     Object? isVisible = freezed,
+    Object? context = freezed,
   }) {
     return _then(_$_ChangeMessagesVisibility(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as Message,
+      talker: talker == freezed
+          ? _value.talker
+          : talker // ignore: cast_nullable_to_non_nullable
+              as Talker,
       isVisible: isVisible == freezed
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool,
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -4153,16 +4496,18 @@ class __$$_ChangeMessagesVisibilityCopyWithImpl<$Res>
 
 class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
   const _$_ChangeMessagesVisibility(
-      {required this.message, required this.isVisible});
+      {required this.talker, required this.isVisible, required this.context});
 
   @override
-  final Message message;
+  final Talker talker;
   @override
   final bool isVisible;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'ChatEvent.changeMessagesVisibility(message: $message, isVisible: $isVisible)';
+    return 'ChatEvent.changeMessagesVisibility(talker: $talker, isVisible: $isVisible, context: $context)';
   }
 
   @override
@@ -4170,15 +4515,17 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChangeMessagesVisibility &&
-            const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality().equals(other.isVisible, isVisible));
+            const DeepCollectionEquality().equals(other.talker, talker) &&
+            const DeepCollectionEquality().equals(other.isVisible, isVisible) &&
+            const DeepCollectionEquality().equals(other.context, context));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(message),
-      const DeepCollectionEquality().hash(isVisible));
+      const DeepCollectionEquality().hash(talker),
+      const DeepCollectionEquality().hash(isVisible),
+      const DeepCollectionEquality().hash(context));
 
   @JsonKey(ignore: true)
   @override
@@ -4191,32 +4538,46 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return changeMessagesVisibility(message, isVisible);
+    return changeMessagesVisibility(talker, isVisible, context);
   }
 
   @override
@@ -4224,29 +4585,39 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return changeMessagesVisibility?.call(message, isVisible);
+    return changeMessagesVisibility?.call(talker, isVisible, context);
   }
 
   @override
@@ -4254,31 +4625,41 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (changeMessagesVisibility != null) {
-      return changeMessagesVisibility(message, isVisible);
+      return changeMessagesVisibility(talker, isVisible, context);
     }
     return orElse();
   }
@@ -4296,8 +4677,7 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -4307,6 +4687,7 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return changeMessagesVisibility(this);
   }
@@ -4324,8 +4705,7 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4333,6 +4713,7 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return changeMessagesVisibility?.call(this);
   }
@@ -4350,8 +4731,7 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4359,6 +4739,7 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (changeMessagesVisibility != null) {
@@ -4370,11 +4751,13 @@ class _$_ChangeMessagesVisibility implements _ChangeMessagesVisibility {
 
 abstract class _ChangeMessagesVisibility implements ChatEvent {
   const factory _ChangeMessagesVisibility(
-      {required final Message message,
-      required final bool isVisible}) = _$_ChangeMessagesVisibility;
+      {required final Talker talker,
+      required final bool isVisible,
+      required final BuildContext context}) = _$_ChangeMessagesVisibility;
 
-  Message get message;
+  Talker get talker;
   bool get isVisible;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_ChangeMessagesVisibilityCopyWith<_$_ChangeMessagesVisibility>
       get copyWith => throw _privateConstructorUsedError;
@@ -4384,7 +4767,7 @@ abstract class _ChangeMessagesVisibility implements ChatEvent {
 abstract class _$$_SetBanCopyWith<$Res> {
   factory _$$_SetBanCopyWith(_$_SetBan value, $Res Function(_$_SetBan) then) =
       __$$_SetBanCopyWithImpl<$Res>;
-  $Res call({Message message, bool isBanned});
+  $Res call({Talker talker, bool isBanned, BuildContext context});
 }
 
 /// @nodoc
@@ -4398,18 +4781,23 @@ class __$$_SetBanCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? message = freezed,
+    Object? talker = freezed,
     Object? isBanned = freezed,
+    Object? context = freezed,
   }) {
     return _then(_$_SetBan(
-      message: message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as Message,
+      talker: talker == freezed
+          ? _value.talker
+          : talker // ignore: cast_nullable_to_non_nullable
+              as Talker,
       isBanned: isBanned == freezed
           ? _value.isBanned
           : isBanned // ignore: cast_nullable_to_non_nullable
               as bool,
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -4417,16 +4805,19 @@ class __$$_SetBanCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SetBan implements _SetBan {
-  const _$_SetBan({required this.message, required this.isBanned});
+  const _$_SetBan(
+      {required this.talker, required this.isBanned, required this.context});
 
   @override
-  final Message message;
+  final Talker talker;
   @override
   final bool isBanned;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'ChatEvent.setBan(message: $message, isBanned: $isBanned)';
+    return 'ChatEvent.setBan(talker: $talker, isBanned: $isBanned, context: $context)';
   }
 
   @override
@@ -4434,15 +4825,17 @@ class _$_SetBan implements _SetBan {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetBan &&
-            const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality().equals(other.isBanned, isBanned));
+            const DeepCollectionEquality().equals(other.talker, talker) &&
+            const DeepCollectionEquality().equals(other.isBanned, isBanned) &&
+            const DeepCollectionEquality().equals(other.context, context));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(message),
-      const DeepCollectionEquality().hash(isBanned));
+      const DeepCollectionEquality().hash(talker),
+      const DeepCollectionEquality().hash(isBanned),
+      const DeepCollectionEquality().hash(context));
 
   @JsonKey(ignore: true)
   @override
@@ -4454,32 +4847,46 @@ class _$_SetBan implements _SetBan {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return setBan(message, isBanned);
+    return setBan(talker, isBanned, context);
   }
 
   @override
@@ -4487,29 +4894,39 @@ class _$_SetBan implements _SetBan {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return setBan?.call(message, isBanned);
+    return setBan?.call(talker, isBanned, context);
   }
 
   @override
@@ -4517,31 +4934,41 @@ class _$_SetBan implements _SetBan {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (setBan != null) {
-      return setBan(message, isBanned);
+      return setBan(talker, isBanned, context);
     }
     return orElse();
   }
@@ -4559,8 +4986,7 @@ class _$_SetBan implements _SetBan {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -4570,6 +4996,7 @@ class _$_SetBan implements _SetBan {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return setBan(this);
   }
@@ -4587,8 +5014,7 @@ class _$_SetBan implements _SetBan {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4596,6 +5022,7 @@ class _$_SetBan implements _SetBan {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return setBan?.call(this);
   }
@@ -4613,8 +5040,7 @@ class _$_SetBan implements _SetBan {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4622,6 +5048,7 @@ class _$_SetBan implements _SetBan {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (setBan != null) {
@@ -4633,11 +5060,13 @@ class _$_SetBan implements _SetBan {
 
 abstract class _SetBan implements ChatEvent {
   const factory _SetBan(
-      {required final Message message,
-      required final bool isBanned}) = _$_SetBan;
+      {required final Talker talker,
+      required final bool isBanned,
+      required final BuildContext context}) = _$_SetBan;
 
-  Message get message;
+  Talker get talker;
   bool get isBanned;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_SetBanCopyWith<_$_SetBan> get copyWith =>
       throw _privateConstructorUsedError;
@@ -4709,30 +5138,44 @@ class _$_UpdateTalker implements _UpdateTalker {
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
     return updateTalker(talker);
   }
@@ -4742,27 +5185,37 @@ class _$_UpdateTalker implements _UpdateTalker {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
     return updateTalker?.call(talker);
   }
@@ -4772,27 +5225,37 @@ class _$_UpdateTalker implements _UpdateTalker {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (updateTalker != null) {
@@ -4814,8 +5277,7 @@ class _$_UpdateTalker implements _UpdateTalker {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -4825,6 +5287,7 @@ class _$_UpdateTalker implements _UpdateTalker {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return updateTalker(this);
   }
@@ -4842,8 +5305,7 @@ class _$_UpdateTalker implements _UpdateTalker {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4851,6 +5313,7 @@ class _$_UpdateTalker implements _UpdateTalker {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return updateTalker?.call(this);
   }
@@ -4868,8 +5331,7 @@ class _$_UpdateTalker implements _UpdateTalker {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -4877,6 +5339,7 @@ class _$_UpdateTalker implements _UpdateTalker {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (updateTalker != null) {
@@ -4900,6 +5363,7 @@ abstract class _$$_LoadMoreMessagesCopyWith<$Res> {
   factory _$$_LoadMoreMessagesCopyWith(
           _$_LoadMoreMessages value, $Res Function(_$_LoadMoreMessages) then) =
       __$$_LoadMoreMessagesCopyWithImpl<$Res>;
+  $Res call({int? lastMessageId, int? limit, Message? scrollToMessage});
 }
 
 /// @nodoc
@@ -4912,58 +5376,117 @@ class __$$_LoadMoreMessagesCopyWithImpl<$Res>
 
   @override
   _$_LoadMoreMessages get _value => super._value as _$_LoadMoreMessages;
+
+  @override
+  $Res call({
+    Object? lastMessageId = freezed,
+    Object? limit = freezed,
+    Object? scrollToMessage = freezed,
+  }) {
+    return _then(_$_LoadMoreMessages(
+      lastMessageId: lastMessageId == freezed
+          ? _value.lastMessageId
+          : lastMessageId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      scrollToMessage: scrollToMessage == freezed
+          ? _value.scrollToMessage
+          : scrollToMessage // ignore: cast_nullable_to_non_nullable
+              as Message?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LoadMoreMessages implements _LoadMoreMessages {
-  const _$_LoadMoreMessages();
+  const _$_LoadMoreMessages(
+      {this.lastMessageId, this.limit, this.scrollToMessage});
+
+  @override
+  final int? lastMessageId;
+  @override
+  final int? limit;
+  @override
+  final Message? scrollToMessage;
 
   @override
   String toString() {
-    return 'ChatEvent.loadMoreMessages()';
+    return 'ChatEvent.loadMoreMessages(lastMessageId: $lastMessageId, limit: $limit, scrollToMessage: $scrollToMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMoreMessages);
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadMoreMessages &&
+            const DeepCollectionEquality()
+                .equals(other.lastMessageId, lastMessageId) &&
+            const DeepCollectionEquality().equals(other.limit, limit) &&
+            const DeepCollectionEquality()
+                .equals(other.scrollToMessage, scrollToMessage));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(lastMessageId),
+      const DeepCollectionEquality().hash(limit),
+      const DeepCollectionEquality().hash(scrollToMessage));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoadMoreMessagesCopyWith<_$_LoadMoreMessages> get copyWith =>
+      __$$_LoadMoreMessagesCopyWithImpl<_$_LoadMoreMessages>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String externalRoomId) init,
     required TResult Function(String text) sendMessage,
-    required TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
         finishLoading,
     required TResult Function(
             String externalRoomId, List<Message> messages, List<Talker> talkers)
         fetchChat,
     required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
     required TResult Function(Message message) mentionMessage,
-    required TResult Function(Message message) copyMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
     required TResult Function(Message message) editMessage,
     required TResult Function() closeOverhang,
-    required TResult Function(Message message) deleteMessage,
-    required TResult Function(List<Message> messages) updateMessages,
-    required TResult Function(List<Talker> talkers) updateTalkers,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
     required TResult Function(BuildContext context, Message message)
         reportMessage,
-    required TResult Function(Message message) blockUser,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
         changeMessageVisibility,
-    required TResult Function(Message message, bool isVisible)
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
         changeMessagesVisibility,
-    required TResult Function(Message message, bool isBanned) setBan,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
     required TResult Function(Talker talker) updateTalker,
-    required TResult Function() loadMoreMessages,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
   }) {
-    return loadMoreMessages();
+    return loadMoreMessages(lastMessageId, limit, this.scrollToMessage);
   }
 
   @override
@@ -4971,29 +5494,39 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
   }) {
-    return loadMoreMessages?.call();
+    return loadMoreMessages?.call(lastMessageId, limit, this.scrollToMessage);
   }
 
   @override
@@ -5001,31 +5534,41 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String externalRoomId)? init,
     TResult Function(String text)? sendMessage,
-    TResult Function(Message? pinnedMessage, List<Message> messages,
-            List<Talker> talkers, Talker talker, String externalRoomId)?
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         finishLoading,
     TResult Function(String externalRoomId, List<Message> messages,
             List<Talker> talkers)?
         fetchChat,
     TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
     TResult Function(Message message)? mentionMessage,
-    TResult Function(Message message)? copyMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
     TResult Function(Message message)? editMessage,
     TResult Function()? closeOverhang,
-    TResult Function(Message message)? deleteMessage,
-    TResult Function(List<Message> messages)? updateMessages,
-    TResult Function(List<Talker> talkers)? updateTalkers,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
     TResult Function(BuildContext context, Message message)? reportMessage,
-    TResult Function(Message message)? blockUser,
-    TResult Function(Message message, bool isVisible)? changeMessageVisibility,
-    TResult Function(Message message, bool isVisible)? changeMessagesVisibility,
-    TResult Function(Message message, bool isBanned)? setBan,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
     TResult Function(Talker talker)? updateTalker,
-    TResult Function()? loadMoreMessages,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (loadMoreMessages != null) {
-      return loadMoreMessages();
+      return loadMoreMessages(lastMessageId, limit, this.scrollToMessage);
     }
     return orElse();
   }
@@ -5043,8 +5586,7 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
     required TResult Function(_EditMessage value) editMessage,
     required TResult Function(_CloseOverhang value) closeOverhang,
     required TResult Function(_DeleteMessage value) deleteMessage,
-    required TResult Function(_UpdateMessages value) updateMessages,
-    required TResult Function(_UpdateTalkers value) updateTalkers,
+    required TResult Function(_UpdateMessages value) update,
     required TResult Function(_ReportMessage value) reportMessage,
     required TResult Function(_BlockUser value) blockUser,
     required TResult Function(_ChangeMessageVisibility value)
@@ -5054,6 +5596,7 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
     required TResult Function(_SetBan value) setBan,
     required TResult Function(_UpdateTalker value) updateTalker,
     required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
   }) {
     return loadMoreMessages(this);
   }
@@ -5071,8 +5614,7 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -5080,6 +5622,7 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
   }) {
     return loadMoreMessages?.call(this);
   }
@@ -5097,8 +5640,7 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
     TResult Function(_EditMessage value)? editMessage,
     TResult Function(_CloseOverhang value)? closeOverhang,
     TResult Function(_DeleteMessage value)? deleteMessage,
-    TResult Function(_UpdateMessages value)? updateMessages,
-    TResult Function(_UpdateTalkers value)? updateTalkers,
+    TResult Function(_UpdateMessages value)? update,
     TResult Function(_ReportMessage value)? reportMessage,
     TResult Function(_BlockUser value)? blockUser,
     TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
@@ -5106,6 +5648,7 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
     TResult Function(_SetBan value)? setBan,
     TResult Function(_UpdateTalker value)? updateTalker,
     TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
     required TResult orElse(),
   }) {
     if (loadMoreMessages != null) {
@@ -5116,7 +5659,305 @@ class _$_LoadMoreMessages implements _LoadMoreMessages {
 }
 
 abstract class _LoadMoreMessages implements ChatEvent {
-  const factory _LoadMoreMessages() = _$_LoadMoreMessages;
+  const factory _LoadMoreMessages(
+      {final int? lastMessageId,
+      final int? limit,
+      final Message? scrollToMessage}) = _$_LoadMoreMessages;
+
+  int? get lastMessageId;
+  int? get limit;
+  Message? get scrollToMessage;
+  @JsonKey(ignore: true)
+  _$$_LoadMoreMessagesCopyWith<_$_LoadMoreMessages> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ScrollToMessageCopyWith<$Res> {
+  factory _$$_ScrollToMessageCopyWith(
+          _$_ScrollToMessage value, $Res Function(_$_ScrollToMessage) then) =
+      __$$_ScrollToMessageCopyWithImpl<$Res>;
+  $Res call({Message message});
+}
+
+/// @nodoc
+class __$$_ScrollToMessageCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res>
+    implements _$$_ScrollToMessageCopyWith<$Res> {
+  __$$_ScrollToMessageCopyWithImpl(
+      _$_ScrollToMessage _value, $Res Function(_$_ScrollToMessage) _then)
+      : super(_value, (v) => _then(v as _$_ScrollToMessage));
+
+  @override
+  _$_ScrollToMessage get _value => super._value as _$_ScrollToMessage;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$_ScrollToMessage(
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as Message,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ScrollToMessage implements _ScrollToMessage {
+  const _$_ScrollToMessage({required this.message});
+
+  @override
+  final Message message;
+
+  @override
+  String toString() {
+    return 'ChatEvent.scrollToMessage(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ScrollToMessage &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ScrollToMessageCopyWith<_$_ScrollToMessage> get copyWith =>
+      __$$_ScrollToMessageCopyWithImpl<_$_ScrollToMessage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String externalRoomId) init,
+    required TResult Function(String text) sendMessage,
+    required TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)
+        finishLoading,
+    required TResult Function(
+            String externalRoomId, List<Message> messages, List<Talker> talkers)
+        fetchChat,
+    required TResult Function(Emotion emotion, bool isMyEmotion) showEmotion,
+    required TResult Function(Message message) mentionMessage,
+    required TResult Function(BuildContext context, Message message)
+        copyMessage,
+    required TResult Function(Message message) editMessage,
+    required TResult Function() closeOverhang,
+    required TResult Function(Message message, BuildContext context)
+        deleteMessage,
+    required TResult Function(ChatStateLoaded loaded) update,
+    required TResult Function(BuildContext context, Message message)
+        reportMessage,
+    required TResult Function(BuildContext context, Message message) blockUser,
+    required TResult Function(
+            Message message, bool isVisible, BuildContext context)
+        changeMessageVisibility,
+    required TResult Function(
+            Talker talker, bool isVisible, BuildContext context)
+        changeMessagesVisibility,
+    required TResult Function(
+            Talker talker, bool isBanned, BuildContext context)
+        setBan,
+    required TResult Function(Talker talker) updateTalker,
+    required TResult Function(
+            int? lastMessageId, int? limit, Message? scrollToMessage)
+        loadMoreMessages,
+    required TResult Function(Message message) scrollToMessage,
+  }) {
+    return scrollToMessage(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String externalRoomId)? init,
+    TResult Function(String text)? sendMessage,
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
+        finishLoading,
+    TResult Function(String externalRoomId, List<Message> messages,
+            List<Talker> talkers)?
+        fetchChat,
+    TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
+    TResult Function(Message message)? mentionMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
+    TResult Function(Message message)? editMessage,
+    TResult Function()? closeOverhang,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
+    TResult Function(BuildContext context, Message message)? reportMessage,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
+    TResult Function(Talker talker)? updateTalker,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
+  }) {
+    return scrollToMessage?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String externalRoomId)? init,
+    TResult Function(String text)? sendMessage,
+    TResult Function(
+            Message? pinnedMessage,
+            List<Message> messages,
+            List<Talker> talkers,
+            Talker talker,
+            String externalRoomId,
+            List<int> initiatorIds,
+            List<int> targetIds)?
+        finishLoading,
+    TResult Function(String externalRoomId, List<Message> messages,
+            List<Talker> talkers)?
+        fetchChat,
+    TResult Function(Emotion emotion, bool isMyEmotion)? showEmotion,
+    TResult Function(Message message)? mentionMessage,
+    TResult Function(BuildContext context, Message message)? copyMessage,
+    TResult Function(Message message)? editMessage,
+    TResult Function()? closeOverhang,
+    TResult Function(Message message, BuildContext context)? deleteMessage,
+    TResult Function(ChatStateLoaded loaded)? update,
+    TResult Function(BuildContext context, Message message)? reportMessage,
+    TResult Function(BuildContext context, Message message)? blockUser,
+    TResult Function(Message message, bool isVisible, BuildContext context)?
+        changeMessageVisibility,
+    TResult Function(Talker talker, bool isVisible, BuildContext context)?
+        changeMessagesVisibility,
+    TResult Function(Talker talker, bool isBanned, BuildContext context)?
+        setBan,
+    TResult Function(Talker talker)? updateTalker,
+    TResult Function(int? lastMessageId, int? limit, Message? scrollToMessage)?
+        loadMoreMessages,
+    TResult Function(Message message)? scrollToMessage,
+    required TResult orElse(),
+  }) {
+    if (scrollToMessage != null) {
+      return scrollToMessage(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_FinishLoading value) finishLoading,
+    required TResult Function(_FetchChat value) fetchChat,
+    required TResult Function(_ShowEmotion value) showEmotion,
+    required TResult Function(_MentionMessage value) mentionMessage,
+    required TResult Function(_CopyMessage value) copyMessage,
+    required TResult Function(_EditMessage value) editMessage,
+    required TResult Function(_CloseOverhang value) closeOverhang,
+    required TResult Function(_DeleteMessage value) deleteMessage,
+    required TResult Function(_UpdateMessages value) update,
+    required TResult Function(_ReportMessage value) reportMessage,
+    required TResult Function(_BlockUser value) blockUser,
+    required TResult Function(_ChangeMessageVisibility value)
+        changeMessageVisibility,
+    required TResult Function(_ChangeMessagesVisibility value)
+        changeMessagesVisibility,
+    required TResult Function(_SetBan value) setBan,
+    required TResult Function(_UpdateTalker value) updateTalker,
+    required TResult Function(_LoadMoreMessages value) loadMoreMessages,
+    required TResult Function(_ScrollToMessage value) scrollToMessage,
+  }) {
+    return scrollToMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_FinishLoading value)? finishLoading,
+    TResult Function(_FetchChat value)? fetchChat,
+    TResult Function(_ShowEmotion value)? showEmotion,
+    TResult Function(_MentionMessage value)? mentionMessage,
+    TResult Function(_CopyMessage value)? copyMessage,
+    TResult Function(_EditMessage value)? editMessage,
+    TResult Function(_CloseOverhang value)? closeOverhang,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_UpdateMessages value)? update,
+    TResult Function(_ReportMessage value)? reportMessage,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
+    TResult Function(_ChangeMessagesVisibility value)? changeMessagesVisibility,
+    TResult Function(_SetBan value)? setBan,
+    TResult Function(_UpdateTalker value)? updateTalker,
+    TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
+  }) {
+    return scrollToMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_FinishLoading value)? finishLoading,
+    TResult Function(_FetchChat value)? fetchChat,
+    TResult Function(_ShowEmotion value)? showEmotion,
+    TResult Function(_MentionMessage value)? mentionMessage,
+    TResult Function(_CopyMessage value)? copyMessage,
+    TResult Function(_EditMessage value)? editMessage,
+    TResult Function(_CloseOverhang value)? closeOverhang,
+    TResult Function(_DeleteMessage value)? deleteMessage,
+    TResult Function(_UpdateMessages value)? update,
+    TResult Function(_ReportMessage value)? reportMessage,
+    TResult Function(_BlockUser value)? blockUser,
+    TResult Function(_ChangeMessageVisibility value)? changeMessageVisibility,
+    TResult Function(_ChangeMessagesVisibility value)? changeMessagesVisibility,
+    TResult Function(_SetBan value)? setBan,
+    TResult Function(_UpdateTalker value)? updateTalker,
+    TResult Function(_LoadMoreMessages value)? loadMoreMessages,
+    TResult Function(_ScrollToMessage value)? scrollToMessage,
+    required TResult orElse(),
+  }) {
+    if (scrollToMessage != null) {
+      return scrollToMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ScrollToMessage implements ChatEvent {
+  const factory _ScrollToMessage({required final Message message}) =
+      _$_ScrollToMessage;
+
+  Message get message;
+  @JsonKey(ignore: true)
+  _$$_ScrollToMessageCopyWith<_$_ScrollToMessage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -5135,7 +5976,9 @@ mixin _$ChatState {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -5153,7 +5996,9 @@ mixin _$ChatState {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)?
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -5171,7 +6016,9 @@ mixin _$ChatState {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)?
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -5231,8 +6078,8 @@ class __$$_LoadingCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  _$_Loading();
+class _$_Loading extends _Loading {
+  _$_Loading() : super._();
 
   @override
   String toString() {
@@ -5263,7 +6110,9 @@ class _$_Loading implements _Loading {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)
         loaded,
   }) {
     return loading();
@@ -5284,7 +6133,9 @@ class _$_Loading implements _Loading {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)?
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         loaded,
   }) {
     return loading?.call();
@@ -5305,7 +6156,9 @@ class _$_Loading implements _Loading {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)?
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         loaded,
     required TResult orElse(),
   }) {
@@ -5347,8 +6200,9 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements ChatState {
+abstract class _Loading extends ChatState {
   factory _Loading() = _$_Loading;
+  _Loading._() : super._();
 }
 
 /// @nodoc
@@ -5367,7 +6221,9 @@ abstract class _$$ChatStateLoadedCopyWith<$Res> {
       List<Emotion> allEmotions,
       Talker talker,
       bool mirrorEmotion,
-      MessageInputType? messageInputType});
+      MessageInputType? messageInputType,
+      List<int> initiatorIds,
+      List<int> targetIds});
 
   $MessageInputTypeCopyWith<$Res>? get messageInputType;
 }
@@ -5396,6 +6252,8 @@ class __$$ChatStateLoadedCopyWithImpl<$Res>
     Object? talker = freezed,
     Object? mirrorEmotion = freezed,
     Object? messageInputType = freezed,
+    Object? initiatorIds = freezed,
+    Object? targetIds = freezed,
   }) {
     return _then(_$ChatStateLoaded(
       pinnedMessage: pinnedMessage == freezed
@@ -5442,6 +6300,14 @@ class __$$ChatStateLoadedCopyWithImpl<$Res>
           ? _value.messageInputType
           : messageInputType // ignore: cast_nullable_to_non_nullable
               as MessageInputType?,
+      initiatorIds: initiatorIds == freezed
+          ? _value._initiatorIds
+          : initiatorIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      targetIds: targetIds == freezed
+          ? _value._targetIds
+          : targetIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 
@@ -5459,7 +6325,7 @@ class __$$ChatStateLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChatStateLoaded implements ChatStateLoaded {
+class _$ChatStateLoaded extends ChatStateLoaded {
   _$ChatStateLoaded(
       {this.pinnedMessage,
       this.isLoadingMoreMessages = false,
@@ -5471,11 +6337,16 @@ class _$ChatStateLoaded implements ChatStateLoaded {
       required final List<Emotion> allEmotions,
       required this.talker,
       this.mirrorEmotion = false,
-      this.messageInputType})
+      this.messageInputType,
+      required final List<int> initiatorIds,
+      required final List<int> targetIds})
       : _talkers = talkers,
         _messages = messages,
         _emojis = emojis,
-        _allEmotions = allEmotions;
+        _allEmotions = allEmotions,
+        _initiatorIds = initiatorIds,
+        _targetIds = targetIds,
+        super._();
 
   @override
   final Message? pinnedMessage;
@@ -5522,10 +6393,23 @@ class _$ChatStateLoaded implements ChatStateLoaded {
   final bool mirrorEmotion;
   @override
   final MessageInputType? messageInputType;
+  final List<int> _initiatorIds;
+  @override
+  List<int> get initiatorIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_initiatorIds);
+  }
+
+  final List<int> _targetIds;
+  @override
+  List<int> get targetIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_targetIds);
+  }
 
   @override
   String toString() {
-    return 'ChatState.loaded(pinnedMessage: $pinnedMessage, isLoadingMoreMessages: $isLoadingMoreMessages, isLoadedAllMessages: $isLoadedAllMessages, externalRoomId: $externalRoomId, talkers: $talkers, messages: $messages, emojis: $emojis, allEmotions: $allEmotions, talker: $talker, mirrorEmotion: $mirrorEmotion, messageInputType: $messageInputType)';
+    return 'ChatState.loaded(pinnedMessage: $pinnedMessage, isLoadingMoreMessages: $isLoadingMoreMessages, isLoadedAllMessages: $isLoadedAllMessages, externalRoomId: $externalRoomId, talkers: $talkers, messages: $messages, emojis: $emojis, allEmotions: $allEmotions, talker: $talker, mirrorEmotion: $mirrorEmotion, messageInputType: $messageInputType, initiatorIds: $initiatorIds, targetIds: $targetIds)';
   }
 
   @override
@@ -5550,7 +6434,11 @@ class _$ChatStateLoaded implements ChatStateLoaded {
             const DeepCollectionEquality()
                 .equals(other.mirrorEmotion, mirrorEmotion) &&
             const DeepCollectionEquality()
-                .equals(other.messageInputType, messageInputType));
+                .equals(other.messageInputType, messageInputType) &&
+            const DeepCollectionEquality()
+                .equals(other._initiatorIds, _initiatorIds) &&
+            const DeepCollectionEquality()
+                .equals(other._targetIds, _targetIds));
   }
 
   @override
@@ -5566,7 +6454,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
       const DeepCollectionEquality().hash(_allEmotions),
       const DeepCollectionEquality().hash(talker),
       const DeepCollectionEquality().hash(mirrorEmotion),
-      const DeepCollectionEquality().hash(messageInputType));
+      const DeepCollectionEquality().hash(messageInputType),
+      const DeepCollectionEquality().hash(_initiatorIds),
+      const DeepCollectionEquality().hash(_targetIds));
 
   @JsonKey(ignore: true)
   @override
@@ -5588,7 +6478,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)
         loaded,
   }) {
     return loaded(
@@ -5602,7 +6494,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
         allEmotions,
         talker,
         mirrorEmotion,
-        messageInputType);
+        messageInputType,
+        initiatorIds,
+        targetIds);
   }
 
   @override
@@ -5620,7 +6514,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)?
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         loaded,
   }) {
     return loaded?.call(
@@ -5634,7 +6530,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
         allEmotions,
         talker,
         mirrorEmotion,
-        messageInputType);
+        messageInputType,
+        initiatorIds,
+        targetIds);
   }
 
   @override
@@ -5652,7 +6550,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
             List<Emotion> allEmotions,
             Talker talker,
             bool mirrorEmotion,
-            MessageInputType? messageInputType)?
+            MessageInputType? messageInputType,
+            List<int> initiatorIds,
+            List<int> targetIds)?
         loaded,
     required TResult orElse(),
   }) {
@@ -5668,7 +6568,9 @@ class _$ChatStateLoaded implements ChatStateLoaded {
           allEmotions,
           talker,
           mirrorEmotion,
-          messageInputType);
+          messageInputType,
+          initiatorIds,
+          targetIds);
     }
     return orElse();
   }
@@ -5705,7 +6607,7 @@ class _$ChatStateLoaded implements ChatStateLoaded {
   }
 }
 
-abstract class ChatStateLoaded implements ChatState {
+abstract class ChatStateLoaded extends ChatState {
   factory ChatStateLoaded(
       {final Message? pinnedMessage,
       final bool isLoadingMoreMessages,
@@ -5717,7 +6619,10 @@ abstract class ChatStateLoaded implements ChatState {
       required final List<Emotion> allEmotions,
       required final Talker talker,
       final bool mirrorEmotion,
-      final MessageInputType? messageInputType}) = _$ChatStateLoaded;
+      final MessageInputType? messageInputType,
+      required final List<int> initiatorIds,
+      required final List<int> targetIds}) = _$ChatStateLoaded;
+  ChatStateLoaded._() : super._();
 
   Message? get pinnedMessage;
   bool get isLoadingMoreMessages;
@@ -5730,6 +6635,8 @@ abstract class ChatStateLoaded implements ChatState {
   Talker get talker;
   bool get mirrorEmotion;
   MessageInputType? get messageInputType;
+  List<int> get initiatorIds;
+  List<int> get targetIds;
   @JsonKey(ignore: true)
   _$$ChatStateLoadedCopyWith<_$ChatStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;

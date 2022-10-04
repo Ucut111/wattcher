@@ -41,7 +41,7 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               shrinkWrap: true,
-              children: isModer ? _moderMenu(bloc) : _userMenu(bloc, context),
+              children: isModer ? _moderMenu(bloc, context) : _userMenu(bloc, context),
             ),
           ),
         );
@@ -62,13 +62,13 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
           popupMenuItemType: PopupMenuItemType.destructive,
           onTap: () {
             _onMenuTap(() {
-              bloc.add(ChatEvent.blockUser(message: message));
+              bloc.add(ChatEvent.blockUser(message: message, context: context));
             });
           },
         ),
       ];
 
-  List<Widget> _moderMenu(ChatBloc bloc) => [
+  List<Widget> _moderMenu(ChatBloc bloc, BuildContext context) => [
         if (message.talker.isSupressed)
           PopupMenuItemWidget(
             titleText: 'Показать сообщения',
@@ -77,7 +77,8 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
             onTap: () {
               _onMenuTap(() {
                 bloc.add(ChatEvent.changeMessagesVisibility(
-                  message: message,
+                  context: context,
+                  talker: message.talker,
                   isVisible: true,
                 ));
               });
@@ -91,8 +92,9 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
             onTap: () {
               _onMenuTap(() {
                 bloc.add(ChatEvent.changeMessagesVisibility(
-                  message: message,
+                  talker: message.talker,
                   isVisible: false,
+                  context: context,
                 ));
               });
             },
@@ -100,7 +102,7 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
         const Divider(
           indent: 12,
           height: 1,
-          color: CustomColors.borderColor,
+          color: CustomColors.divider,
         ),
         if (message.talker.isBanned)
           PopupMenuItemWidget(
@@ -109,7 +111,11 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
             popupMenuItemType: PopupMenuItemType.positive,
             onTap: () {
               _onMenuTap(() {
-                bloc.add(ChatEvent.setBan(message: message, isBanned: false));
+                bloc.setBan(ChatEvent.setBan(
+                  talker: message.talker,
+                  isBanned: false,
+                  context: context,
+                ));
               });
             },
           )
@@ -120,7 +126,11 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
             popupMenuItemType: PopupMenuItemType.destructive,
             onTap: () {
               _onMenuTap(() {
-                bloc.add(ChatEvent.setBan(message: message, isBanned: true));
+                bloc.setBan(ChatEvent.setBan(
+                  talker: message.talker,
+                  isBanned: true,
+                  context: context,
+                ));
               });
             },
           )

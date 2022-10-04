@@ -9,17 +9,16 @@ import 'package:watchers_widget/src/core/svg_icon.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/avatar_popup_menu.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/mension_message_widget.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/message_popup_menu.dart';
+import 'package:watchers_widget/src/features/chat/presentation/widgets/vip_badge.dart';
 import 'package:watchers_widget/src/features/common/models/message.dart';
 import 'package:watchers_widget/src/features/common/widgets/universal_picture.dart';
 
 class MessageView extends StatelessWidget {
   final Message message;
   final bool isModer;
+  final void Function() onMentionTap;
 
-  const MessageView({
-    required this.message,
-    required this.isModer,
-  });
+  const MessageView({required this.message, required this.isModer, required this.onMentionTap});
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +66,7 @@ class MessageView extends StatelessWidget {
                                   isModer: isModer,
                                   isSentByUser: isMyMessage,
                                   message: message,
+                                  onMentionTap: onMentionTap,
                                 ),
                               ),
                               const SizedBox(width: 4),
@@ -113,12 +113,13 @@ class _Bubble extends StatelessWidget {
   final Message message;
   final bool isSentByUser;
   final bool isModer;
+  final void Function() onMentionTap;
 
-  const _Bubble({
-    required this.isSentByUser,
-    required this.message,
-    required this.isModer,
-  });
+  const _Bubble(
+      {required this.isSentByUser,
+      required this.message,
+      required this.isModer,
+      required this.onMentionTap});
   @override
   Widget build(BuildContext context) {
     return MessagePopupMenu(
@@ -148,6 +149,7 @@ class _Bubble extends StatelessWidget {
                                   if (message.mentionMessage != null)
                                     MentionMessageWidget(
                                       mentionMessage: message.mentionMessage!,
+                                      onTap: onMentionTap,
                                     ),
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -164,7 +166,7 @@ class _Bubble extends StatelessWidget {
                                           }
                                         },
                                         text: message.text,
-                                        style: TextStyles.messageText,
+                                        style: TextStyles.primary,
                                       )),
                                     ],
                                   ),
@@ -189,46 +191,43 @@ class _Bubble extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  if ((message.talker.role == "ADMIN") || (message.talker.isModer))
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          message.talker.user.name,
-                                          style: TextStyle(
-                                            color:
-                                                CustomColors.userColors[message.talker.user.color],
-                                            fontFamily: '.SF UI Display',
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 15,
-                                          ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        message.talker.user.name,
+                                        style: TextStyle(
+                                          color:
+                                              CustomColors.getUserColor(message.talker.user.color),
+                                          fontFamily: '.SF UI Display',
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
                                         ),
+                                      ),
+                                      if ((message.talker.role == "ADMIN") ||
+                                          (message.talker.isModer)) ...[
                                         const SizedBox(
                                           width: 3,
                                         ),
-                                        SvgIcon(
+                                        const SvgIcon(
                                           Resources.admin_check_mark,
-                                          width: 14,
+                                          size: 14,
                                         ),
                                         const SizedBox(
                                           width: 3,
                                         ),
                                         const Text('admin', style: TextStyles.contribution),
                                       ],
-                                    )
-                                  else
-                                    Text(
-                                      message.talker.user.name,
-                                      style: TextStyle(
-                                        color: CustomColors.userColors[message.talker.user.color],
-                                        fontFamily: '.SF UI Display',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15,
-                                      ),
-                                    ),
+                                      const SizedBox(width: 4),
+                                      if (message.talker.user.statusName != null)
+                                        VipBadgeWidget(statusName: message.talker.user.statusName!),
+                                    ],
+                                  ),
                                   if (message.mentionMessage != null)
                                     MentionMessageWidget(
                                       mentionMessage: message.mentionMessage!,
+                                      onTap: onMentionTap,
                                     ),
                                   const SizedBox(
                                     height: 2,
@@ -244,7 +243,7 @@ class _Bubble extends StatelessWidget {
                                       }
                                     },
                                     text: message.text,
-                                    style: TextStyles.messageText,
+                                    style: TextStyles.primary,
                                   ),
                                   const SizedBox(
                                     height: 2,
@@ -262,7 +261,7 @@ class _Bubble extends StatelessWidget {
                           ))),
             if (!message.isVisible) ...[
               const SizedBox(width: 8),
-              SvgIcon(Resources.disabled),
+              const SvgIcon(Resources.disabled),
             ],
           ],
         ));

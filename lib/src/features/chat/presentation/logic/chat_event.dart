@@ -16,6 +16,8 @@ class ChatEvent with _$ChatEvent {
     required List<Talker> talkers,
     required Talker talker,
     required String externalRoomId,
+    required List<int> initiatorIds,
+    required List<int> targetIds,
   }) = _FinishLoading;
 
   const factory ChatEvent.fetchChat({
@@ -33,6 +35,7 @@ class ChatEvent with _$ChatEvent {
   }) = _MentionMessage;
 
   const factory ChatEvent.copyMessage({
+    required BuildContext context,
     required Message message,
   }) = _CopyMessage;
 
@@ -44,15 +47,12 @@ class ChatEvent with _$ChatEvent {
 
   const factory ChatEvent.deleteMessage({
     required Message message,
+    required BuildContext context,
   }) = _DeleteMessage;
 
-  const factory ChatEvent.updateMessages(
-    List<Message> messages,
+  const factory ChatEvent.update(
+    ChatStateLoaded loaded,
   ) = _UpdateMessages;
-
-  const factory ChatEvent.updateTalkers(
-    List<Talker> talkers,
-  ) = _UpdateTalkers;
 
   const factory ChatEvent.reportMessage({
     required BuildContext context,
@@ -60,25 +60,35 @@ class ChatEvent with _$ChatEvent {
   }) = _ReportMessage;
 
   const factory ChatEvent.blockUser({
+    required BuildContext context,
     required Message message,
   }) = _BlockUser;
 
   const factory ChatEvent.changeMessageVisibility({
     required Message message,
     required bool isVisible,
+    required BuildContext context,
   }) = _ChangeMessageVisibility;
 
   const factory ChatEvent.changeMessagesVisibility({
-    required Message message,
+    required Talker talker,
     required bool isVisible,
+    required BuildContext context,
   }) = _ChangeMessagesVisibility;
 
   const factory ChatEvent.setBan({
-    required Message message,
+    required Talker talker,
     required bool isBanned,
+    required BuildContext context,
   }) = _SetBan;
 
   const factory ChatEvent.updateTalker(Talker talker) = _UpdateTalker;
 
-  const factory ChatEvent.loadMoreMessages() = _LoadMoreMessages;
+  const factory ChatEvent.loadMoreMessages({
+    int? lastMessageId,
+    int? limit,
+    Message? scrollToMessage,
+  }) = _LoadMoreMessages;
+
+  const factory ChatEvent.scrollToMessage({required Message message}) = _ScrollToMessage;
 }

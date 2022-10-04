@@ -4,7 +4,7 @@ const double _figmaWidth = 375;
 const double _figmaHeight = 812;
 
 const _maxDesignScale = 1.0;
-const _minDesignScale = 0.6;
+const _minDesignScale = 0.4;
 
 extension FigmaSizerExtension on num {
   double get fh => (100.h / _figmaHeight).clamp(_minDesignScale, _maxDesignScale) * this;

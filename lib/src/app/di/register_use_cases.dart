@@ -7,10 +7,11 @@ void _registerUseCases() {
   // Blocks
   locator.registerFactory(() => AddBlockUseCase(blockRepository: locator()));
   locator.registerFactory(() => RemoveBlockUseCase(blockRepository: locator()));
-  locator.registerFactory(() => GetAllBlocksUseCase(blockRepository: locator()));
+  locator.registerFactory(() => GetBlocksUseCase(blockRepository: locator()));
 
   // User
   locator.registerFactory(() => DeleteUserUseCase(userRepository: locator()));
+  locator.registerFactory(() => RestoreUserUseCase(userRepository: locator()));
   locator.registerFactory(() => GetUserByIdUseCase(userRepository: locator()));
   locator.registerFactory(() => GetUserUseCase(userRepository: locator()));
   locator.registerFactory(() => UpdateUserUseCase(userRepository: locator()));
@@ -32,6 +33,7 @@ void _registerUseCases() {
   locator.registerFactory(() => SetMessageVisibleUseCase(chatRepository: locator()));
   locator.registerFactory(() => SetMessagesVisibleUseCase(chatRepository: locator()));
   locator.registerFactory(() => SetBanUseCase(chatRepository: locator()));
+  locator.registerFactory(() => CloseSocketUseCase(chatRepository: locator()));
 
   // Emotions
   locator.registerFactory(() => const GetAllEmotionsUseCase());
@@ -42,7 +44,6 @@ void _registerUseCases() {
 
   // Talkers
   locator.registerFactory(() => GetTalkersUseCase(locator()));
-  locator.registerFactory(() => CheckTalkerUseCase(locator()));
 
   //
   locator.registerFactory(() => GetSocketUseCase(chatRepository: locator()));

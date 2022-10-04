@@ -13,12 +13,9 @@ class Talker {
   final String role;
   final User user;
 
-  bool? isMe;
-
   Talker({
     required this.id,
     required this.hand,
-    this.isMe,
     required this.isBanned,
     required this.isActive,
     required this.isMuted,

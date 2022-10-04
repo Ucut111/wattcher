@@ -23,4 +23,12 @@ abstract class BlocInjectableState<T extends StatefulWidget, G extends Bloc<E, S
           param1: param1,
           param2: param2,
         );
+
+  BlocInjectableState.withParamsNavigator({
+    param1,
+    param2,
+  }) : super.withParamsNavigator(
+          param1: param1,
+          param2: param2,
+        );
 }

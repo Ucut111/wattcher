@@ -4,6 +4,7 @@ part of 'onboarding_bloc.dart';
 class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.init({
     required String externalId,
+    required StatusName? statusName,
   }) = _Init;
 
   const factory OnboardingEvent.showLicence(Licence licence) = _ShowLicence;
@@ -35,4 +36,8 @@ class OnboardingEvent with _$OnboardingEvent {
     required List<Avatar> avatars,
     required String userName,
   }) = _SubmitAvatar;
+
+  const factory OnboardingEvent.showChat() = _ShowChatEvent;
+
+  const factory OnboardingEvent.showDeleted() = _ShowDeletedEvent;
 }

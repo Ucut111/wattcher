@@ -158,4 +158,9 @@ class ChatRepository implements IChatRepository {
   Socket getSocket() {
     return _chatApi.socket;
   }
+
+  @override
+  void close() {
+    _chatApi.close();
+  }
 }

@@ -21,7 +21,7 @@ class ModalTitleWidget extends StatelessWidget {
           onTap: onBackTap,
           child: const Icon(
             CupertinoIcons.back,
-            color: CustomColors.contributionTextColor,
+            color: CustomColors.textMain,
           ),
         ),
         Text(

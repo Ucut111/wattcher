@@ -14,164 +14,171 @@ import 'package:watchers_widget/src/features/common/widgets/modal_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/submit_button.dart';
 import 'package:watchers_widget/src/features/common/widgets/user_name_input_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/user_name_widget.dart';
+import 'package:watchers_widget/src/features/deleted_profile/deleted_profile_screen.dart';
+import 'package:watchers_widget/src/features/deleted_profile/logic/deleted_profile_bloc_params.dart';
 import 'package:watchers_widget/src/features/onboarding/domain/licence.dart';
+import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc_params.dart';
 
 import 'logic/onboarding_bloc.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  final String userId;
   final String externalRoomId;
+  final OnboardingBlocParams onboardingBlocParams;
 
   const OnboardingScreen({
-    required this.userId,
     required this.externalRoomId,
+    required this.onboardingBlocParams,
   });
 
   static Route route({
-    required String userId,
     required String externalRoomId,
+    required OnboardingBlocParams onboardingBlocParams,
   }) =>
       MaterialPageRoute(
         builder: (_) => OnboardingScreen(
-          userId: userId,
+          onboardingBlocParams: onboardingBlocParams,
           externalRoomId: externalRoomId,
         ),
       );
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState(userId);
+  State<OnboardingScreen> createState() => _OnboardingScreenState(onboardingBlocParams);
 }
 
 class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, OnboardingBloc,
     OnboardingEvent, OnboardingState> {
-  _OnboardingScreenState(String externalId) : super.withParams(param1: externalId);
+  _OnboardingScreenState(OnboardingBlocParams params) : super.withParamsNavigator(param1: params);
 
   @override
   Widget builder(BuildContext context, OnboardingState state) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: CustomColors.chatBackground,
       body: SafeArea(
         top: false,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: state.map(
-            loading: (_) => const LoadingWidget(),
-            main: (_) {
-              return ModalWidget(
-                title: _buildLicenceTitle(),
-                submitButton: Column(
-                  children: [
-                    const ContributionWidget(),
-                    const SizedBox(height: 16),
-                    SubmitButton.textual(
-                      text: 'Принять и продолжить',
-                      onTap: () => bloc.add(const OnboardingEvent.acceptLicences()),
-                    ),
-                  ],
-                ),
-                children: [
-                  _buildMainParapraph(),
-                ],
-              );
-            },
-            licenceDetails: (state) {
-              return ModalWidget(
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: _buildLicenceTitle(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: InkWell(
-                        onTap: () => bloc.add(const OnboardingEvent.backToMain()),
-                        child: const SvgIcon(Resources.close, color: CustomColors.danger),
+              loading: (_) => const LoadingWidget(),
+              main: (_) {
+                return ModalWidget(
+                  title: _buildLicenceTitle(),
+                  submitButton: Column(
+                    children: [
+                      const ContributionWidget(),
+                      const SizedBox(height: 16),
+                      SubmitButton.textual(
+                        text: 'Принять и продолжить',
+                        onTap: () => bloc.add(const OnboardingEvent.acceptLicences()),
                       ),
-                    ),
-                  ],
-                ),
-                submitButton: SubmitButton.textual(
-                  text: 'Принять и продолжить',
-                  onTap: () => bloc.add(const OnboardingEvent.acceptLicences()),
-                ),
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Text(
-                        state.licenceText + state.licenceText,
-                        style: TextStyles.paragraph,
-                      ),
-                    ),
+                    ],
                   ),
-                ],
-              );
-            },
-            form: (state) {
-              return ModalWidget(
-                title: ModalTitleWidget(
+                  children: [
+                    _buildMainParapraph(),
+                  ],
+                );
+              },
+              licenceDetails: (state) {
+                return ModalWidget(
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: _buildLicenceTitle(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: InkWell(
+                          onTap: () => bloc.add(const OnboardingEvent.backToMain()),
+                          child: const SvgIcon(Resources.close, color: CustomColors.danger),
+                        ),
+                      ),
+                    ],
+                  ),
+                  submitButton: SubmitButton.textual(
+                    text: 'Принять и продолжить',
+                    onTap: () => bloc.add(const OnboardingEvent.acceptLicences()),
+                  ),
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Text(
+                          state.licenceText + state.licenceText,
+                          style: TextStyles.secondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              form: (state) {
+                return ModalWidget(
+                  title: ModalTitleWidget(
+                    onBackTap: () => bloc.add(
+                      const OnboardingEvent.backToMain(),
+                    ),
+                    titleText: 'Имя в чате',
+                  ),
+                  submitButton: SubmitButton.textual(
+                    text: 'Сохранить и продолжить',
+                    isActive: state.isSubmitActive,
+                    onTap: () => bloc.add(OnboardingEvent.submitForm(userName: state.userName)),
+                  ),
+                  children: [
+                    UserNameWidget(
+                      onTap: () => bloc.add(const OnboardingEvent.showInput()),
+                      userName: state.userName,
+                    ),
+                    if (state.errorDescription != null)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                        child: Text(
+                          state.errorDescription!,
+                          style: TextStyles.errorTextStyle(),
+                        ),
+                      ),
+                  ],
+                );
+              },
+              input: (state) {
+                return UserNameInputWidget(
+                  onSubmitted: () => bloc.add(const OnboardingEvent.submitInput()),
+                  userNameFocusNode: bloc.userNameFocusNode,
+                  userNameTextEditingController: bloc.userNameTextEditingController,
+                );
+              },
+              avatarPicker: (state) {
+                return AvatarPickerWidget(
                   onBackTap: () => bloc.add(
-                    const OnboardingEvent.backToMain(),
+                    OnboardingEvent.backToForm(userName: state.userName),
                   ),
-                  titleText: 'Имя в чате',
-                ),
-                submitButton: SubmitButton.textual(
-                  text: 'Сохранить и продолжить',
-                  isActive: state.isSubmitActive,
-                  onTap: () => bloc.add(OnboardingEvent.submitForm(userName: state.userName)),
-                ),
-                children: [
-                  UserNameWidget(
-                    onTap: () => bloc.add(const OnboardingEvent.showInput()),
-                    userName: state.userName,
-                  ),
-                  if (state.errorDescription != null)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                      child: Text(
-                        state.errorDescription!,
-                        style: TextStyles.errorTextStyle(),
-                      ),
+                  onSubmit: () => bloc.add(
+                    OnboardingEvent.submitAvatar(
+                      userName: state.userName,
+                      selectedAvatar: state.selectedAvatar,
+                      avatars: state.avatars,
                     ),
-                ],
-              );
-            },
-            input: (state) {
-              return UserNameInputWidget(
-                onSubmitted: () => bloc.add(const OnboardingEvent.submitInput()),
-                userNameFocusNode: bloc.userNameFocusNode,
-                userNameTextEditingController: bloc.userNameTextEditingController,
-              );
-            },
-            avatarPicker: (state) {
-              return AvatarPickerWidget(
-                onBackTap: () => bloc.add(
-                  OnboardingEvent.backToForm(userName: state.userName),
-                ),
-                onSubmit: () => bloc.add(
-                  OnboardingEvent.submitAvatar(
-                    userName: state.userName,
-                    selectedAvatar: state.selectedAvatar,
-                    avatars: state.avatars,
                   ),
-                ),
-                onSelectAvatar: (avatar) => bloc.add(
-                  OnboardingEvent.selectAvatar(
-                    selectedAvatar: avatar,
-                    avatars: state.avatars,
-                    userName: state.userName,
+                  onSelectAvatar: (avatar) => bloc.add(
+                    OnboardingEvent.selectAvatar(
+                      selectedAvatar: avatar,
+                      avatars: state.avatars,
+                      userName: state.userName,
+                    ),
                   ),
-                ),
-                selectedAvatar: state.selectedAvatar,
-                avatars: state.avatars,
-              );
-            },
-            showChat: (_) {
-              return ChatScreen(
-                externalRoomId: widget.externalRoomId,
-              );
-            },
-          ),
+                  selectedAvatar: state.selectedAvatar,
+                  avatars: state.avatars,
+                );
+              },
+              showChat: (_) {
+                return ChatScreen(
+                  externalRoomId: widget.externalRoomId,
+                );
+              },
+              showDeleted: (state) {
+                return DeletedProfileScreen(DeletedProfileBlocParams(
+                  deletedAt: state.deletedAt,
+                ));
+              }),
         ),
       ),
     );
@@ -181,7 +188,7 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
     return Text.rich(
       TextSpan(
         text: 'Я принимаю условия ',
-        style: TextStyles.paragraph,
+        style: TextStyles.secondary,
         children: [
           TextSpan(
             text: 'Лицензионного соглашения',

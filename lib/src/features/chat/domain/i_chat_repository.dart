@@ -74,4 +74,6 @@ abstract class IChatRepository {
   Future<void> reportMessage({
     required ReportMessageRequest reportMessageRequest,
   });
+
+  void close();
 }

@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OnboardingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -32,11 +32,13 @@ mixin _$OnboardingEvent {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -50,11 +52,13 @@ mixin _$OnboardingEvent {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -68,6 +72,8 @@ mixin _$OnboardingEvent {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -83,6 +89,8 @@ mixin _$OnboardingEvent {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,6 +105,8 @@ mixin _$OnboardingEvent {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +121,8 @@ mixin _$OnboardingEvent {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,7 +149,7 @@ class _$OnboardingEventCopyWithImpl<$Res>
 abstract class _$$_InitCopyWith<$Res> {
   factory _$$_InitCopyWith(_$_Init value, $Res Function(_$_Init) then) =
       __$$_InitCopyWithImpl<$Res>;
-  $Res call({String externalId});
+  $Res call({String externalId, StatusName? statusName});
 }
 
 /// @nodoc
@@ -152,12 +164,17 @@ class __$$_InitCopyWithImpl<$Res> extends _$OnboardingEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? externalId = freezed,
+    Object? statusName = freezed,
   }) {
     return _then(_$_Init(
       externalId: externalId == freezed
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
               as String,
+      statusName: statusName == freezed
+          ? _value.statusName
+          : statusName // ignore: cast_nullable_to_non_nullable
+              as StatusName?,
     ));
   }
 }
@@ -165,14 +182,16 @@ class __$$_InitCopyWithImpl<$Res> extends _$OnboardingEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Init implements _Init {
-  const _$_Init({required this.externalId});
+  const _$_Init({required this.externalId, required this.statusName});
 
   @override
   final String externalId;
+  @override
+  final StatusName? statusName;
 
   @override
   String toString() {
-    return 'OnboardingEvent.init(externalId: $externalId)';
+    return 'OnboardingEvent.init(externalId: $externalId, statusName: $statusName)';
   }
 
   @override
@@ -181,12 +200,16 @@ class _$_Init implements _Init {
         (other.runtimeType == runtimeType &&
             other is _$_Init &&
             const DeepCollectionEquality()
-                .equals(other.externalId, externalId));
+                .equals(other.externalId, externalId) &&
+            const DeepCollectionEquality()
+                .equals(other.statusName, statusName));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(externalId));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(externalId),
+      const DeepCollectionEquality().hash(statusName));
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +219,7 @@ class _$_Init implements _Init {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -210,14 +233,16 @@ class _$_Init implements _Init {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
-    return init(externalId);
+    return init(externalId, statusName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -231,14 +256,16 @@ class _$_Init implements _Init {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
-    return init?.call(externalId);
+    return init?.call(externalId, statusName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -252,10 +279,12 @@ class _$_Init implements _Init {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (init != null) {
-      return init(externalId);
+      return init(externalId, statusName);
     }
     return orElse();
   }
@@ -273,6 +302,8 @@ class _$_Init implements _Init {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return init(this);
   }
@@ -290,6 +321,8 @@ class _$_Init implements _Init {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return init?.call(this);
   }
@@ -307,6 +340,8 @@ class _$_Init implements _Init {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -317,9 +352,12 @@ class _$_Init implements _Init {
 }
 
 abstract class _Init implements OnboardingEvent {
-  const factory _Init({required final String externalId}) = _$_Init;
+  const factory _Init(
+      {required final String externalId,
+      required final StatusName? statusName}) = _$_Init;
 
   String get externalId;
+  StatusName? get statusName;
   @JsonKey(ignore: true)
   _$$_InitCopyWith<_$_Init> get copyWith => throw _privateConstructorUsedError;
 }
@@ -389,7 +427,7 @@ class _$_ShowLicence implements _ShowLicence {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -403,6 +441,8 @@ class _$_ShowLicence implements _ShowLicence {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return showLicence(licence);
   }
@@ -410,7 +450,7 @@ class _$_ShowLicence implements _ShowLicence {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -424,6 +464,8 @@ class _$_ShowLicence implements _ShowLicence {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return showLicence?.call(licence);
   }
@@ -431,7 +473,7 @@ class _$_ShowLicence implements _ShowLicence {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -445,6 +487,8 @@ class _$_ShowLicence implements _ShowLicence {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (showLicence != null) {
@@ -466,6 +510,8 @@ class _$_ShowLicence implements _ShowLicence {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return showLicence(this);
   }
@@ -483,6 +529,8 @@ class _$_ShowLicence implements _ShowLicence {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return showLicence?.call(this);
   }
@@ -500,6 +548,8 @@ class _$_ShowLicence implements _ShowLicence {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (showLicence != null) {
@@ -559,7 +609,7 @@ class _$_AcceptLicences implements _AcceptLicences {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -573,6 +623,8 @@ class _$_AcceptLicences implements _AcceptLicences {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return acceptLicences();
   }
@@ -580,7 +632,7 @@ class _$_AcceptLicences implements _AcceptLicences {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -594,6 +646,8 @@ class _$_AcceptLicences implements _AcceptLicences {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return acceptLicences?.call();
   }
@@ -601,7 +655,7 @@ class _$_AcceptLicences implements _AcceptLicences {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -615,6 +669,8 @@ class _$_AcceptLicences implements _AcceptLicences {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (acceptLicences != null) {
@@ -636,6 +692,8 @@ class _$_AcceptLicences implements _AcceptLicences {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return acceptLicences(this);
   }
@@ -653,6 +711,8 @@ class _$_AcceptLicences implements _AcceptLicences {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return acceptLicences?.call(this);
   }
@@ -670,6 +730,8 @@ class _$_AcceptLicences implements _AcceptLicences {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (acceptLicences != null) {
@@ -724,7 +786,7 @@ class _$_BackToMain implements _BackToMain {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -738,6 +800,8 @@ class _$_BackToMain implements _BackToMain {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return backToMain();
   }
@@ -745,7 +809,7 @@ class _$_BackToMain implements _BackToMain {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -759,6 +823,8 @@ class _$_BackToMain implements _BackToMain {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return backToMain?.call();
   }
@@ -766,7 +832,7 @@ class _$_BackToMain implements _BackToMain {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -780,6 +846,8 @@ class _$_BackToMain implements _BackToMain {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (backToMain != null) {
@@ -801,6 +869,8 @@ class _$_BackToMain implements _BackToMain {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return backToMain(this);
   }
@@ -818,6 +888,8 @@ class _$_BackToMain implements _BackToMain {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return backToMain?.call(this);
   }
@@ -835,6 +907,8 @@ class _$_BackToMain implements _BackToMain {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (backToMain != null) {
@@ -889,7 +963,7 @@ class _$_ShowInput implements _ShowInput {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -903,6 +977,8 @@ class _$_ShowInput implements _ShowInput {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return showInput();
   }
@@ -910,7 +986,7 @@ class _$_ShowInput implements _ShowInput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -924,6 +1000,8 @@ class _$_ShowInput implements _ShowInput {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return showInput?.call();
   }
@@ -931,7 +1009,7 @@ class _$_ShowInput implements _ShowInput {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -945,6 +1023,8 @@ class _$_ShowInput implements _ShowInput {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (showInput != null) {
@@ -966,6 +1046,8 @@ class _$_ShowInput implements _ShowInput {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return showInput(this);
   }
@@ -983,6 +1065,8 @@ class _$_ShowInput implements _ShowInput {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return showInput?.call(this);
   }
@@ -1000,6 +1084,8 @@ class _$_ShowInput implements _ShowInput {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (showInput != null) {
@@ -1054,7 +1140,7 @@ class _$_SubmitInput implements _SubmitInput {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -1068,6 +1154,8 @@ class _$_SubmitInput implements _SubmitInput {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return submitInput();
   }
@@ -1075,7 +1163,7 @@ class _$_SubmitInput implements _SubmitInput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1089,6 +1177,8 @@ class _$_SubmitInput implements _SubmitInput {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return submitInput?.call();
   }
@@ -1096,7 +1186,7 @@ class _$_SubmitInput implements _SubmitInput {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1110,6 +1200,8 @@ class _$_SubmitInput implements _SubmitInput {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (submitInput != null) {
@@ -1131,6 +1223,8 @@ class _$_SubmitInput implements _SubmitInput {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return submitInput(this);
   }
@@ -1148,6 +1242,8 @@ class _$_SubmitInput implements _SubmitInput {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return submitInput?.call(this);
   }
@@ -1165,6 +1261,8 @@ class _$_SubmitInput implements _SubmitInput {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (submitInput != null) {
@@ -1243,7 +1341,7 @@ class _$_SubmitForm implements _SubmitForm {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -1257,6 +1355,8 @@ class _$_SubmitForm implements _SubmitForm {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return submitForm(userName);
   }
@@ -1264,7 +1364,7 @@ class _$_SubmitForm implements _SubmitForm {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1278,6 +1378,8 @@ class _$_SubmitForm implements _SubmitForm {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return submitForm?.call(userName);
   }
@@ -1285,7 +1387,7 @@ class _$_SubmitForm implements _SubmitForm {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1299,6 +1401,8 @@ class _$_SubmitForm implements _SubmitForm {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (submitForm != null) {
@@ -1320,6 +1424,8 @@ class _$_SubmitForm implements _SubmitForm {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return submitForm(this);
   }
@@ -1337,6 +1443,8 @@ class _$_SubmitForm implements _SubmitForm {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return submitForm?.call(this);
   }
@@ -1354,6 +1462,8 @@ class _$_SubmitForm implements _SubmitForm {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (submitForm != null) {
@@ -1437,7 +1547,7 @@ class _$_BackToForm implements _BackToForm {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -1451,6 +1561,8 @@ class _$_BackToForm implements _BackToForm {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return backToForm(userName);
   }
@@ -1458,7 +1570,7 @@ class _$_BackToForm implements _BackToForm {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1472,6 +1584,8 @@ class _$_BackToForm implements _BackToForm {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return backToForm?.call(userName);
   }
@@ -1479,7 +1593,7 @@ class _$_BackToForm implements _BackToForm {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1493,6 +1607,8 @@ class _$_BackToForm implements _BackToForm {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (backToForm != null) {
@@ -1514,6 +1630,8 @@ class _$_BackToForm implements _BackToForm {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return backToForm(this);
   }
@@ -1531,6 +1649,8 @@ class _$_BackToForm implements _BackToForm {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return backToForm?.call(this);
   }
@@ -1548,6 +1668,8 @@ class _$_BackToForm implements _BackToForm {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (backToForm != null) {
@@ -1660,7 +1782,7 @@ class _$_SelectAvatar implements _SelectAvatar {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -1674,6 +1796,8 @@ class _$_SelectAvatar implements _SelectAvatar {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return selectAvatar(avatars, selectedAvatar, userName);
   }
@@ -1681,7 +1805,7 @@ class _$_SelectAvatar implements _SelectAvatar {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1695,6 +1819,8 @@ class _$_SelectAvatar implements _SelectAvatar {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return selectAvatar?.call(avatars, selectedAvatar, userName);
   }
@@ -1702,7 +1828,7 @@ class _$_SelectAvatar implements _SelectAvatar {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1716,6 +1842,8 @@ class _$_SelectAvatar implements _SelectAvatar {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (selectAvatar != null) {
@@ -1737,6 +1865,8 @@ class _$_SelectAvatar implements _SelectAvatar {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return selectAvatar(this);
   }
@@ -1754,6 +1884,8 @@ class _$_SelectAvatar implements _SelectAvatar {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return selectAvatar?.call(this);
   }
@@ -1771,6 +1903,8 @@ class _$_SelectAvatar implements _SelectAvatar {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (selectAvatar != null) {
@@ -1888,7 +2022,7 @@ class _$_SubmitAvatar implements _SubmitAvatar {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String externalId) init,
+    required TResult Function(String externalId, StatusName? statusName) init,
     required TResult Function(Licence licence) showLicence,
     required TResult Function() acceptLicences,
     required TResult Function() backToMain,
@@ -1902,6 +2036,8 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
   }) {
     return submitAvatar(selectedAvatar, avatars, userName);
   }
@@ -1909,7 +2045,7 @@ class _$_SubmitAvatar implements _SubmitAvatar {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1923,6 +2059,8 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
   }) {
     return submitAvatar?.call(selectedAvatar, avatars, userName);
   }
@@ -1930,7 +2068,7 @@ class _$_SubmitAvatar implements _SubmitAvatar {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String externalId)? init,
+    TResult Function(String externalId, StatusName? statusName)? init,
     TResult Function(Licence licence)? showLicence,
     TResult Function()? acceptLicences,
     TResult Function()? backToMain,
@@ -1944,6 +2082,8 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
     required TResult orElse(),
   }) {
     if (submitAvatar != null) {
@@ -1965,6 +2105,8 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     required TResult Function(_BackToForm value) backToForm,
     required TResult Function(_SelectAvatar value) selectAvatar,
     required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
   }) {
     return submitAvatar(this);
   }
@@ -1982,6 +2124,8 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
   }) {
     return submitAvatar?.call(this);
   }
@@ -1999,6 +2143,8 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     TResult Function(_BackToForm value)? backToForm,
     TResult Function(_SelectAvatar value)? selectAvatar,
     TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
     required TResult orElse(),
   }) {
     if (submitAvatar != null) {
@@ -2023,12 +2169,367 @@ abstract class _SubmitAvatar implements OnboardingEvent {
 }
 
 /// @nodoc
+abstract class _$$_ShowChatEventCopyWith<$Res> {
+  factory _$$_ShowChatEventCopyWith(
+          _$_ShowChatEvent value, $Res Function(_$_ShowChatEvent) then) =
+      __$$_ShowChatEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowChatEventCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res>
+    implements _$$_ShowChatEventCopyWith<$Res> {
+  __$$_ShowChatEventCopyWithImpl(
+      _$_ShowChatEvent _value, $Res Function(_$_ShowChatEvent) _then)
+      : super(_value, (v) => _then(v as _$_ShowChatEvent));
+
+  @override
+  _$_ShowChatEvent get _value => super._value as _$_ShowChatEvent;
+}
+
+/// @nodoc
+
+class _$_ShowChatEvent implements _ShowChatEvent {
+  const _$_ShowChatEvent();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.showChat()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ShowChatEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String externalId, StatusName? statusName) init,
+    required TResult Function(Licence licence) showLicence,
+    required TResult Function() acceptLicences,
+    required TResult Function() backToMain,
+    required TResult Function() showInput,
+    required TResult Function() submitInput,
+    required TResult Function(String userName) submitForm,
+    required TResult Function(String userName) backToForm,
+    required TResult Function(
+            List<Avatar> avatars, Avatar selectedAvatar, String userName)
+        selectAvatar,
+    required TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)
+        submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
+  }) {
+    return showChat();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String externalId, StatusName? statusName)? init,
+    TResult Function(Licence licence)? showLicence,
+    TResult Function()? acceptLicences,
+    TResult Function()? backToMain,
+    TResult Function()? showInput,
+    TResult Function()? submitInput,
+    TResult Function(String userName)? submitForm,
+    TResult Function(String userName)? backToForm,
+    TResult Function(
+            List<Avatar> avatars, Avatar selectedAvatar, String userName)?
+        selectAvatar,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
+  }) {
+    return showChat?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String externalId, StatusName? statusName)? init,
+    TResult Function(Licence licence)? showLicence,
+    TResult Function()? acceptLicences,
+    TResult Function()? backToMain,
+    TResult Function()? showInput,
+    TResult Function()? submitInput,
+    TResult Function(String userName)? submitForm,
+    TResult Function(String userName)? backToForm,
+    TResult Function(
+            List<Avatar> avatars, Avatar selectedAvatar, String userName)?
+        selectAvatar,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
+    required TResult orElse(),
+  }) {
+    if (showChat != null) {
+      return showChat();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_ShowLicence value) showLicence,
+    required TResult Function(_AcceptLicences value) acceptLicences,
+    required TResult Function(_BackToMain value) backToMain,
+    required TResult Function(_ShowInput value) showInput,
+    required TResult Function(_SubmitInput value) submitInput,
+    required TResult Function(_SubmitForm value) submitForm,
+    required TResult Function(_BackToForm value) backToForm,
+    required TResult Function(_SelectAvatar value) selectAvatar,
+    required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
+  }) {
+    return showChat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ShowLicence value)? showLicence,
+    TResult Function(_AcceptLicences value)? acceptLicences,
+    TResult Function(_BackToMain value)? backToMain,
+    TResult Function(_ShowInput value)? showInput,
+    TResult Function(_SubmitInput value)? submitInput,
+    TResult Function(_SubmitForm value)? submitForm,
+    TResult Function(_BackToForm value)? backToForm,
+    TResult Function(_SelectAvatar value)? selectAvatar,
+    TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
+  }) {
+    return showChat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ShowLicence value)? showLicence,
+    TResult Function(_AcceptLicences value)? acceptLicences,
+    TResult Function(_BackToMain value)? backToMain,
+    TResult Function(_ShowInput value)? showInput,
+    TResult Function(_SubmitInput value)? submitInput,
+    TResult Function(_SubmitForm value)? submitForm,
+    TResult Function(_BackToForm value)? backToForm,
+    TResult Function(_SelectAvatar value)? selectAvatar,
+    TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
+    required TResult orElse(),
+  }) {
+    if (showChat != null) {
+      return showChat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowChatEvent implements OnboardingEvent {
+  const factory _ShowChatEvent() = _$_ShowChatEvent;
+}
+
+/// @nodoc
+abstract class _$$_ShowDeletedEventCopyWith<$Res> {
+  factory _$$_ShowDeletedEventCopyWith(
+          _$_ShowDeletedEvent value, $Res Function(_$_ShowDeletedEvent) then) =
+      __$$_ShowDeletedEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowDeletedEventCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res>
+    implements _$$_ShowDeletedEventCopyWith<$Res> {
+  __$$_ShowDeletedEventCopyWithImpl(
+      _$_ShowDeletedEvent _value, $Res Function(_$_ShowDeletedEvent) _then)
+      : super(_value, (v) => _then(v as _$_ShowDeletedEvent));
+
+  @override
+  _$_ShowDeletedEvent get _value => super._value as _$_ShowDeletedEvent;
+}
+
+/// @nodoc
+
+class _$_ShowDeletedEvent implements _ShowDeletedEvent {
+  const _$_ShowDeletedEvent();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.showDeleted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ShowDeletedEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String externalId, StatusName? statusName) init,
+    required TResult Function(Licence licence) showLicence,
+    required TResult Function() acceptLicences,
+    required TResult Function() backToMain,
+    required TResult Function() showInput,
+    required TResult Function() submitInput,
+    required TResult Function(String userName) submitForm,
+    required TResult Function(String userName) backToForm,
+    required TResult Function(
+            List<Avatar> avatars, Avatar selectedAvatar, String userName)
+        selectAvatar,
+    required TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)
+        submitAvatar,
+    required TResult Function() showChat,
+    required TResult Function() showDeleted,
+  }) {
+    return showDeleted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String externalId, StatusName? statusName)? init,
+    TResult Function(Licence licence)? showLicence,
+    TResult Function()? acceptLicences,
+    TResult Function()? backToMain,
+    TResult Function()? showInput,
+    TResult Function()? submitInput,
+    TResult Function(String userName)? submitForm,
+    TResult Function(String userName)? backToForm,
+    TResult Function(
+            List<Avatar> avatars, Avatar selectedAvatar, String userName)?
+        selectAvatar,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
+  }) {
+    return showDeleted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String externalId, StatusName? statusName)? init,
+    TResult Function(Licence licence)? showLicence,
+    TResult Function()? acceptLicences,
+    TResult Function()? backToMain,
+    TResult Function()? showInput,
+    TResult Function()? submitInput,
+    TResult Function(String userName)? submitForm,
+    TResult Function(String userName)? backToForm,
+    TResult Function(
+            List<Avatar> avatars, Avatar selectedAvatar, String userName)?
+        selectAvatar,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        submitAvatar,
+    TResult Function()? showChat,
+    TResult Function()? showDeleted,
+    required TResult orElse(),
+  }) {
+    if (showDeleted != null) {
+      return showDeleted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_ShowLicence value) showLicence,
+    required TResult Function(_AcceptLicences value) acceptLicences,
+    required TResult Function(_BackToMain value) backToMain,
+    required TResult Function(_ShowInput value) showInput,
+    required TResult Function(_SubmitInput value) submitInput,
+    required TResult Function(_SubmitForm value) submitForm,
+    required TResult Function(_BackToForm value) backToForm,
+    required TResult Function(_SelectAvatar value) selectAvatar,
+    required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_ShowChatEvent value) showChat,
+    required TResult Function(_ShowDeletedEvent value) showDeleted,
+  }) {
+    return showDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ShowLicence value)? showLicence,
+    TResult Function(_AcceptLicences value)? acceptLicences,
+    TResult Function(_BackToMain value)? backToMain,
+    TResult Function(_ShowInput value)? showInput,
+    TResult Function(_SubmitInput value)? submitInput,
+    TResult Function(_SubmitForm value)? submitForm,
+    TResult Function(_BackToForm value)? backToForm,
+    TResult Function(_SelectAvatar value)? selectAvatar,
+    TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
+  }) {
+    return showDeleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ShowLicence value)? showLicence,
+    TResult Function(_AcceptLicences value)? acceptLicences,
+    TResult Function(_BackToMain value)? backToMain,
+    TResult Function(_ShowInput value)? showInput,
+    TResult Function(_SubmitInput value)? submitInput,
+    TResult Function(_SubmitForm value)? submitForm,
+    TResult Function(_BackToForm value)? backToForm,
+    TResult Function(_SelectAvatar value)? selectAvatar,
+    TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_ShowChatEvent value)? showChat,
+    TResult Function(_ShowDeletedEvent value)? showDeleted,
+    required TResult orElse(),
+  }) {
+    if (showDeleted != null) {
+      return showDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowDeletedEvent implements OnboardingEvent {
+  const factory _ShowDeletedEvent() = _$_ShowDeletedEvent;
+}
+
+/// @nodoc
 mixin _$OnboardingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2042,6 +2543,7 @@ mixin _$OnboardingState {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2055,6 +2557,7 @@ mixin _$OnboardingState {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2069,6 +2572,7 @@ mixin _$OnboardingState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2080,6 +2584,7 @@ mixin _$OnboardingState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2091,6 +2596,7 @@ mixin _$OnboardingState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2159,6 +2665,7 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2175,6 +2682,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2191,6 +2699,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2211,6 +2720,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2225,6 +2735,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2239,6 +2750,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2297,6 +2809,7 @@ class _$_Main implements _Main {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2313,6 +2826,7 @@ class _$_Main implements _Main {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2329,6 +2843,7 @@ class _$_Main implements _Main {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2349,6 +2864,7 @@ class _$_Main implements _Main {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2363,6 +2879,7 @@ class _$_Main implements _Main {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2377,6 +2894,7 @@ class _$_Main implements _Main {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2438,6 +2956,7 @@ class _$_ShowChat implements _ShowChat {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2454,6 +2973,7 @@ class _$_ShowChat implements _ShowChat {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2470,6 +2990,7 @@ class _$_ShowChat implements _ShowChat {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2490,6 +3011,7 @@ class _$_ShowChat implements _ShowChat {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2504,6 +3026,7 @@ class _$_ShowChat implements _ShowChat {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2518,6 +3041,7 @@ class _$_ShowChat implements _ShowChat {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2533,6 +3057,182 @@ class _$_ShowChat implements _ShowChat {
 
 abstract class _ShowChat implements OnboardingState {
   factory _ShowChat() = _$_ShowChat;
+}
+
+/// @nodoc
+abstract class _$$_ShowDeletedCopyWith<$Res> {
+  factory _$$_ShowDeletedCopyWith(
+          _$_ShowDeleted value, $Res Function(_$_ShowDeleted) then) =
+      __$$_ShowDeletedCopyWithImpl<$Res>;
+  $Res call({DateTime deletedAt});
+}
+
+/// @nodoc
+class __$$_ShowDeletedCopyWithImpl<$Res>
+    extends _$OnboardingStateCopyWithImpl<$Res>
+    implements _$$_ShowDeletedCopyWith<$Res> {
+  __$$_ShowDeletedCopyWithImpl(
+      _$_ShowDeleted _value, $Res Function(_$_ShowDeleted) _then)
+      : super(_value, (v) => _then(v as _$_ShowDeleted));
+
+  @override
+  _$_ShowDeleted get _value => super._value as _$_ShowDeleted;
+
+  @override
+  $Res call({
+    Object? deletedAt = freezed,
+  }) {
+    return _then(_$_ShowDeleted(
+      deletedAt: deletedAt == freezed
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowDeleted implements _ShowDeleted {
+  _$_ShowDeleted({required this.deletedAt});
+
+  @override
+  final DateTime deletedAt;
+
+  @override
+  String toString() {
+    return 'OnboardingState.showDeleted(deletedAt: $deletedAt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowDeleted &&
+            const DeepCollectionEquality().equals(other.deletedAt, deletedAt));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(deletedAt));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ShowDeletedCopyWith<_$_ShowDeleted> get copyWith =>
+      __$$_ShowDeletedCopyWithImpl<_$_ShowDeleted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() main,
+    required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
+    required TResult Function(String licenceText) licenceDetails,
+    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function() input,
+    required TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)
+        avatarPicker,
+  }) {
+    return showDeleted(deletedAt);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? main,
+    TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
+    TResult Function(String licenceText)? licenceDetails,
+    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function()? input,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        avatarPicker,
+  }) {
+    return showDeleted?.call(deletedAt);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? main,
+    TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
+    TResult Function(String licenceText)? licenceDetails,
+    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function()? input,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        avatarPicker,
+    required TResult orElse(),
+  }) {
+    if (showDeleted != null) {
+      return showDeleted(deletedAt);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Main value) main,
+    required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
+    required TResult Function(_LicenceDetails value) licenceDetails,
+    required TResult Function(_Form value) form,
+    required TResult Function(_Input value) input,
+    required TResult Function(_AvatarPicker value) avatarPicker,
+  }) {
+    return showDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Main value)? main,
+    TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
+    TResult Function(_LicenceDetails value)? licenceDetails,
+    TResult Function(_Form value)? form,
+    TResult Function(_Input value)? input,
+    TResult Function(_AvatarPicker value)? avatarPicker,
+  }) {
+    return showDeleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Main value)? main,
+    TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
+    TResult Function(_LicenceDetails value)? licenceDetails,
+    TResult Function(_Form value)? form,
+    TResult Function(_Input value)? input,
+    TResult Function(_AvatarPicker value)? avatarPicker,
+    required TResult orElse(),
+  }) {
+    if (showDeleted != null) {
+      return showDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowDeleted implements OnboardingState {
+  factory _ShowDeleted({required final DateTime deletedAt}) = _$_ShowDeleted;
+
+  DateTime get deletedAt;
+  @JsonKey(ignore: true)
+  _$$_ShowDeletedCopyWith<_$_ShowDeleted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2604,6 +3304,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2620,6 +3321,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2636,6 +3338,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2656,6 +3359,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2670,6 +3374,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2684,6 +3389,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2783,6 +3489,7 @@ class _$_Form implements _Form {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2799,6 +3506,7 @@ class _$_Form implements _Form {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2815,6 +3523,7 @@ class _$_Form implements _Form {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2835,6 +3544,7 @@ class _$_Form implements _Form {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2849,6 +3559,7 @@ class _$_Form implements _Form {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2863,6 +3574,7 @@ class _$_Form implements _Form {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -2928,6 +3640,7 @@ class _$_Input implements _Input {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -2944,6 +3657,7 @@ class _$_Input implements _Input {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2960,6 +3674,7 @@ class _$_Input implements _Input {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -2980,6 +3695,7 @@ class _$_Input implements _Input {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -2994,6 +3710,7 @@ class _$_Input implements _Input {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -3008,6 +3725,7 @@ class _$_Input implements _Input {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -3122,6 +3840,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
     required TResult Function(String userName, String? errorDescription) form,
     required TResult Function() input,
@@ -3138,6 +3857,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -3154,6 +3874,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
     TResult Function(String userName, String? errorDescription)? form,
     TResult Function()? input,
@@ -3174,6 +3895,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
     required TResult Function(_Input value) input,
@@ -3188,6 +3910,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,
@@ -3202,6 +3925,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
     TResult Function(_Input value)? input,

@@ -6,6 +6,7 @@ class SvgIcon extends StatelessWidget {
 
   final double? width;
   final double? height;
+  final double? size;
   final BoxFit boxFit;
 
   final String svgName;
@@ -15,6 +16,7 @@ class SvgIcon extends StatelessWidget {
     this.color,
     this.width,
     this.height,
+    this.size,
     this.boxFit = BoxFit.contain,
   });
 
@@ -23,8 +25,8 @@ class SvgIcon extends StatelessWidget {
     return SvgPicture.asset(
       svgName,
       fit: boxFit,
-      width: width,
-      height: height,
+      width: size ?? width ?? 18,
+      height: size ?? height ?? 18,
       color: color,
       package: 'watchers_widget',
     );

@@ -41,18 +41,18 @@ class AvatarPickerWidget extends StatelessWidget {
         onTap: onSubmit,
         isActive: isSubmitActive,
       ),
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
         Row(
           children: [
-            const SizedBox(width: 16),
             _buildCircleAvatar(avatar: selectedAvatar),
           ],
         ),
         const SizedBox(height: 16),
         const Text(
           'Выбрать другой:',
-          style: TextStyles.paragraph,
+          style: TextStyles.secondary,
         ),
         const SizedBox(height: 12),
         Wrap(
@@ -96,9 +96,13 @@ class AvatarPickerWidget extends StatelessWidget {
     return Badge(
       toAnimate: false,
       borderRadius: BorderRadius.circular(8),
-      badgeColor: CustomColors.primaryColor,
+      badgeColor: CustomColors.primary,
       position: BadgePosition.bottomEnd(bottom: 0, end: 0),
-      badgeContent: SvgIcon(Resources.selected_mark),
+      badgeContent: const SvgIcon(
+        Resources.selected_mark,
+        size: 8,
+        color: CustomColors.onPrimary,
+      ),
       child: circleAvatar,
     );
   }

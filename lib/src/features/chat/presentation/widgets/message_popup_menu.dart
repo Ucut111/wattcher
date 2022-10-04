@@ -43,7 +43,8 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               shrinkWrap: true,
-              children: isSentByUser ? _selfMessageMenu(bloc) : _otherMessageMenu(bloc, context),
+              children:
+                  isSentByUser ? _selfMessageMenu(bloc, context) : _otherMessageMenu(bloc, context),
             ),
           ),
         );
@@ -70,21 +71,24 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
         const Divider(
           indent: 12,
           height: 1,
-          color: CustomColors.borderColor,
+          color: CustomColors.divider,
         ),
         PopupMenuItemWidget(
           titleText: 'Копировать',
           iconPath: Resources.copy,
           onTap: () {
             _onMenuTap(() {
-              bloc.add(ChatEvent.copyMessage(message: message));
+              bloc.add(ChatEvent.copyMessage(
+                message: message,
+                context: context,
+              ));
             });
           },
         ),
         const Divider(
           indent: 12,
           height: 1,
-          color: CustomColors.borderColor,
+          color: CustomColors.divider,
         ),
         if (isModer) ...[
           if (message.isVisible)
@@ -97,6 +101,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
                   bloc.add(ChatEvent.changeMessageVisibility(
                     message: message,
                     isVisible: false,
+                    context: context,
                   ));
                 });
               },
@@ -111,6 +116,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
                   bloc.add(ChatEvent.changeMessageVisibility(
                     message: message,
                     isVisible: true,
+                    context: context,
                   ));
                 });
               },
@@ -118,7 +124,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
           const Divider(
             indent: 12,
             height: 1,
-            color: CustomColors.borderColor,
+            color: CustomColors.divider,
           ),
         ],
         PopupMenuItemWidget(
@@ -136,7 +142,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
         ),
       ];
 
-  List<Widget> _selfMessageMenu(ChatBloc bloc) => [
+  List<Widget> _selfMessageMenu(ChatBloc bloc, BuildContext context) => [
         PopupMenuItemWidget(
           titleText: 'Ответить',
           iconPath: Resources.reply,
@@ -149,7 +155,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
         const Divider(
           indent: 12,
           height: 1,
-          color: CustomColors.borderColor,
+          color: CustomColors.divider,
         ),
         PopupMenuItemWidget(
           titleText: 'Изменить',
@@ -163,21 +169,24 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
         const Divider(
           indent: 12,
           height: 1,
-          color: CustomColors.borderColor,
+          color: CustomColors.divider,
         ),
         PopupMenuItemWidget(
           titleText: 'Копировать',
           iconPath: Resources.copy,
           onTap: () {
             _onMenuTap(() {
-              bloc.add(ChatEvent.copyMessage(message: message));
+              bloc.add(ChatEvent.copyMessage(
+                message: message,
+                context: context,
+              ));
             });
           },
         ),
         const Divider(
           indent: 12,
           height: 1,
-          color: CustomColors.borderColor,
+          color: CustomColors.divider,
         ),
         PopupMenuItemWidget(
           titleText: 'Удалить',
@@ -185,7 +194,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
           popupMenuItemType: PopupMenuItemType.destructive,
           onTap: () {
             _onMenuTap(() {
-              bloc.add(ChatEvent.deleteMessage(message: message));
+              bloc.add(ChatEvent.deleteMessage(message: message, context: context));
             });
           },
         ),

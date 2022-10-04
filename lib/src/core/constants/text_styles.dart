@@ -6,8 +6,8 @@ class TextStyles {
   TextStyles._();
 
   static const highlighted = TextStyle(
-    color: CustomColors.primaryColor,
-    fontFamily: '.SF UI Display',
+    color: CustomColors.primary,
+    fontFamily: 'Inter',
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
@@ -15,64 +15,72 @@ class TextStyles {
   static TextStyle title({
     double fontSize = 17,
     FontWeight fontWeight = FontWeight.w500,
-    Color color = CustomColors.titleText
+    Color color = CustomColors.textMain,
   }) =>
       TextStyle(
         color: color,
-        fontFamily: '.SF UI Display',
+        fontFamily: 'Inter',
         fontWeight: fontWeight,
         fontSize: fontSize,
       );
 
-  static TextStyle subtitle1({
-    Color? color,
-    double fontSize = 15
-  }) =>
-      TextStyle(
+  static TextStyle subtitle1({Color? color, double fontSize = 15}) => TextStyle(
         color: color ?? CustomColors.contributionTextColor,
-        fontFamily: '.SF UI Display',
+        fontFamily: 'Inter',
         fontWeight: FontWeight.w400,
         fontSize: fontSize,
       );
 
   static const subtitle2 = TextStyle(
     color: CustomColors.paragraphTextColor,
-    fontFamily: '.SF UI Display',
+    fontFamily: 'Inter',
     fontWeight: FontWeight.w300,
     fontSize: 10,
   );
 
   static const input = TextStyle(
-    color: CustomColors.titleText,
-    fontFamily: '.SF UI Display',
+    color: CustomColors.textMain,
+    fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
     fontSize: 16,
   );
 
   static const hint = TextStyle(
-    color: CustomColors.borderColor,
-    fontFamily: '.SF UI Display',
+    color: CustomColors.textTertiary,
+    fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
     fontSize: 14,
   );
 
-  static const paragraph = TextStyle(
-    color: CustomColors.paragraphTextColor,
-    fontFamily: '.SF UI Display',
+  static const secondary = TextStyle(
+    color: CustomColors.textSecondary,
+    fontFamily: 'Inter',
     fontSize: 15,
     fontWeight: FontWeight.w400,
   );
 
+  static TextStyle onPrimary({
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.w400,
+    Color color = CustomColors.onPrimary,
+  }) =>
+      TextStyle(
+        color: color,
+        fontFamily: 'Inter',
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+      );
+
   static const contribution = TextStyle(
-    fontFamily: '.SF UI Display',
+    fontFamily: 'Inter',
     fontSize: 13,
     fontWeight: FontWeight.w400,
-    color: CustomColors.contributionTextColor,
+    color: CustomColors.textSecondary,
   );
 
-  static const messageText = TextStyle(
-    color: CustomColors.titleText,
-    fontFamily: '.SF UI Display',
+  static const primary = TextStyle(
+    color: CustomColors.textMain,
+    fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
     fontSize: 15,
   );
@@ -82,16 +90,16 @@ class TextStyles {
     FontWeight fontWeight = FontWeight.w400,
   }) =>
       TextStyle(
-        fontFamily: '.SF UI Display',
+        fontFamily: 'Inter',
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: CustomColors.danger,
       );
 
   static const setting = TextStyle(
-    fontFamily: '.SF UI Display',
+    fontFamily: 'Inter',
     fontSize: 15,
     fontWeight: FontWeight.w400,
-    color: CustomColors.settingText,
+    color: CustomColors.textSecondary,
   );
 }

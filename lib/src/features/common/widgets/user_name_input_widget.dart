@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:watchers_widget/src/core/constants/custom_colors.dart';
 import 'package:watchers_widget/src/core/constants/resources.dart';
@@ -21,7 +20,7 @@ class UserNameInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final outlineInputBorder = OutlineInputBorder(
       borderSide: const BorderSide(
-        color: CustomColors.paragraphTextColor,
+        color: CustomColors.inputBorder,
       ),
       borderRadius: BorderRadius.circular(100),
     );
@@ -30,6 +29,7 @@ class UserNameInputWidget extends StatelessWidget {
       width: 100.w,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: const BoxDecoration(
+        color: CustomColors.modalBackground,
         border: Border(
           top: BorderSide(
             color: CustomColors.contributionTextColor,
@@ -54,15 +54,18 @@ class UserNameInputWidget extends StatelessWidget {
                 border: outlineInputBorder,
                 focusedBorder: outlineInputBorder,
                 hintStyle: TextStyles.title(),
+                filled: true,
+                fillColor: CustomColors.inputFilling,
               ),
               style: TextStyles.title(),
             ),
           ),
           InkWell(
             onTap: onSubmitted,
-            child: SvgIcon(
+            child: const SvgIcon(
               Resources.arrow_button,
-              width: 55,
+              size: 55,
+              color: CustomColors.primary,
             ),
           ),
         ],

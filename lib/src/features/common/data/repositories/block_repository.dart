@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:watchers_widget/src/features/common/data/apis/block/block_api.dart';
 import 'package:watchers_widget/src/features/common/data/apis/block/dtos/block_update_dto.dart';
 import 'package:watchers_widget/src/features/common/domain/models/block_response.dart';
-import 'package:watchers_widget/src/features/common/domain/models/user.dart';
 
 abstract class IBlockRepository {
   Future<void> add({
@@ -13,7 +12,7 @@ abstract class IBlockRepository {
     required int targetId,
   });
 
-  Future<List<BlockUser>> getAll();
+  Future<BlockResponse> getBlocks();
 }
 
 class BlockRepository implements IBlockRepository {
@@ -34,7 +33,7 @@ class BlockRepository implements IBlockRepository {
       _blockApi.remove(BlockUpdateDto(targetId: targetId));
 
   @override
-  Future<List<BlockUser>> getAll() => _blockApi.getAll().then((response) =>
-      compute(BlockResponse.fromMap, response.data as Map<String, dynamic>)
-          .then((response) => response.initiator));
+  Future<BlockResponse> getBlocks() => _blockApi
+      .getAll()
+      .then((response) => compute(BlockResponse.fromMap, response.data as Map<String, dynamic>));
 }

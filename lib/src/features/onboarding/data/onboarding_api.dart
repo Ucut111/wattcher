@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:watchers_widget/src/core/constants/constants.dart';
 import 'package:watchers_widget/src/features/common/data/interceptors/add_token_interceptor.dart';
 
 class OnboardingApi {
@@ -14,7 +15,7 @@ class OnboardingApi {
     AddTokenInterceptor addTokenInterceptor,
   ) {
     final Dio client = Dio(BaseOptions(
-      baseUrl: 'https://webbackend.dev.watchers.io/',
+      baseUrl: Constants.baseUrl,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

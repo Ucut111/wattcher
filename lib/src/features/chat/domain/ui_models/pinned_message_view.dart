@@ -50,7 +50,7 @@ class PinnedMessageView extends StatelessWidget {
                   InkWell(
                     splashColor: Colors.transparent,
                     onTap: onButtonTap,
-                    child: SvgIcon(
+                    child: const SvgIcon(
                       Resources.pin,
                     ),
                   ),
@@ -61,7 +61,7 @@ class PinnedMessageView extends StatelessWidget {
               ),
               const Divider(
                 height: 1.32,
-                color: CustomColors.borderColor,
+                color: CustomColors.divider,
               )
             ])));
   }

@@ -6,6 +6,7 @@ import 'package:watchers_widget/src/core/constants/resources.dart';
 import 'package:watchers_widget/src/core/constants/text_styles.dart';
 import 'package:watchers_widget/src/core/style/figma_sizer.dart';
 import 'package:watchers_widget/src/core/svg_icon.dart';
+import 'package:watchers_widget/src/features/chat/presentation/widgets/vip_badge.dart';
 import 'package:watchers_widget/src/features/common/widgets/avatar_picker_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/contribution_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/loading_widget.dart';
@@ -18,9 +19,11 @@ import 'package:watchers_widget/src/features/common/widgets/user_name_widget.dar
 import 'logic/settings_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen();
+  const SettingsScreen._();
 
-  static Route route() => MaterialPageRoute(builder: (_) => const SettingsScreen());
+  static Route route() => MaterialPageRoute(
+        builder: (_) => const SettingsScreen._(),
+      );
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -42,9 +45,8 @@ class _SettingsScreenState
                   titleText: 'Профиль',
                   onBackTap: () {},
                 ),
-                children: const [
-                  LoadingWidget(),
-                ],
+                isEmpty: true,
+                emptyWidget: const LoadingWidget(),
               );
             },
             settings: (state) {
@@ -69,8 +71,8 @@ class _SettingsScreenState
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: CustomColors.buttonPanel,
+                      borderRadius: BorderRadius.circular(8),
+                      color: CustomColors.secondary,
                     ),
                     child: Column(
                       children: [
@@ -85,7 +87,10 @@ class _SettingsScreenState
                                   'Профиль',
                                   style: TextStyles.setting,
                                 ),
-                                SvgIcon(Resources.chevron),
+                                SvgIcon(
+                                  Resources.chevron,
+                                  color: CustomColors.textTertiary,
+                                ),
                               ],
                             ),
                           ),
@@ -94,7 +99,8 @@ class _SettingsScreenState
                           padding: EdgeInsets.only(left: 16.0),
                           child: Divider(
                             height: 1,
-                            color: CustomColors.buttonPanel,
+                            thickness: 1,
+                            color: CustomColors.divider,
                           ),
                         ),
                         InkWell(
@@ -114,7 +120,11 @@ class _SettingsScreenState
                                   style: TextStyles.contribution,
                                 ),
                                 const SizedBox(width: 16),
-                                const SvgIcon(Resources.chevron),
+                                // if (widget.)
+                                const SvgIcon(
+                                  Resources.chevron,
+                                  color: CustomColors.textTertiary,
+                                ),
                               ],
                             ),
                           ),
@@ -123,11 +133,14 @@ class _SettingsScreenState
                     ),
                   ),
                   const Spacer(),
-                  const Text(
-                    'Удалить профиль',
-                    style: TextStyles.paragraph,
+                  TextButton(
+                    onPressed: () => bloc.deleteUser(SettingsEvent.deleteUser(context: context)),
+                    child: const Text(
+                      'Удалить профиль',
+                      style: TextStyles.secondary,
+                    ),
                   ),
-                  SizedBox(height: 21.fh),
+                  SizedBox(height: 6.fh),
                   const ContributionWidget(),
                 ],
               );
@@ -140,16 +153,30 @@ class _SettingsScreenState
                 ),
                 children: [
                   SizedBox(height: 16.fh),
-                  GestureDetector(
-                    onTap: () {},
-                    child: ClipOval(
-                      child: CircleAvatar(
-                        radius: 33.fw,
-                        child: SvgPicture.network(
-                          state.user.pic,
+                  Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipOval(
+                          child: CircleAvatar(
+                            radius: 33.fw,
+                            child: SvgPicture.network(
+                              state.user.pic,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      // Todo(dartloli): get status from backend
+                      if (state.user.statusName != null)
+                        Positioned(
+                          bottom: 0,
+                          child: VipBadgeWidget(
+                            statusName: state.user.statusName!,
+                            isSettings: true,
+                          ),
+                        ),
+                    ],
                   ),
                   TextButton(
                     onPressed: () => bloc.add(
@@ -158,11 +185,9 @@ class _SettingsScreenState
                         user: state.user,
                       ),
                     ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: CustomColors.primaryColor,
-                    ),
                     child: const Text(
                       'Выбрать другой аватар',
+                      style: TextStyles.highlighted,
                     ),
                   ),
                   Padding(
@@ -171,7 +196,7 @@ class _SettingsScreenState
                       children: const [
                         Text(
                           'Имя в чате',
-                          style: TextStyles.paragraph,
+                          style: TextStyles.secondary,
                         ),
                       ],
                     ),
@@ -226,30 +251,29 @@ class _SettingsScreenState
                   onBackTap: () => bloc.add(SettingsEvent.backToSettings(blocks: state.blocks)),
                   titleText: 'Заблокированные',
                 ),
+                emptyWidget: Text(
+                  'У вас нет заблокированных пользователей',
+                  style: TextStyles.title(fontSize: 15),
+                  textAlign: TextAlign.left,
+                ),
+                isEmpty: state.blocks.isEmpty,
                 children: [
                   SizedBox(height: 16.fh),
-                  if (state.blocks.isEmpty)
-                    Text(
-                      'У вас нет заблокированных пользователей',
-                      style: TextStyles.title(fontSize: 15),
-                      textAlign: TextAlign.left,
-                    )
-                  else
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.blocks.length,
-                      itemBuilder: (context, index) {
-                        final block = state.blocks[index];
-                        return UserListTile(
-                          baseUser: block.baseUser,
-                          onTap: () => bloc.add(SettingsEvent.showUnblockDialog(
-                            context: context,
-                            block: block,
-                            blocks: state.blocks,
-                          )),
-                        );
-                      },
-                    ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.blocks.length,
+                    itemBuilder: (context, index) {
+                      final block = state.blocks[index];
+                      return UserListTile(
+                        user: block,
+                        onTap: () => bloc.add(SettingsEvent.showUnblockDialog(
+                          context: context,
+                          user: block,
+                          blocks: state.blocks,
+                        )),
+                      );
+                    },
+                  ),
                 ],
               );
             },

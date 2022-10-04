@@ -1,38 +1,45 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:watchers_widget/src/core/constants/resources.dart';
 import 'package:watchers_widget/src/features/common/domain/models/avatar.dart';
-import 'package:watchers_widget/src/features/common/domain/models/user.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/avatar/get_all_avatars_use_case.dart';
-import 'package:watchers_widget/src/features/common/domain/use_cases/block/get_all_blocks_use_case.dart';
+import 'package:watchers_widget/src/features/common/domain/use_cases/block/get_blocks_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/block/remove_block_use_case.dart';
+import 'package:watchers_widget/src/features/common/domain/use_cases/user/delete_user_user_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/user/get_user_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/user/update_user_use_case.dart';
-import 'package:watchers_widget/src/features/common/widgets/unblock_dialog.dart';
+import 'package:watchers_widget/src/features/common/models/user.dart';
+import 'package:watchers_widget/src/features/common/widgets/dialogs/confirm_dialog.dart';
+import 'package:watchers_widget/src/features/common/widgets/snacks/info_snackbar.dart';
 import 'package:watchers_widget/src/features/onboarding/domain/user_name.dart';
+import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc.dart';
 
 part 'settings_bloc.freezed.dart';
 part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final GetAllBlocksUseCase _getBlocksUseCase;
+  final GetBlocksUseCase _getBlocksUseCase;
   final GetUserUseCase _getUserUseCase;
   final UpdateUserUseCase _updateUserUseCase;
   final GetAllAvatarsUseCase _getAllAvatarsUseCase;
   final RemoveBlockUseCase _removeBlockUseCase;
+  final DeleteUserUseCase _deleteUserUseCase;
 
   SettingsBloc({
-    required GetAllBlocksUseCase getBlocksUseCase,
+    required GetBlocksUseCase getBlocksUseCase,
     required GetUserUseCase getUserUseCase,
     required UpdateUserUseCase updateUserUseCase,
     required GetAllAvatarsUseCase getAllAvatarsUseCase,
     required RemoveBlockUseCase removeBlockUseCase,
+    required DeleteUserUseCase deleteUserUseCase,
   })  : _getBlocksUseCase = getBlocksUseCase,
         _getUserUseCase = getUserUseCase,
         _updateUserUseCase = updateUserUseCase,
         _getAllAvatarsUseCase = getAllAvatarsUseCase,
         _removeBlockUseCase = removeBlockUseCase,
+        _deleteUserUseCase = deleteUserUseCase,
         super(const SettingsState.loading()) {
     on<SettingsEvent>(
       (event, emit) => event.maybeMap<Future<void>>(
@@ -51,9 +58,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       ),
     );
 
-    // _addBlockUseCase(targetId: 812);
-    // _addBlockUseCase(targetId: 811);
-    // _addBlockUseCase(targetId: 810);
+    on<_DeleteUser>(_onDeleteUser);
 
     add(const SettingsEvent.init());
   }
@@ -67,7 +72,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   Future<void> _init(_Init event, Emitter<SettingsState> emit) async {
     final result = await _getBlocksUseCase();
     if (result.isSuccess) {
-      return emit(SettingsState.settings(blocks: result.successValue));
+      return emit(SettingsState.settings(blocks: result.successValue.initiator));
     }
   }
 
@@ -83,7 +88,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     if (result.isSuccess) {
       return emit(SettingsState.profile(
         blocks: event.blocks,
-        user: result.successValue.baseUser,
+        user: result.successValue.user,
       ));
     }
   }
@@ -163,20 +168,68 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   Future<void> _showUnblockDialog(_ShowUnblockDialog event, Emitter<SettingsState> emit) async {
     await showDialog(
       context: event.context,
-      builder: (context) => UnblockDialog(
-        targetName: event.block.baseUser.name,
+      builder: (context) => ConfirmDialog(
+        confirmButtonText: 'Разблокировать',
+        titleText: 'Разблокировать ${event.user.name}?',
         onConfirm: () async {
-          // Удаляем блокировку по id
-          // Todo(dartloli): удалять из сокета в рилтайме
-          final result = await _removeBlockUseCase(targetId: event.block.id);
+          final result = await _removeBlockUseCase(targetId: event.user.id);
 
           if (result.isError) {
             return;
           }
 
-          emit(SettingsState.blackList(blocks: event.blocks.toList()..remove(event.block)));
+          emit(SettingsState.blackList(blocks: event.blocks.toList()..remove(event.user)));
 
           Navigator.pop(context);
+
+          _showSnackbar(
+            context: event.context,
+            snackBar: const InfoSnackbar(
+              leadingIconPath: Resources.block,
+              titleText: 'Пользователь разблокирован',
+            ).build(),
+          );
+        },
+        onCancel: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  void _showSnackbar({
+    required BuildContext context,
+    required SnackBar snackBar,
+  }) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      snackBar,
+    );
+  }
+
+  /// [SettingsEvent.deleteUser]
+  void deleteUser(SettingsEvent event) => add(event);
+  Future<void> _onDeleteUser(
+    _DeleteUser event,
+    Emitter<SettingsState> emit,
+  ) async {
+    await showDialog(
+      context: event.context,
+      builder: (context) => ConfirmDialog(
+        titleText: 'Удаление профиля',
+        subtitleText: 'Все данные будут удалены. Вы сможете восстановить профиль в течение 30 дней',
+        confirmButtonText: 'Удалить профиль',
+        cancelButtonText: 'Отмена',
+        onConfirm: () async {
+          final result = await _deleteUserUseCase.call();
+
+          if (result.isError) {
+            return;
+          }
+
+          Navigator.of(context).maybePop();
+          Navigator.of(event.context).maybePop();
+          event.context.read<OnboardingBloc>().add(const OnboardingEvent.showDeleted());
         },
         onCancel: () {
           Navigator.pop(context);

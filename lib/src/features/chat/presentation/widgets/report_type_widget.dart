@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:watchers_widget/src/core/constants/custom_colors.dart';
 import 'package:watchers_widget/src/core/constants/resources.dart';
 import 'package:watchers_widget/src/core/constants/text_styles.dart';
 import 'package:watchers_widget/src/core/svg_icon.dart';
 
-// Todo(dartloli): спросить про названия на бекенде (только spam выдает 201)
 enum ReportType { spam, abuse, porn }
 
 extension ReportTypeX on ReportType {
@@ -63,7 +61,10 @@ class ReportTypeWidget extends StatelessWidget {
                         child: Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SvgIcon(Resources.report_badge),
+                            const SvgIcon(
+                              Resources.report_badge,
+                              size: 48,
+                            ),
                             const SizedBox(width: 10),
                             Column(
                               mainAxisSize: MainAxisSize.min,
@@ -75,7 +76,7 @@ class ReportTypeWidget extends StatelessWidget {
                                 ),
                                 const Text(
                                   'Жалобы отправляются анонимно',
-                                  style: TextStyles.paragraph,
+                                  style: TextStyles.secondary,
                                 ),
                               ],
                             ),
@@ -83,12 +84,16 @@ class ReportTypeWidget extends StatelessWidget {
                             IconButton(
                               padding: const EdgeInsets.only(bottom: 16.0),
                               onPressed: () => Navigator.maybePop(context),
-                              icon: SvgIcon(Resources.close, color: CustomColors.danger),
+                              icon: const SvgIcon(Resources.close, color: CustomColors.danger),
                             ),
                           ],
                         ),
                       ),
-                      const Divider(color: CustomColors.borderColor),
+
+                      const Divider(
+                        color: CustomColors.divider,
+                        thickness: 1,
+                      ),
 
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 36),

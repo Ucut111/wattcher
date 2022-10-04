@@ -21,15 +21,31 @@ class UserNameWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,
-            color: CustomColors.paragraphTextColor,
+            color: CustomColors.inputBorder,
           ),
+          color: CustomColors.inputFilling,
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-          child: Text(
-            userName.isEmpty ? 'Введите имя' : userName,
-            style: TextStyles.paragraph,
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (userName.isEmpty)
+                const Text(
+                  'Введите имя',
+                  style: TextStyles.secondary,
+                )
+              else
+                Text(
+                  userName,
+                  style: TextStyles.primary,
+                ),
+              const Text(
+                'изменить',
+                style: TextStyles.highlighted,
+              ),
+            ],
           ),
         ),
       ),

@@ -1,11 +1,11 @@
 part of 'locator.dart';
 
 void _registerBlocs() {
-  locator.registerFactoryParam<OnboardingBloc, String, void>((externalId, _) => OnboardingBloc(
+  locator.registerFactoryParam((OnboardingBlocParams params, _) => OnboardingBloc(
         registerUserUseCase: locator(),
         updateUserUseCase: locator(),
         getAllAvatarsUseCase: locator(),
-        externalId: externalId,
+        params: params,
       ));
 
   locator.registerFactory(() => SettingsBloc(
@@ -14,6 +14,7 @@ void _registerBlocs() {
         getAllAvatarsUseCase: locator(),
         updateUserUseCase: locator(),
         removeBlockUseCase: locator(),
+        deleteUserUseCase: locator(),
       ));
 
   locator.registerFactoryParam<ChatBloc, String, void>((externalRoomId, _) => ChatBloc(
@@ -30,15 +31,16 @@ void _registerBlocs() {
         deleteMessageUseCase: locator(),
         editMessageUseCase: locator(),
         reportMessageUseCase: locator(),
-        getUserUseCase: locator(),
         addBlockUseCase: locator(),
         setMessageVisibleUseCase: locator(),
         setMessagesVisibleUseCase: locator(),
         setBanUseCase: locator(),
+        getBlocksUseCase: locator(),
+        closeSocketUseCase: locator(),
       ));
-  locator.registerFactoryParam<TalkersBloc, List<Talker>, void>((talkers, _) => TalkersBloc(
-        checkTalkerUseCase: locator(),
-        getSocketUseCase: locator(),
-        talkers: talkers,
+
+  locator.registerFactoryParam((DeletedProfileBlocParams params, _) => DeletedProfileBloc(
+        params,
+        locator(),
       ));
 }

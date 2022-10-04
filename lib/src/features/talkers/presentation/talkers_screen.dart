@@ -1,31 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:watchers_widget/src/core/base/bloc_injectable_state.dart';
+import 'package:watchers_widget/src/features/chat/presentation/logic/chat_bloc.dart';
 import 'package:watchers_widget/src/features/common/widgets/loading_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/modal_title_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/modal_widget.dart';
-import 'package:watchers_widget/src/features/common/widgets/talker_list_tile.dart';
-import 'package:watchers_widget/src/features/talkers/presentation/logic/talkers_bloc.dart';
+import 'package:watchers_widget/src/features/common/widgets/talker_action_menu.dart';
 
 import '../../common/models/talker.dart';
 
 class TalkersScreen extends StatefulWidget {
-  final List<Talker> talkers;
+  final void Function(Talker talker, bool isBanned) onToggleUserBan;
+  final void Function(Talker talker, bool isVisible) onToggleMessagesVisibility;
 
-  const TalkersScreen(this.talkers);
+  //  Удалить кастыль после добавления локальных координаторов (навигаторов)
+  final ChatBloc bloc;
 
-  static Route route(List<Talker> talkers) =>
-      MaterialPageRoute(builder: (_) => TalkersScreen(talkers));
+  const TalkersScreen({
+    required this.onToggleUserBan,
+    required this.onToggleMessagesVisibility,
+    required this.bloc,
+  });
+
+  static Route route({
+    required ChatBloc bloc,
+    required void Function(Talker talker, bool isBanned) onToggleUserBan,
+    required void Function(Talker talker, bool isVisible) onToggleMessagesVisibility,
+  }) =>
+      MaterialPageRoute(
+        builder: (_) => TalkersScreen(
+          bloc: bloc,
+          onToggleUserBan: onToggleUserBan,
+          onToggleMessagesVisibility: onToggleMessagesVisibility,
+        ),
+      );
 
   @override
-  State<TalkersScreen> createState() => _TalkersScreenState(talkers);
+  State<TalkersScreen> createState() => _TalkersScreenState();
 }
 
 class _TalkersScreenState
-    extends BlocInjectableState<TalkersScreen, TalkersBloc, TalkersEvent, TalkersState> {
-  _TalkersScreenState(List<Talker> talkers) : super.withParams(param1: talkers);
+    extends BlocInjectableState<TalkersScreen, ChatBloc, ChatEvent, ChatState> {
+  _TalkersScreenState() : super.empty();
 
   @override
-  Widget builder(BuildContext context, TalkersState state) {
+  void initState() {
+    cubit = widget.bloc;
+    super.initState();
+  }
+
+  @override
+  Widget builder(BuildContext context, ChatState state) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -38,9 +62,8 @@ class _TalkersScreenState
                   titleText: 'Профиль',
                   onBackTap: () {},
                 ),
-                children: const [
-                  LoadingWidget(),
-                ],
+                isEmpty: true,
+                emptyWidget: const LoadingWidget(),
               );
             },
             loaded: (state) {
@@ -56,17 +79,22 @@ class _TalkersScreenState
                     child: ListView.builder(
                       itemCount: state.talkers.length,
                       itemBuilder: (BuildContext context, int index) {
-                        late final Talker myTalker;
-                        for (int i = 0; i < state.talkers.length; i++) {
-                          if (state.talkers[i].isMe == true) {
-                            myTalker = state.talkers[i];
-                          }
-                        }
-                        return TalkerListTile(
-                            iAmAdminOrModer: myTalker.isModer || myTalker.role == 'ADMIN',
-                            onBlockUserTap: () {},
-                            onHideMessagesTap: () {},
-                            talker: state.talkers[index]);
+                        final myTalker = state.talker;
+                        final iAmAdminOrModer = myTalker.isModer || myTalker.role == 'ADMIN';
+                        final isMe = state.talker == state.talkers[index];
+                        final talker = state.talkers[index];
+
+                        return TalkerActionMenu(
+                          iAmAdminOrModer: iAmAdminOrModer,
+                          onToggleMessagesVisibility: widget.onToggleMessagesVisibility,
+                          onToggleUserBan: widget.onToggleUserBan,
+                          talker: talker,
+                          isMe: state.talker == talker,
+                          isShowActions: (talker.role != 'ADMIN') &&
+                              !isMe &&
+                              !talker.isModer &&
+                              iAmAdminOrModer,
+                        );
                       },
                     ),
                   ),

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:watchers_widget/src/features/common/domain/models/user.dart';
+import 'package:watchers_widget/src/features/common/models/user.dart';
 
 class BlockResponse {
-  final List<BlockUser> initiator;
-  final List<BlockUser> target;
+  final List<User> initiator;
+  final List<User> target;
 
   const BlockResponse({
     required this.initiator,
@@ -13,8 +13,8 @@ class BlockResponse {
 
   factory BlockResponse.fromMap(Map<String, dynamic> map) {
     return BlockResponse(
-      initiator: List<BlockUser>.from(map['initiator']?.map((x) => BlockUser.fromMap(x))),
-      target: List<BlockUser>.from(map['target']?.map((x) => BlockUser.fromMap(x))),
+      initiator: List<User>.from(map['initiator']?.map((x) => User.fromMap(x))),
+      target: List<User>.from(map['target']?.map((x) => User.fromMap(x))),
     );
   }
 

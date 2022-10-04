@@ -3,7 +3,7 @@ part of 'locator.dart';
 void _registerUtils() {
   locator.registerLazySingleton(() {
     return Dio(BaseOptions(
-      baseUrl: 'https://webbackend.dev.watchers.io/',
+      baseUrl: Constants.baseUrl,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

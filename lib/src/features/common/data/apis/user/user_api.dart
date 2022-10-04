@@ -27,6 +27,10 @@ class UserApi {
         'user',
       );
 
+  Future<Response> restore() => _dio.get(
+        'user/restore',
+      );
+
   Future<Response> getAvas() => _dio.get(
         'user/getAvas',
       );

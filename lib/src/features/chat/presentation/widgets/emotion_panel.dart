@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:watchers_widget/src/core/constants/custom_colors.dart';
-import 'package:watchers_widget/src/core/style/figma_sizer.dart';
 import 'package:watchers_widget/src/features/chat/domain/models/emotion.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/emoji_widget.dart';
 
@@ -42,8 +41,13 @@ class _EmotionPannelState extends State<EmotionPannel> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           width: panelWidth,
-          height: 50.fh,
+          height: 48,
           decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: CustomColors.divider,
+              style: BorderStyle.solid,
+            ),
             color: CustomColors.modalBackground,
             borderRadius: BorderRadius.circular(100),
           ),

@@ -2,6 +2,8 @@ part of 'chat_bloc.dart';
 
 @freezed
 class ChatState with _$ChatState {
+  ChatState._();
+
   factory ChatState.loading() = _Loading;
   factory ChatState.loaded({
     Message? pinnedMessage,
@@ -15,7 +17,18 @@ class ChatState with _$ChatState {
     required Talker talker,
     @Default(false) bool mirrorEmotion,
     MessageInputType? messageInputType,
+    required List<int> initiatorIds,
+    required List<int> targetIds,
   }) = ChatStateLoaded;
+
+  bool get isChatEmpty => maybeMap(
+        orElse: () => false,
+
+        // Либо чат действительно пустой, либо вы гость и все сообщения скрыты модераторами
+        loaded: (state) =>
+            state.messages.where((message) => message.isVisible).isEmpty && !state.talker.isModer ||
+            state.messages.isEmpty,
+      );
 }
 
 extension ChatStateX on ChatState {

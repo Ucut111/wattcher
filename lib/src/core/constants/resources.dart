@@ -9,7 +9,6 @@ class Resources {
   static const selected_mark = 'assets/icons/selected_mark.svg';
   static const leave = 'assets/icons/leave.svg';
   static const people = 'assets/icons/people.svg';
-  static const heart = 'assets/icons/heart.svg';
   static const settings = 'assets/icons/settings.svg';
   static const check = 'assets/icons/check.svg';
   static const admin_check_mark = 'assets/icons/admin_mark.svg';
@@ -18,6 +17,7 @@ class Resources {
   static const block = 'assets/icons/block.svg';
   static const brick = 'assets/icons/brick.svg';
   static const speaker = 'assets/icons/speaker.svg';
+  static const send = 'assets/icons/send.svg';
 
   // popup menu
   static const reply = 'assets/icons/answer.svg';
@@ -25,8 +25,12 @@ class Resources {
   static const copy = 'assets/icons/copy.svg';
   static const remove = 'assets/icons/remove.svg';
   static const report = 'assets/icons/report.svg';
+  static const report_badge_simple = 'assets/icons/report_badge_simple.svg';
   static const report_badge = 'assets/icons/report_badge.svg';
   static const hide_message = 'assets/icons/hide_message.svg';
   static const show_message = 'assets/icons/show_message.svg';
   static const disabled = 'assets/icons/disabled.svg';
+
+  static const loader = 'assets/icons/loader.svg';
+  static const be_first = 'assets/icons/be_first.svg';
 }

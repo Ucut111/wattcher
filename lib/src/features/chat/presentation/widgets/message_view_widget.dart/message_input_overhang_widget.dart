@@ -40,18 +40,18 @@ class MessageInputOverhangWidget
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Divider(height: 1, thickness: 1, color: CustomColors.borderColor),
+        const Divider(height: 1, thickness: 1, color: CustomColors.divider),
         Padding(
           padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
           child: Row(
             children: [
               SvgIcon(
                 type.iconPath,
-                color: CustomColors.primaryColor,
+                color: CustomColors.gray400,
               ),
               const SizedBox(width: 8),
               Container(
-                color: CustomColors.primaryColor,
+                color: CustomColors.gray400,
                 width: 1,
                 height: 30,
               ),
@@ -67,19 +67,19 @@ class MessageInputOverhangWidget
                         children: [
                           Text(
                             '${type.titlePrefix} ${type.isReply ? message.talker.user.name : ''}',
-                            style: TextStyles.subtitle1(color: CustomColors.primaryColor),
+                            style: TextStyles.subtitle1(color: CustomColors.textMain),
                           ),
                           Flexible(
                               child: Row(mainAxisSize: MainAxisSize.min, children: [
-                                Flexible(
-                                  child: Text(
-                                    message.text,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                    style: TextStyles.subtitle1(),
-                                  ),
-                                )
-                              ])),
+                            Flexible(
+                              child: Text(
+                                message.text,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyles.subtitle1(color: CustomColors.textSecondary),
+                              ),
+                            )
+                          ])),
                         ],
                       ),
                     ),

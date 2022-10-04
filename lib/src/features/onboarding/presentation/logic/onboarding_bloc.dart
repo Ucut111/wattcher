@@ -10,6 +10,8 @@ import 'package:watchers_widget/src/features/common/domain/use_cases/avatar/get_
 import 'package:watchers_widget/src/features/common/domain/use_cases/user/update_user_use_case.dart';
 import 'package:watchers_widget/src/features/onboarding/domain/licence.dart';
 import 'package:watchers_widget/src/features/onboarding/domain/user_name.dart';
+import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc_params.dart';
+import 'package:watchers_widget/watchers_widget.dart';
 
 part 'onboarding_bloc.freezed.dart';
 part 'onboarding_event.dart';
@@ -19,18 +21,20 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final RegisterUserUseCase _registerUserUseCase;
   final UpdateUserUseCase _updateUserUseCase;
   final GetAllAvatarsUseCase _getAllAvatarsUseCase;
+  final OnboardingBlocParams _params;
 
   OnboardingBloc({
+    required OnboardingBlocParams params,
     required RegisterUserUseCase registerUserUseCase,
     required UpdateUserUseCase updateUserUseCase,
     required GetAllAvatarsUseCase getAllAvatarsUseCase,
-    required String externalId,
-  })  : _registerUserUseCase = registerUserUseCase,
+  })  : _params = params,
+        _registerUserUseCase = registerUserUseCase,
         _updateUserUseCase = updateUserUseCase,
         _getAllAvatarsUseCase = getAllAvatarsUseCase,
         super(OnboardingState.loading()) {
     on<OnboardingEvent>(
-      (event, emit) => event.map<Future<void>>(
+      (event, emit) => event.mapOrNull<Future<void>>(
         init: (event) => _init(event, emit),
         showLicence: (event) => _showLicence(event, emit),
         backToMain: (event) => _backToMain(event, emit),
@@ -45,7 +49,13 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       transformer: bloc_concurrency.droppable(),
     );
 
-    add(OnboardingEvent.init(externalId: externalId));
+    on<_ShowChatEvent>(_onShowChat);
+    on<_ShowDeletedEvent>(_onShowDeleted);
+
+    add(OnboardingEvent.init(
+      externalId: _params.userId,
+      statusName: _params.statusName,
+    ));
   }
 
   final TextEditingController _userNameTextEditingController = TextEditingController();
@@ -55,10 +65,22 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   FocusNode get userNameFocusNode => _userNameFocusNode;
 
   Future<void> _init(_Init event, Emitter<OnboardingState> emit) async {
-    final result = await _registerUserUseCase.call(externalId: event.externalId);
+    final result = await _registerUserUseCase.call(
+      externalId: event.externalId,
+      statusName: event.statusName,
+    );
 
     if (result.isSuccess) {
-      if (result.successValue.isNew) {
+      final registerResponse = result.successValue;
+
+      if (registerResponse.isDeleted) {
+        emit(OnboardingState.showDeleted(deletedAt: registerResponse.user.user.deletedAt!));
+        return;
+      }
+
+      if (registerResponse.isNew ||
+          registerResponse.user.user.name.isEmpty ||
+          registerResponse.user.user.pic.isEmpty) {
         emit(OnboardingState.main());
         return;
       }
@@ -129,4 +151,12 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       emit(OnboardingState.showChat());
     }
   }
+
+  void _onShowChat(_ShowChatEvent event, Emitter<OnboardingState> emit) =>
+      emit(OnboardingState.showChat());
+
+  void _onShowDeleted(_ShowDeletedEvent event, Emitter<OnboardingState> emit) =>
+      emit(OnboardingState.showDeleted(
+        deletedAt: DateTime.now(),
+      ));
 }

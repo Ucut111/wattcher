@@ -5,13 +5,19 @@ class ModalWidget extends StatelessWidget {
   final Widget title;
   final Widget? submitButton;
   final List<Widget> children;
+  final Widget? emptyWidget;
+  final bool isEmpty;
   final double? height;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const ModalWidget({
     required this.title,
-    required this.children,
+    this.children = const [],
+    this.emptyWidget,
+    this.isEmpty = false,
     this.height,
     this.submitButton,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   });
 
   @override
@@ -24,10 +30,6 @@ class ModalWidget extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                ),
                 color: CustomColors.modalBackground,
               ),
               child: Padding(
@@ -35,10 +37,19 @@ class ModalWidget extends StatelessWidget {
                 child: Stack(
                   children: [
                     Column(
+                      crossAxisAlignment: crossAxisAlignment,
+                      textDirection: TextDirection.ltr,
                       children: [
                         title,
                         const SizedBox(height: 16),
-                        ...children,
+                        if (isEmpty && emptyWidget != null)
+                          Expanded(
+                            child: Center(
+                              child: emptyWidget,
+                            ),
+                          )
+                        else
+                          ...children,
                       ],
                     ),
                     if (submitButton != null)

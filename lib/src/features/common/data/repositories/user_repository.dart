@@ -21,6 +21,8 @@ abstract class IUserRepository {
 
   Future<void> delete();
 
+  Future<void> restore();
+
   Future<List<Avatar>> getAvas();
 }
 
@@ -42,14 +44,14 @@ class UserRepository implements IUserRepository {
 
     // Actualize user in local storage, cuz back sends only {true}
     final user = AuthUser.fromJson(await _entityStorage.get(AppSettings.user));
-    _saveUser(user.copyWith(baseUser: user.baseUser.copyWith(name: name, pic: pic)));
+    _saveUser(user.copyWith(user: user.user.copyWith(name: name, pic: pic)));
   }
 
   @override
   Future<AuthUser> get() async {
-    final user = await _userApi
-        .get()
-        .then((response) => compute(AuthUser.fromMap, response.data as Map<String, dynamic>));
+    final user = await _userApi.get().then((response) {
+      return compute(AuthUser.fromMap, response.data as Map<String, dynamic>);
+    });
 
     await _saveUser(user);
 
@@ -71,6 +73,9 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> delete() => _userApi.delete();
+
+  @override
+  Future<void> restore() => _userApi.restore();
 
   @override
   Future<List<Avatar>> getAvas() =>

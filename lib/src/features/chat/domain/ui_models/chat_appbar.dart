@@ -19,62 +19,65 @@ class ChatAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16, top: 6),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                onTap: onLeaveTap,
-                child: SvgIcon(
-                  Resources.leave,
-                  //width: 24,
-                ),
-              ),
+    return ClipRRect(
+      borderRadius: BorderRadius.zero,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 1),
+        decoration: const BoxDecoration(
+          color: CustomColors.modalBackground,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0.0, 1.0),
+              blurRadius: 6.0,
             ),
-            Padding(
-                padding: const EdgeInsets.only(left: 16, top: 6),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  onTap: onCountTap,
-                  child: CircleAvatar(
-                    backgroundColor: CustomColors.modalBackground,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        SvgIcon(
-                          Resources.people,
-                          width: 13,
-                          height: 9,
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          talkersCount,
-                          style: TextStyles.subtitle1(fontSize: 12),
-                        ),
-                      ],
-                    ),
-                  ),
-                ))
           ],
         ),
-        const SizedBox(
-          height: 5,
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: InkWell(
+                    onTap: onCountTap,
+                    splashColor: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: CustomColors.gray800,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5.5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SvgIcon(
+                              Resources.people,
+                              height: 11,
+                              color: CustomColors.gray400,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              talkersCount,
+                              style: TextStyles.subtitle1(
+                                fontSize: 14,
+                                color: CustomColors.gray400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
-        const Divider(
-          height: 1.32,
-          color: CustomColors.borderColor,
-        )
-      ],
+      ),
     );
   }
 }

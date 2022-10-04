@@ -19,67 +19,63 @@ mixin _$SettingsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -96,6 +92,7 @@ mixin _$SettingsEvent {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +108,7 @@ mixin _$SettingsEvent {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -126,6 +124,7 @@ mixin _$SettingsEvent {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -187,25 +186,23 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return init();
   }
@@ -214,22 +211,21 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return init?.call();
   }
@@ -238,22 +234,21 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -276,6 +271,7 @@ class _$_Init implements _Init {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return init(this);
   }
@@ -294,6 +290,7 @@ class _$_Init implements _Init {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return init?.call(this);
   }
@@ -312,6 +309,7 @@ class _$_Init implements _Init {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -330,7 +328,7 @@ abstract class _$$_ToProfileCopyWith<$Res> {
   factory _$$_ToProfileCopyWith(
           _$_ToProfile value, $Res Function(_$_ToProfile) then) =
       __$$_ToProfileCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks});
+  $Res call({List<User> blocks});
 }
 
 /// @nodoc
@@ -351,7 +349,7 @@ class __$$_ToProfileCopyWithImpl<$Res> extends _$SettingsEventCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
     ));
   }
 }
@@ -359,12 +357,11 @@ class __$$_ToProfileCopyWithImpl<$Res> extends _$SettingsEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ToProfile implements _ToProfile {
-  const _$_ToProfile({required final List<BlockUser> blocks})
-      : _blocks = blocks;
+  const _$_ToProfile({required final List<User> blocks}) : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
@@ -395,25 +392,23 @@ class _$_ToProfile implements _ToProfile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return toProfile(blocks);
   }
@@ -422,22 +417,21 @@ class _$_ToProfile implements _ToProfile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return toProfile?.call(blocks);
   }
@@ -446,22 +440,21 @@ class _$_ToProfile implements _ToProfile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (toProfile != null) {
@@ -484,6 +477,7 @@ class _$_ToProfile implements _ToProfile {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return toProfile(this);
   }
@@ -502,6 +496,7 @@ class _$_ToProfile implements _ToProfile {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return toProfile?.call(this);
   }
@@ -520,6 +515,7 @@ class _$_ToProfile implements _ToProfile {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (toProfile != null) {
@@ -530,10 +526,9 @@ class _$_ToProfile implements _ToProfile {
 }
 
 abstract class _ToProfile implements SettingsEvent {
-  const factory _ToProfile({required final List<BlockUser> blocks}) =
-      _$_ToProfile;
+  const factory _ToProfile({required final List<User> blocks}) = _$_ToProfile;
 
-  List<BlockUser> get blocks;
+  List<User> get blocks;
   @JsonKey(ignore: true)
   _$$_ToProfileCopyWith<_$_ToProfile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -544,7 +539,7 @@ abstract class _$$_ToBlackListCopyWith<$Res> {
   factory _$$_ToBlackListCopyWith(
           _$_ToBlackList value, $Res Function(_$_ToBlackList) then) =
       __$$_ToBlackListCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks});
+  $Res call({List<User> blocks});
 }
 
 /// @nodoc
@@ -566,7 +561,7 @@ class __$$_ToBlackListCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
     ));
   }
 }
@@ -574,12 +569,11 @@ class __$$_ToBlackListCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ToBlackList implements _ToBlackList {
-  const _$_ToBlackList({required final List<BlockUser> blocks})
-      : _blocks = blocks;
+  const _$_ToBlackList({required final List<User> blocks}) : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
@@ -610,25 +604,23 @@ class _$_ToBlackList implements _ToBlackList {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return toBlackList(blocks);
   }
@@ -637,22 +629,21 @@ class _$_ToBlackList implements _ToBlackList {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return toBlackList?.call(blocks);
   }
@@ -661,22 +652,21 @@ class _$_ToBlackList implements _ToBlackList {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (toBlackList != null) {
@@ -699,6 +689,7 @@ class _$_ToBlackList implements _ToBlackList {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return toBlackList(this);
   }
@@ -717,6 +708,7 @@ class _$_ToBlackList implements _ToBlackList {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return toBlackList?.call(this);
   }
@@ -735,6 +727,7 @@ class _$_ToBlackList implements _ToBlackList {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (toBlackList != null) {
@@ -745,10 +738,10 @@ class _$_ToBlackList implements _ToBlackList {
 }
 
 abstract class _ToBlackList implements SettingsEvent {
-  const factory _ToBlackList({required final List<BlockUser> blocks}) =
+  const factory _ToBlackList({required final List<User> blocks}) =
       _$_ToBlackList;
 
-  List<BlockUser> get blocks;
+  List<User> get blocks;
   @JsonKey(ignore: true)
   _$$_ToBlackListCopyWith<_$_ToBlackList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -759,7 +752,7 @@ abstract class _$$_BackToSettingsCopyWith<$Res> {
   factory _$$_BackToSettingsCopyWith(
           _$_BackToSettings value, $Res Function(_$_BackToSettings) then) =
       __$$_BackToSettingsCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks});
+  $Res call({List<User> blocks});
 }
 
 /// @nodoc
@@ -781,7 +774,7 @@ class __$$_BackToSettingsCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
     ));
   }
 }
@@ -789,12 +782,12 @@ class __$$_BackToSettingsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BackToSettings implements _BackToSettings {
-  const _$_BackToSettings({required final List<BlockUser> blocks})
+  const _$_BackToSettings({required final List<User> blocks})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
@@ -825,25 +818,23 @@ class _$_BackToSettings implements _BackToSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return backToSettings(blocks);
   }
@@ -852,22 +843,21 @@ class _$_BackToSettings implements _BackToSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return backToSettings?.call(blocks);
   }
@@ -876,22 +866,21 @@ class _$_BackToSettings implements _BackToSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (backToSettings != null) {
@@ -914,6 +903,7 @@ class _$_BackToSettings implements _BackToSettings {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return backToSettings(this);
   }
@@ -932,6 +922,7 @@ class _$_BackToSettings implements _BackToSettings {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return backToSettings?.call(this);
   }
@@ -950,6 +941,7 @@ class _$_BackToSettings implements _BackToSettings {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (backToSettings != null) {
@@ -960,10 +952,10 @@ class _$_BackToSettings implements _BackToSettings {
 }
 
 abstract class _BackToSettings implements SettingsEvent {
-  const factory _BackToSettings({required final List<BlockUser> blocks}) =
+  const factory _BackToSettings({required final List<User> blocks}) =
       _$_BackToSettings;
 
-  List<BlockUser> get blocks;
+  List<User> get blocks;
   @JsonKey(ignore: true)
   _$$_BackToSettingsCopyWith<_$_BackToSettings> get copyWith =>
       throw _privateConstructorUsedError;
@@ -974,7 +966,7 @@ abstract class _$$_ToAvatarPickerCopyWith<$Res> {
   factory _$$_ToAvatarPickerCopyWith(
           _$_ToAvatarPicker value, $Res Function(_$_ToAvatarPicker) then) =
       __$$_ToAvatarPickerCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user});
+  $Res call({List<User> blocks, User user});
 }
 
 /// @nodoc
@@ -997,11 +989,11 @@ class __$$_ToAvatarPickerCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
     ));
   }
 }
@@ -1010,18 +1002,18 @@ class __$$_ToAvatarPickerCopyWithImpl<$Res>
 
 class _$_ToAvatarPicker implements _ToAvatarPicker {
   const _$_ToAvatarPicker(
-      {required final List<BlockUser> blocks, required this.user})
+      {required final List<User> blocks, required this.user})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
 
   @override
   String toString() {
@@ -1052,25 +1044,23 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return toAvatarPicker(blocks, user);
   }
@@ -1079,22 +1069,21 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return toAvatarPicker?.call(blocks, user);
   }
@@ -1103,22 +1092,21 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (toAvatarPicker != null) {
@@ -1141,6 +1129,7 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return toAvatarPicker(this);
   }
@@ -1159,6 +1148,7 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return toAvatarPicker?.call(this);
   }
@@ -1177,6 +1167,7 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (toAvatarPicker != null) {
@@ -1188,11 +1179,11 @@ class _$_ToAvatarPicker implements _ToAvatarPicker {
 
 abstract class _ToAvatarPicker implements SettingsEvent {
   const factory _ToAvatarPicker(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user}) = _$_ToAvatarPicker;
+      {required final List<User> blocks,
+      required final User user}) = _$_ToAvatarPicker;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   @JsonKey(ignore: true)
   _$$_ToAvatarPickerCopyWith<_$_ToAvatarPicker> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1204,8 +1195,8 @@ abstract class _$$_SelectAvatarCopyWith<$Res> {
           _$_SelectAvatar value, $Res Function(_$_SelectAvatar) then) =
       __$$_SelectAvatarCopyWithImpl<$Res>;
   $Res call(
-      {List<BlockUser> blocks,
-      BaseUser user,
+      {List<User> blocks,
+      User user,
       List<Avatar> avatars,
       Avatar selectedAvatar});
 }
@@ -1232,11 +1223,11 @@ class __$$_SelectAvatarCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
       avatars: avatars == freezed
           ? _value._avatars
           : avatars // ignore: cast_nullable_to_non_nullable
@@ -1253,22 +1244,22 @@ class __$$_SelectAvatarCopyWithImpl<$Res>
 
 class _$_SelectAvatar implements _SelectAvatar {
   const _$_SelectAvatar(
-      {required final List<BlockUser> blocks,
+      {required final List<User> blocks,
       required this.user,
       required final List<Avatar> avatars,
       required this.selectedAvatar})
       : _blocks = blocks,
         _avatars = avatars;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
   final List<Avatar> _avatars;
   @override
   List<Avatar> get avatars {
@@ -1313,25 +1304,23 @@ class _$_SelectAvatar implements _SelectAvatar {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return selectAvatar(blocks, user, avatars, selectedAvatar);
   }
@@ -1340,22 +1329,21 @@ class _$_SelectAvatar implements _SelectAvatar {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return selectAvatar?.call(blocks, user, avatars, selectedAvatar);
   }
@@ -1364,22 +1352,21 @@ class _$_SelectAvatar implements _SelectAvatar {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (selectAvatar != null) {
@@ -1402,6 +1389,7 @@ class _$_SelectAvatar implements _SelectAvatar {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return selectAvatar(this);
   }
@@ -1420,6 +1408,7 @@ class _$_SelectAvatar implements _SelectAvatar {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return selectAvatar?.call(this);
   }
@@ -1438,6 +1427,7 @@ class _$_SelectAvatar implements _SelectAvatar {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (selectAvatar != null) {
@@ -1449,13 +1439,13 @@ class _$_SelectAvatar implements _SelectAvatar {
 
 abstract class _SelectAvatar implements SettingsEvent {
   const factory _SelectAvatar(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user,
+      {required final List<User> blocks,
+      required final User user,
       required final List<Avatar> avatars,
       required final Avatar selectedAvatar}) = _$_SelectAvatar;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   List<Avatar> get avatars;
   Avatar get selectedAvatar;
   @JsonKey(ignore: true)
@@ -1468,7 +1458,7 @@ abstract class _$$_SubmitAvatarCopyWith<$Res> {
   factory _$$_SubmitAvatarCopyWith(
           _$_SubmitAvatar value, $Res Function(_$_SubmitAvatar) then) =
       __$$_SubmitAvatarCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar});
+  $Res call({List<User> blocks, User user, Avatar selectedAvatar});
 }
 
 /// @nodoc
@@ -1492,11 +1482,11 @@ class __$$_SubmitAvatarCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
       selectedAvatar: selectedAvatar == freezed
           ? _value.selectedAvatar
           : selectedAvatar // ignore: cast_nullable_to_non_nullable
@@ -1509,20 +1499,20 @@ class __$$_SubmitAvatarCopyWithImpl<$Res>
 
 class _$_SubmitAvatar implements _SubmitAvatar {
   const _$_SubmitAvatar(
-      {required final List<BlockUser> blocks,
+      {required final List<User> blocks,
       required this.user,
       required this.selectedAvatar})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
   @override
   final Avatar selectedAvatar;
 
@@ -1558,25 +1548,23 @@ class _$_SubmitAvatar implements _SubmitAvatar {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return submitAvatar(blocks, user, selectedAvatar);
   }
@@ -1585,22 +1573,21 @@ class _$_SubmitAvatar implements _SubmitAvatar {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return submitAvatar?.call(blocks, user, selectedAvatar);
   }
@@ -1609,22 +1596,21 @@ class _$_SubmitAvatar implements _SubmitAvatar {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (submitAvatar != null) {
@@ -1647,6 +1633,7 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return submitAvatar(this);
   }
@@ -1665,6 +1652,7 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return submitAvatar?.call(this);
   }
@@ -1683,6 +1671,7 @@ class _$_SubmitAvatar implements _SubmitAvatar {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (submitAvatar != null) {
@@ -1694,12 +1683,12 @@ class _$_SubmitAvatar implements _SubmitAvatar {
 
 abstract class _SubmitAvatar implements SettingsEvent {
   const factory _SubmitAvatar(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user,
+      {required final List<User> blocks,
+      required final User user,
       required final Avatar selectedAvatar}) = _$_SubmitAvatar;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   Avatar get selectedAvatar;
   @JsonKey(ignore: true)
   _$$_SubmitAvatarCopyWith<_$_SubmitAvatar> get copyWith =>
@@ -1711,7 +1700,7 @@ abstract class _$$_BackToProfileCopyWith<$Res> {
   factory _$$_BackToProfileCopyWith(
           _$_BackToProfile value, $Res Function(_$_BackToProfile) then) =
       __$$_BackToProfileCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user});
+  $Res call({List<User> blocks, User user});
 }
 
 /// @nodoc
@@ -1734,11 +1723,11 @@ class __$$_BackToProfileCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
     ));
   }
 }
@@ -1746,19 +1735,18 @@ class __$$_BackToProfileCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BackToProfile implements _BackToProfile {
-  const _$_BackToProfile(
-      {required final List<BlockUser> blocks, required this.user})
+  const _$_BackToProfile({required final List<User> blocks, required this.user})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
 
   @override
   String toString() {
@@ -1789,25 +1777,23 @@ class _$_BackToProfile implements _BackToProfile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return backToProfile(blocks, user);
   }
@@ -1816,22 +1802,21 @@ class _$_BackToProfile implements _BackToProfile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return backToProfile?.call(blocks, user);
   }
@@ -1840,22 +1825,21 @@ class _$_BackToProfile implements _BackToProfile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (backToProfile != null) {
@@ -1878,6 +1862,7 @@ class _$_BackToProfile implements _BackToProfile {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return backToProfile(this);
   }
@@ -1896,6 +1881,7 @@ class _$_BackToProfile implements _BackToProfile {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return backToProfile?.call(this);
   }
@@ -1914,6 +1900,7 @@ class _$_BackToProfile implements _BackToProfile {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (backToProfile != null) {
@@ -1925,11 +1912,11 @@ class _$_BackToProfile implements _BackToProfile {
 
 abstract class _BackToProfile implements SettingsEvent {
   const factory _BackToProfile(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user}) = _$_BackToProfile;
+      {required final List<User> blocks,
+      required final User user}) = _$_BackToProfile;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   @JsonKey(ignore: true)
   _$$_BackToProfileCopyWith<_$_BackToProfile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1940,7 +1927,7 @@ abstract class _$$_ShowInputCopyWith<$Res> {
   factory _$$_ShowInputCopyWith(
           _$_ShowInput value, $Res Function(_$_ShowInput) then) =
       __$$_ShowInputCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user});
+  $Res call({List<User> blocks, User user});
 }
 
 /// @nodoc
@@ -1962,11 +1949,11 @@ class __$$_ShowInputCopyWithImpl<$Res> extends _$SettingsEventCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
     ));
   }
 }
@@ -1974,19 +1961,18 @@ class __$$_ShowInputCopyWithImpl<$Res> extends _$SettingsEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ShowInput implements _ShowInput {
-  const _$_ShowInput(
-      {required final List<BlockUser> blocks, required this.user})
+  const _$_ShowInput({required final List<User> blocks, required this.user})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
 
   @override
   String toString() {
@@ -2017,25 +2003,23 @@ class _$_ShowInput implements _ShowInput {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return showInput(blocks, user);
   }
@@ -2044,22 +2028,21 @@ class _$_ShowInput implements _ShowInput {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return showInput?.call(blocks, user);
   }
@@ -2068,22 +2051,21 @@ class _$_ShowInput implements _ShowInput {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (showInput != null) {
@@ -2106,6 +2088,7 @@ class _$_ShowInput implements _ShowInput {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return showInput(this);
   }
@@ -2124,6 +2107,7 @@ class _$_ShowInput implements _ShowInput {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return showInput?.call(this);
   }
@@ -2142,6 +2126,7 @@ class _$_ShowInput implements _ShowInput {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (showInput != null) {
@@ -2153,11 +2138,11 @@ class _$_ShowInput implements _ShowInput {
 
 abstract class _ShowInput implements SettingsEvent {
   const factory _ShowInput(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user}) = _$_ShowInput;
+      {required final List<User> blocks,
+      required final User user}) = _$_ShowInput;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   @JsonKey(ignore: true)
   _$$_ShowInputCopyWith<_$_ShowInput> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2168,7 +2153,7 @@ abstract class _$$_SubmitInputCopyWith<$Res> {
   factory _$$_SubmitInputCopyWith(
           _$_SubmitInput value, $Res Function(_$_SubmitInput) then) =
       __$$_SubmitInputCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user});
+  $Res call({List<User> blocks, User user});
 }
 
 /// @nodoc
@@ -2191,11 +2176,11 @@ class __$$_SubmitInputCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
     ));
   }
 }
@@ -2203,19 +2188,18 @@ class __$$_SubmitInputCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SubmitInput implements _SubmitInput {
-  const _$_SubmitInput(
-      {required final List<BlockUser> blocks, required this.user})
+  const _$_SubmitInput({required final List<User> blocks, required this.user})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
 
   @override
   String toString() {
@@ -2246,25 +2230,23 @@ class _$_SubmitInput implements _SubmitInput {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
     return submitInput(blocks, user);
   }
@@ -2273,22 +2255,21 @@ class _$_SubmitInput implements _SubmitInput {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
     return submitInput?.call(blocks, user);
   }
@@ -2297,22 +2278,21 @@ class _$_SubmitInput implements _SubmitInput {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (submitInput != null) {
@@ -2335,6 +2315,7 @@ class _$_SubmitInput implements _SubmitInput {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return submitInput(this);
   }
@@ -2353,6 +2334,7 @@ class _$_SubmitInput implements _SubmitInput {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return submitInput?.call(this);
   }
@@ -2371,6 +2353,7 @@ class _$_SubmitInput implements _SubmitInput {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (submitInput != null) {
@@ -2382,11 +2365,11 @@ class _$_SubmitInput implements _SubmitInput {
 
 abstract class _SubmitInput implements SettingsEvent {
   const factory _SubmitInput(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user}) = _$_SubmitInput;
+      {required final List<User> blocks,
+      required final User user}) = _$_SubmitInput;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   @JsonKey(ignore: true)
   _$$_SubmitInputCopyWith<_$_SubmitInput> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2397,7 +2380,7 @@ abstract class _$$_ShowUnblockDialogCopyWith<$Res> {
   factory _$$_ShowUnblockDialogCopyWith(_$_ShowUnblockDialog value,
           $Res Function(_$_ShowUnblockDialog) then) =
       __$$_ShowUnblockDialogCopyWithImpl<$Res>;
-  $Res call({BuildContext context, BlockUser block, List<BlockUser> blocks});
+  $Res call({BuildContext context, User user, List<User> blocks});
 }
 
 /// @nodoc
@@ -2414,7 +2397,7 @@ class __$$_ShowUnblockDialogCopyWithImpl<$Res>
   @override
   $Res call({
     Object? context = freezed,
-    Object? block = freezed,
+    Object? user = freezed,
     Object? blocks = freezed,
   }) {
     return _then(_$_ShowUnblockDialog(
@@ -2422,14 +2405,14 @@ class __$$_ShowUnblockDialogCopyWithImpl<$Res>
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
-      block: block == freezed
-          ? _value.block
-          : block // ignore: cast_nullable_to_non_nullable
-              as BlockUser,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
     ));
   }
 }
@@ -2439,24 +2422,24 @@ class __$$_ShowUnblockDialogCopyWithImpl<$Res>
 class _$_ShowUnblockDialog implements _ShowUnblockDialog {
   const _$_ShowUnblockDialog(
       {required this.context,
-      required this.block,
-      required final List<BlockUser> blocks})
+      required this.user,
+      required final List<User> blocks})
       : _blocks = blocks;
 
   @override
   final BuildContext context;
   @override
-  final BlockUser block;
-  final List<BlockUser> _blocks;
+  final User user;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
   String toString() {
-    return 'SettingsEvent.showUnblockDialog(context: $context, block: $block, blocks: $blocks)';
+    return 'SettingsEvent.showUnblockDialog(context: $context, user: $user, blocks: $blocks)';
   }
 
   @override
@@ -2465,7 +2448,7 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
         (other.runtimeType == runtimeType &&
             other is _$_ShowUnblockDialog &&
             const DeepCollectionEquality().equals(other.context, context) &&
-            const DeepCollectionEquality().equals(other.block, block) &&
+            const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other._blocks, _blocks));
   }
 
@@ -2473,7 +2456,7 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(context),
-      const DeepCollectionEquality().hash(block),
+      const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(_blocks));
 
   @JsonKey(ignore: true)
@@ -2486,77 +2469,73 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
-    required TResult Function(List<BlockUser> blocks) toProfile,
-    required TResult Function(List<BlockUser> blocks) toBlackList,
-    required TResult Function(List<BlockUser> blocks) backToSettings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        toAvatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar)
         selectAvatar,
     required TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)
+            List<User> blocks, User user, Avatar selectedAvatar)
         submitAvatar,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        backToProfile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) showInput,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        submitInput,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
     required TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)
+            BuildContext context, User user, List<User> blocks)
         showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
   }) {
-    return showUnblockDialog(context, block, blocks);
+    return showUnblockDialog(context, user, blocks);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
   }) {
-    return showUnblockDialog?.call(context, block, blocks);
+    return showUnblockDialog?.call(context, user, blocks);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
-    TResult Function(List<BlockUser> blocks)? toProfile,
-    TResult Function(List<BlockUser> blocks)? toBlackList,
-    TResult Function(List<BlockUser> blocks)? backToSettings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? toAvatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
         selectAvatar,
-    TResult Function(
-            List<BlockUser> blocks, BaseUser user, Avatar selectedAvatar)?
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
         submitAvatar,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? backToProfile,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? showInput,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? submitInput,
-    TResult Function(
-            BuildContext context, BlockUser block, List<BlockUser> blocks)?
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
         showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
     required TResult orElse(),
   }) {
     if (showUnblockDialog != null) {
-      return showUnblockDialog(context, block, blocks);
+      return showUnblockDialog(context, user, blocks);
     }
     return orElse();
   }
@@ -2575,6 +2554,7 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
     required TResult Function(_ShowInput value) showInput,
     required TResult Function(_SubmitInput value) submitInput,
     required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
   }) {
     return showUnblockDialog(this);
   }
@@ -2593,6 +2573,7 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
   }) {
     return showUnblockDialog?.call(this);
   }
@@ -2611,6 +2592,7 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
     TResult Function(_ShowInput value)? showInput,
     TResult Function(_SubmitInput value)? submitInput,
     TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
     required TResult orElse(),
   }) {
     if (showUnblockDialog != null) {
@@ -2623,14 +2605,223 @@ class _$_ShowUnblockDialog implements _ShowUnblockDialog {
 abstract class _ShowUnblockDialog implements SettingsEvent {
   const factory _ShowUnblockDialog(
       {required final BuildContext context,
-      required final BlockUser block,
-      required final List<BlockUser> blocks}) = _$_ShowUnblockDialog;
+      required final User user,
+      required final List<User> blocks}) = _$_ShowUnblockDialog;
 
   BuildContext get context;
-  BlockUser get block;
-  List<BlockUser> get blocks;
+  User get user;
+  List<User> get blocks;
   @JsonKey(ignore: true)
   _$$_ShowUnblockDialogCopyWith<_$_ShowUnblockDialog> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteUserCopyWith<$Res> {
+  factory _$$_DeleteUserCopyWith(
+          _$_DeleteUser value, $Res Function(_$_DeleteUser) then) =
+      __$$_DeleteUserCopyWithImpl<$Res>;
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class __$$_DeleteUserCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res>
+    implements _$$_DeleteUserCopyWith<$Res> {
+  __$$_DeleteUserCopyWithImpl(
+      _$_DeleteUser _value, $Res Function(_$_DeleteUser) _then)
+      : super(_value, (v) => _then(v as _$_DeleteUser));
+
+  @override
+  _$_DeleteUser get _value => super._value as _$_DeleteUser;
+
+  @override
+  $Res call({
+    Object? context = freezed,
+  }) {
+    return _then(_$_DeleteUser(
+      context: context == freezed
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteUser implements _DeleteUser {
+  const _$_DeleteUser({required this.context});
+
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'SettingsEvent.deleteUser(context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteUser &&
+            const DeepCollectionEquality().equals(other.context, context));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(context));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_DeleteUserCopyWith<_$_DeleteUser> get copyWith =>
+      __$$_DeleteUserCopyWithImpl<_$_DeleteUser>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(List<User> blocks) toProfile,
+    required TResult Function(List<User> blocks) toBlackList,
+    required TResult Function(List<User> blocks) backToSettings,
+    required TResult Function(List<User> blocks, User user) toAvatarPicker,
+    required TResult Function(List<User> blocks, User user,
+            List<Avatar> avatars, Avatar selectedAvatar)
+        selectAvatar,
+    required TResult Function(
+            List<User> blocks, User user, Avatar selectedAvatar)
+        submitAvatar,
+    required TResult Function(List<User> blocks, User user) backToProfile,
+    required TResult Function(List<User> blocks, User user) showInput,
+    required TResult Function(List<User> blocks, User user) submitInput,
+    required TResult Function(
+            BuildContext context, User user, List<User> blocks)
+        showUnblockDialog,
+    required TResult Function(BuildContext context) deleteUser,
+  }) {
+    return deleteUser(context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
+        selectAvatar,
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
+        submitAvatar,
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
+        showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
+  }) {
+    return deleteUser?.call(context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(List<User> blocks)? toProfile,
+    TResult Function(List<User> blocks)? toBlackList,
+    TResult Function(List<User> blocks)? backToSettings,
+    TResult Function(List<User> blocks, User user)? toAvatarPicker,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar)?
+        selectAvatar,
+    TResult Function(List<User> blocks, User user, Avatar selectedAvatar)?
+        submitAvatar,
+    TResult Function(List<User> blocks, User user)? backToProfile,
+    TResult Function(List<User> blocks, User user)? showInput,
+    TResult Function(List<User> blocks, User user)? submitInput,
+    TResult Function(BuildContext context, User user, List<User> blocks)?
+        showUnblockDialog,
+    TResult Function(BuildContext context)? deleteUser,
+    required TResult orElse(),
+  }) {
+    if (deleteUser != null) {
+      return deleteUser(context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_ToProfile value) toProfile,
+    required TResult Function(_ToBlackList value) toBlackList,
+    required TResult Function(_BackToSettings value) backToSettings,
+    required TResult Function(_ToAvatarPicker value) toAvatarPicker,
+    required TResult Function(_SelectAvatar value) selectAvatar,
+    required TResult Function(_SubmitAvatar value) submitAvatar,
+    required TResult Function(_BackToProfile value) backToProfile,
+    required TResult Function(_ShowInput value) showInput,
+    required TResult Function(_SubmitInput value) submitInput,
+    required TResult Function(_ShowUnblockDialog value) showUnblockDialog,
+    required TResult Function(_DeleteUser value) deleteUser,
+  }) {
+    return deleteUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ToProfile value)? toProfile,
+    TResult Function(_ToBlackList value)? toBlackList,
+    TResult Function(_BackToSettings value)? backToSettings,
+    TResult Function(_ToAvatarPicker value)? toAvatarPicker,
+    TResult Function(_SelectAvatar value)? selectAvatar,
+    TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_BackToProfile value)? backToProfile,
+    TResult Function(_ShowInput value)? showInput,
+    TResult Function(_SubmitInput value)? submitInput,
+    TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
+  }) {
+    return deleteUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_ToProfile value)? toProfile,
+    TResult Function(_ToBlackList value)? toBlackList,
+    TResult Function(_BackToSettings value)? backToSettings,
+    TResult Function(_ToAvatarPicker value)? toAvatarPicker,
+    TResult Function(_SelectAvatar value)? selectAvatar,
+    TResult Function(_SubmitAvatar value)? submitAvatar,
+    TResult Function(_BackToProfile value)? backToProfile,
+    TResult Function(_ShowInput value)? showInput,
+    TResult Function(_SubmitInput value)? submitInput,
+    TResult Function(_ShowUnblockDialog value)? showUnblockDialog,
+    TResult Function(_DeleteUser value)? deleteUser,
+    required TResult orElse(),
+  }) {
+    if (deleteUser != null) {
+      return deleteUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteUser implements SettingsEvent {
+  const factory _DeleteUser({required final BuildContext context}) =
+      _$_DeleteUser;
+
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_DeleteUserCopyWith<_$_DeleteUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2639,38 +2830,37 @@ mixin _$SettingsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -2764,14 +2954,13 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) {
     return loading();
   }
@@ -2780,13 +2969,13 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) {
     return loading?.call();
   }
@@ -2795,13 +2984,13 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -2863,7 +3052,7 @@ abstract class _$$_SettingsCopyWith<$Res> {
   factory _$$_SettingsCopyWith(
           _$_Settings value, $Res Function(_$_Settings) then) =
       __$$_SettingsCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks});
+  $Res call({List<User> blocks});
 }
 
 /// @nodoc
@@ -2884,7 +3073,7 @@ class __$$_SettingsCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
     ));
   }
 }
@@ -2892,11 +3081,11 @@ class __$$_SettingsCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Settings implements _Settings {
-  const _$_Settings({required final List<BlockUser> blocks}) : _blocks = blocks;
+  const _$_Settings({required final List<User> blocks}) : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
@@ -2927,14 +3116,13 @@ class _$_Settings implements _Settings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) {
     return settings(blocks);
   }
@@ -2943,13 +3131,13 @@ class _$_Settings implements _Settings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) {
     return settings?.call(blocks);
   }
@@ -2958,13 +3146,13 @@ class _$_Settings implements _Settings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) {
     if (settings != null) {
@@ -3018,10 +3206,9 @@ class _$_Settings implements _Settings {
 }
 
 abstract class _Settings implements SettingsState {
-  const factory _Settings({required final List<BlockUser> blocks}) =
-      _$_Settings;
+  const factory _Settings({required final List<User> blocks}) = _$_Settings;
 
-  List<BlockUser> get blocks;
+  List<User> get blocks;
   @JsonKey(ignore: true)
   _$$_SettingsCopyWith<_$_Settings> get copyWith =>
       throw _privateConstructorUsedError;
@@ -3032,7 +3219,7 @@ abstract class _$$_ProfileCopyWith<$Res> {
   factory _$$_ProfileCopyWith(
           _$_Profile value, $Res Function(_$_Profile) then) =
       __$$_ProfileCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user});
+  $Res call({List<User> blocks, User user});
 }
 
 /// @nodoc
@@ -3053,11 +3240,11 @@ class __$$_ProfileCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
     ));
   }
 }
@@ -3065,18 +3252,18 @@ class __$$_ProfileCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Profile implements _Profile {
-  const _$_Profile({required final List<BlockUser> blocks, required this.user})
+  const _$_Profile({required final List<User> blocks, required this.user})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
 
   @override
   String toString() {
@@ -3107,14 +3294,13 @@ class _$_Profile implements _Profile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) {
     return profile(blocks, user);
   }
@@ -3123,13 +3309,13 @@ class _$_Profile implements _Profile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) {
     return profile?.call(blocks, user);
   }
@@ -3138,13 +3324,13 @@ class _$_Profile implements _Profile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) {
     if (profile != null) {
@@ -3199,11 +3385,11 @@ class _$_Profile implements _Profile {
 
 abstract class _Profile implements SettingsState {
   const factory _Profile(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user}) = _$_Profile;
+      {required final List<User> blocks,
+      required final User user}) = _$_Profile;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   @JsonKey(ignore: true)
   _$$_ProfileCopyWith<_$_Profile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -3215,8 +3401,8 @@ abstract class _$$_AvatarPickerCopyWith<$Res> {
           _$_AvatarPicker value, $Res Function(_$_AvatarPicker) then) =
       __$$_AvatarPickerCopyWithImpl<$Res>;
   $Res call(
-      {List<BlockUser> blocks,
-      BaseUser user,
+      {List<User> blocks,
+      User user,
       List<Avatar> avatars,
       Avatar selectedAvatar,
       bool isAvatarChanged});
@@ -3245,11 +3431,11 @@ class __$$_AvatarPickerCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
       avatars: avatars == freezed
           ? _value._avatars
           : avatars // ignore: cast_nullable_to_non_nullable
@@ -3270,7 +3456,7 @@ class __$$_AvatarPickerCopyWithImpl<$Res>
 
 class _$_AvatarPicker implements _AvatarPicker {
   const _$_AvatarPicker(
-      {required final List<BlockUser> blocks,
+      {required final List<User> blocks,
       required this.user,
       required final List<Avatar> avatars,
       required this.selectedAvatar,
@@ -3278,15 +3464,15 @@ class _$_AvatarPicker implements _AvatarPicker {
       : _blocks = blocks,
         _avatars = avatars;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
   final List<Avatar> _avatars;
   @override
   List<Avatar> get avatars {
@@ -3336,14 +3522,13 @@ class _$_AvatarPicker implements _AvatarPicker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) {
     return avatarPicker(blocks, user, avatars, selectedAvatar, isAvatarChanged);
   }
@@ -3352,13 +3537,13 @@ class _$_AvatarPicker implements _AvatarPicker {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) {
     return avatarPicker?.call(
         blocks, user, avatars, selectedAvatar, isAvatarChanged);
@@ -3368,13 +3553,13 @@ class _$_AvatarPicker implements _AvatarPicker {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) {
     if (avatarPicker != null) {
@@ -3430,14 +3615,14 @@ class _$_AvatarPicker implements _AvatarPicker {
 
 abstract class _AvatarPicker implements SettingsState {
   const factory _AvatarPicker(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user,
+      {required final List<User> blocks,
+      required final User user,
       required final List<Avatar> avatars,
       required final Avatar selectedAvatar,
       required final bool isAvatarChanged}) = _$_AvatarPicker;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   List<Avatar> get avatars;
   Avatar get selectedAvatar;
   bool get isAvatarChanged;
@@ -3451,7 +3636,7 @@ abstract class _$$_InputEditorCopyWith<$Res> {
   factory _$$_InputEditorCopyWith(
           _$_InputEditor value, $Res Function(_$_InputEditor) then) =
       __$$_InputEditorCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks, BaseUser user});
+  $Res call({List<User> blocks, User user});
 }
 
 /// @nodoc
@@ -3474,11 +3659,11 @@ class __$$_InputEditorCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as BaseUser,
+              as User,
     ));
   }
 }
@@ -3486,19 +3671,18 @@ class __$$_InputEditorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_InputEditor implements _InputEditor {
-  const _$_InputEditor(
-      {required final List<BlockUser> blocks, required this.user})
+  const _$_InputEditor({required final List<User> blocks, required this.user})
       : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
 
   @override
-  final BaseUser user;
+  final User user;
 
   @override
   String toString() {
@@ -3529,14 +3713,13 @@ class _$_InputEditor implements _InputEditor {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) {
     return inputEditor(blocks, user);
   }
@@ -3545,13 +3728,13 @@ class _$_InputEditor implements _InputEditor {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) {
     return inputEditor?.call(blocks, user);
   }
@@ -3560,13 +3743,13 @@ class _$_InputEditor implements _InputEditor {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) {
     if (inputEditor != null) {
@@ -3621,11 +3804,11 @@ class _$_InputEditor implements _InputEditor {
 
 abstract class _InputEditor implements SettingsState {
   const factory _InputEditor(
-      {required final List<BlockUser> blocks,
-      required final BaseUser user}) = _$_InputEditor;
+      {required final List<User> blocks,
+      required final User user}) = _$_InputEditor;
 
-  List<BlockUser> get blocks;
-  BaseUser get user;
+  List<User> get blocks;
+  User get user;
   @JsonKey(ignore: true)
   _$$_InputEditorCopyWith<_$_InputEditor> get copyWith =>
       throw _privateConstructorUsedError;
@@ -3636,7 +3819,7 @@ abstract class _$$_BlockUsersCopyWith<$Res> {
   factory _$$_BlockUsersCopyWith(
           _$_BlockUsers value, $Res Function(_$_BlockUsers) then) =
       __$$_BlockUsersCopyWithImpl<$Res>;
-  $Res call({List<BlockUser> blocks});
+  $Res call({List<User> blocks});
 }
 
 /// @nodoc
@@ -3658,7 +3841,7 @@ class __$$_BlockUsersCopyWithImpl<$Res>
       blocks: blocks == freezed
           ? _value._blocks
           : blocks // ignore: cast_nullable_to_non_nullable
-              as List<BlockUser>,
+              as List<User>,
     ));
   }
 }
@@ -3666,12 +3849,11 @@ class __$$_BlockUsersCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BlockUsers implements _BlockUsers {
-  const _$_BlockUsers({required final List<BlockUser> blocks})
-      : _blocks = blocks;
+  const _$_BlockUsers({required final List<User> blocks}) : _blocks = blocks;
 
-  final List<BlockUser> _blocks;
+  final List<User> _blocks;
   @override
-  List<BlockUser> get blocks {
+  List<User> get blocks {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blocks);
   }
@@ -3702,14 +3884,13 @@ class _$_BlockUsers implements _BlockUsers {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<BlockUser> blocks) settings,
-    required TResult Function(List<BlockUser> blocks, BaseUser user) profile,
-    required TResult Function(List<BlockUser> blocks, BaseUser user,
+    required TResult Function(List<User> blocks) settings,
+    required TResult Function(List<User> blocks, User user) profile,
+    required TResult Function(List<User> blocks, User user,
             List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)
         avatarPicker,
-    required TResult Function(List<BlockUser> blocks, BaseUser user)
-        inputEditor,
-    required TResult Function(List<BlockUser> blocks) blackList,
+    required TResult Function(List<User> blocks, User user) inputEditor,
+    required TResult Function(List<User> blocks) blackList,
   }) {
     return blackList(blocks);
   }
@@ -3718,13 +3899,13 @@ class _$_BlockUsers implements _BlockUsers {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
   }) {
     return blackList?.call(blocks);
   }
@@ -3733,13 +3914,13 @@ class _$_BlockUsers implements _BlockUsers {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<BlockUser> blocks)? settings,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? profile,
-    TResult Function(List<BlockUser> blocks, BaseUser user,
-            List<Avatar> avatars, Avatar selectedAvatar, bool isAvatarChanged)?
+    TResult Function(List<User> blocks)? settings,
+    TResult Function(List<User> blocks, User user)? profile,
+    TResult Function(List<User> blocks, User user, List<Avatar> avatars,
+            Avatar selectedAvatar, bool isAvatarChanged)?
         avatarPicker,
-    TResult Function(List<BlockUser> blocks, BaseUser user)? inputEditor,
-    TResult Function(List<BlockUser> blocks)? blackList,
+    TResult Function(List<User> blocks, User user)? inputEditor,
+    TResult Function(List<User> blocks)? blackList,
     required TResult orElse(),
   }) {
     if (blackList != null) {
@@ -3793,10 +3974,9 @@ class _$_BlockUsers implements _BlockUsers {
 }
 
 abstract class _BlockUsers implements SettingsState {
-  const factory _BlockUsers({required final List<BlockUser> blocks}) =
-      _$_BlockUsers;
+  const factory _BlockUsers({required final List<User> blocks}) = _$_BlockUsers;
 
-  List<BlockUser> get blocks;
+  List<User> get blocks;
   @JsonKey(ignore: true)
   _$$_BlockUsersCopyWith<_$_BlockUsers> get copyWith =>
       throw _privateConstructorUsedError;

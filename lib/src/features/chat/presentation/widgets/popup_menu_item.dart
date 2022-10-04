@@ -38,6 +38,7 @@ class PopupMenuItemWidget extends StatelessWidget {
               SvgIcon(
                 iconPath,
                 color: color,
+                size: 20,
               ),
             ],
           ),

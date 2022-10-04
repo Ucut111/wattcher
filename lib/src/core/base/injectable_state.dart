@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:watchers_widget/src/app/di/locator.dart';
@@ -10,6 +11,8 @@ abstract class InjectableState<T extends StatefulWidget, G extends BlocBase<S>, 
   void Function(G cubit)? _onCubitCreated;
 
   final bool _shouldProvide;
+
+  GlobalKey<NavigatorState>? _navigatorKey;
 
   InjectableState({
     void Function(G cubit)? onCubitCreated,
@@ -32,6 +35,14 @@ abstract class InjectableState<T extends StatefulWidget, G extends BlocBase<S>, 
     param2,
   })  : _shouldProvide = true,
         cubit = locator.get<G>(param1: param1, param2: param2),
+        super();
+
+  InjectableState.withParamsNavigator({
+    param1,
+    param2,
+  })  : cubit = locator.get<G>(param1: param1, param2: param2),
+        _shouldProvide = true,
+        _navigatorKey = GlobalKey(),
         super();
 
   @override
@@ -62,18 +73,28 @@ abstract class InjectableState<T extends StatefulWidget, G extends BlocBase<S>, 
       builder: builder,
       listener: listener,
     );
-    return _shouldProvide
+
+    final navigator = _navigatorKey != null
+        ? Navigator(
+            key: _navigatorKey,
+            onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => consumer),
+          )
+        : consumer;
+
+    final provider = _shouldProvide
         ? BlocProvider(
             lazy: false,
             create: (context) {
               _onCubitCreated?.call(cubit);
               return cubit;
             },
-            child: consumer,
+            child: navigator,
           )
         : BlocProvider.value(
             value: cubit,
-            child: consumer,
+            child: navigator,
           );
+
+    return provider;
   }
 }

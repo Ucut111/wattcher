@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:watchers_widget/src/features/common/data/apis/auth/dtos/auth_check_dto.dart';
 import 'package:watchers_widget/src/features/common/data/apis/auth/dtos/auth_login_dto.dart';
-import 'package:watchers_widget/src/features/common/data/apis/auth/dtos/auth_register_dto.dart';
+import 'package:watchers_widget/src/features/common/data/apis/auth/dtos/auth_register_request.dart';
 
 class AuthApi {
   final Dio _dio;
@@ -10,7 +10,7 @@ class AuthApi {
     this._dio,
   );
 
-  Future<Response> register(AuthRegisterDto authRegisterDto) => _dio.post(
+  Future<Response> register(AuthRegisterRequest authRegisterDto) => _dio.post(
         'auth/register',
         data: authRegisterDto.toJson(),
       );

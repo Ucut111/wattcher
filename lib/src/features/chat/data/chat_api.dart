@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:watchers_widget/src/core/constants/constants.dart';
 import 'package:watchers_widget/src/core/log/i_log.dart';
 import 'package:watchers_widget/src/features/chat/data/request/delete_message_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/edit_message_request.dart';
@@ -13,7 +14,7 @@ import 'package:watchers_widget/src/features/common/data/interceptors/add_token_
 
 class ChatApi {
   final Dio _dio;
-  late final Socket _socket;
+  late Socket _socket;
 
   Socket get socket => _socket;
   ChatApi(Dio dio) : _dio = dio;
@@ -22,7 +23,7 @@ class ChatApi {
     AddTokenInterceptor addTokenInterceptor,
   ) {
     final Dio client = Dio(BaseOptions(
-      baseUrl: 'https://webbackend.dev.watchers.io/',
+      baseUrl: Constants.baseUrl,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -55,7 +56,7 @@ class ChatApi {
 
   Socket joinRoom(String externalRoomId, String token, Function(String, dynamic) eventHandler) {
     return _socket = io(
-        'https://webbackend.dev.watchers.io/',
+        Constants.baseUrl,
         OptionBuilder()
             .setAuth({'token': token})
             .setTransports(['websocket'])
@@ -104,5 +105,10 @@ class ChatApi {
   void emitAndLog(String event, [dynamic data]) {
     log.debug('Sended >>> event: $event, data: $data');
     _socket.emit(event, data);
+  }
+
+  void close() {
+    log.debug('Socket was closed');
+    _socket.close();
   }
 }

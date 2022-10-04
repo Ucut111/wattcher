@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:watchers_widget/src/core/constants/custom_colors.dart';
-import 'package:watchers_widget/src/core/style/figma_sizer.dart';
 
 class SubmitButton extends StatelessWidget {
   final void Function() onPressed;
@@ -25,7 +24,7 @@ class SubmitButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: isActive ? Colors.black : Colors.white.withOpacity(0.2),
+            color: isActive ? CustomColors.onPrimary : CustomColors.onPrimary.withOpacity(0.2),
             fontFamily: '.SF Pro Text',
             fontSize: 17,
           ),
@@ -40,7 +39,7 @@ class SubmitButton extends StatelessWidget {
       child: TextButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(
-            isActive ? CustomColors.primaryColor : CustomColors.primaryColor.withOpacity(0.2),
+            isActive ? CustomColors.primary : CustomColors.primary.withOpacity(0.4),
           ),
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

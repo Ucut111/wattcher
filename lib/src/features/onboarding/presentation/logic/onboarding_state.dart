@@ -8,6 +8,10 @@ class OnboardingState with _$OnboardingState {
 
   factory OnboardingState.showChat() = _ShowChat;
 
+  factory OnboardingState.showDeleted({
+    required DateTime deletedAt,
+  }) = _ShowDeleted;
+
   factory OnboardingState.licenceDetails({
     required String licenceText,
   }) = _LicenceDetails;

@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:watchers_widget/src/features/common/domain/models/avatar.dart';
+import 'package:watchers_widget/watchers_widget.dart';
+
 class User {
   final int id;
   final String token;
@@ -10,6 +13,13 @@ class User {
   final bool isModer;
   final bool isBanned;
   final int color;
+  final bool isVip;
+  final String vipStatus;
+  final bool isInvitedGuest;
+  final DateTime? deletedAt;
+
+  Avatar get avatar => Avatar.fromPic(pic);
+  StatusName? get statusName => StatusNameX.fromString(vipStatus);
 
   User({
     required this.id,
@@ -21,6 +31,10 @@ class User {
     required this.isModer,
     required this.isBanned,
     required this.color,
+    required this.isVip,
+    required this.vipStatus,
+    required this.isInvitedGuest,
+    required this.deletedAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -34,6 +48,10 @@ class User {
       'isModer': isModer,
       'isBanned': isBanned,
       'color': color,
+      'isVip': isVip,
+      'vipStatus': vipStatus,
+      'isInvitedGuest': isInvitedGuest,
+      'deletedAt': deletedAt?.millisecondsSinceEpoch,
     };
   }
 
@@ -48,6 +66,10 @@ class User {
       isModer: map['isModer'] ?? false,
       isBanned: map['isBanned'] ?? false,
       color: map['color']?.toInt() ?? 0,
+      isVip: map['isVip'] ?? false,
+      vipStatus: map['vipStatus'] ?? '',
+      isInvitedGuest: map['isInvitedGuest'] ?? false,
+      deletedAt: map['deletedAt'] != null ? DateTime.parse(map['deletedAt']) : null,
     );
   }
 
@@ -65,6 +87,10 @@ class User {
     bool? isModer,
     bool? isBanned,
     int? color,
+    bool? isVip,
+    String? vipStatus,
+    bool? isInvitedGuest,
+    DateTime? deletedAt,
   }) {
     return User(
       id: id ?? this.id,
@@ -76,6 +102,10 @@ class User {
       isModer: isModer ?? this.isModer,
       isBanned: isBanned ?? this.isBanned,
       color: color ?? this.color,
+      isVip: isVip ?? this.isVip,
+      vipStatus: vipStatus ?? this.vipStatus,
+      isInvitedGuest: isInvitedGuest ?? this.isInvitedGuest,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 }

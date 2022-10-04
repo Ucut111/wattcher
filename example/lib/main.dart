@@ -56,7 +56,8 @@ class _HomePageState extends State<HomePage> {
                 height: height * 0.7,
                 child: const WatchersWidget(
                   userId: 'DummyExternalID6',
-                  roomId: '144444',
+                  roomId: '144446',
+                  statusName: StatusName.gold,
                 ),
               ),
             ],
