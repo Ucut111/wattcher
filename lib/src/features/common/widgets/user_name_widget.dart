@@ -6,10 +6,12 @@ class UserNameWidget extends StatelessWidget {
   const UserNameWidget({
     required this.onTap,
     required this.userName,
+    this.showChangeTrailing = true,
   });
 
   final void Function() onTap;
   final String userName;
+  final bool showChangeTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +29,27 @@ class UserNameWidget extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (userName.isEmpty)
-                const Text(
+                Text(
                   'Введите имя',
-                  style: TextStyles.secondary,
+                  style: TextStyles.secondary(),
                 )
               else
                 Text(
                   userName,
                   style: TextStyles.primary,
+                  textAlign: TextAlign.left,
                 ),
-              const Text(
-                'изменить',
-                style: TextStyles.highlighted,
-              ),
+              if (showChangeTrailing)
+                const Text(
+                  'изменить',
+                  style: TextStyles.highlighted,
+                ),
             ],
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watchers_widget/src/core/constants/constants.dart';
@@ -18,18 +20,23 @@ import 'package:watchers_widget/src/features/chat/domain/use_cases/get_message_u
 import 'package:watchers_widget/src/features/chat/domain/use_cases/get_pinned_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/get_socket_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/join_room_use_case.dart';
+import 'package:watchers_widget/src/features/chat/domain/use_cases/on_connectivity_changed_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/report_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/send_emotion_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/send_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/set_ban_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/set_message_visible_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/set_messages_visible_request.dart';
+import 'package:watchers_widget/src/features/chat/domain/use_cases/set_pinned_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/presentation/logic/chat_bloc.dart';
+import 'package:watchers_widget/src/features/common/anti_swearing/anti_swearing.dart';
 import 'package:watchers_widget/src/features/common/data/apis/room/room_api.dart';
 import 'package:watchers_widget/src/features/common/data/apis/talker/talker_api.dart';
+import 'package:watchers_widget/src/features/common/data/apis/wordlist/wordlist_api.dart';
 import 'package:watchers_widget/src/features/common/data/interceptors/add_token_interceptor.dart';
 import 'package:watchers_widget/src/features/common/data/repositories/room_repository.dart';
 import 'package:watchers_widget/src/features/common/data/repositories/talker_repository.dart';
+import 'package:watchers_widget/src/features/common/data/repositories/wordlist_repository.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/room/get_room_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/talker/get_talkers_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/user/restore_user_use_case.dart';
@@ -37,6 +44,9 @@ import 'package:watchers_widget/src/features/deleted_profile/logic/deleted_profi
 import 'package:watchers_widget/src/features/deleted_profile/logic/deleted_profile_bloc_params.dart';
 import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc.dart';
 import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc_params.dart';
+import 'package:watchers_widget/src/features/tooltips/domain/use_cases/complete_tooltip_use_case.dart';
+import 'package:watchers_widget/src/features/tooltips/domain/use_cases/is_show_tooltip_use_case.dart';
+import 'package:watchers_widget/src/features/tooltips/logic/tooltip_cubit.dart';
 
 import '../../features/chat/domain/use_cases/check_message_use_case.dart';
 import '../../features/common/data/apis/auth/auth_api.dart';
@@ -67,7 +77,12 @@ part 'register_utils.dart';
 
 GetIt locator = GetIt.asNewInstance();
 
+// Todo(dartloli): create class and use everywhere
+DateFormat buildDateFormat([String? newPattern]) => DateFormat(newPattern, 'ru');
+
 Future<void> init() async {
+  await initializeDateFormatting('ru', null);
+
   Bloc.observer = CustomBlocObserver();
 
   _registerUtils();
@@ -79,6 +94,11 @@ Future<void> init() async {
   _registerApies();
 
   _registerRepositories();
+
+  locator.registerLazySingletonAsync(() async {
+    final wordlist = await locator<IWordlistRepository>().getWordlist();
+    return AntiSwearing(wordlistResponse: wordlist);
+  });
 
   _registerUseCases();
 

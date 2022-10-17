@@ -1,7 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:watchers_widget/src/core/constants/resources.dart';
+import 'package:watchers_widget/src/features/chat/domain/use_cases/on_connectivity_changed_use_case.dart';
+import 'package:watchers_widget/src/features/common/anti_swearing/anti_swearing.dart';
 import 'package:watchers_widget/src/features/common/domain/models/avatar.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/avatar/get_all_avatars_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/block/get_blocks_use_case.dart';
@@ -26,6 +29,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final GetAllAvatarsUseCase _getAllAvatarsUseCase;
   final RemoveBlockUseCase _removeBlockUseCase;
   final DeleteUserUseCase _deleteUserUseCase;
+  final Future<AntiSwearing> _antiSwearingFuture;
+  final GetConnectivityChangeStreamUseCase _connectivityChangeStreamUseCase;
 
   SettingsBloc({
     required GetBlocksUseCase getBlocksUseCase,
@@ -34,13 +39,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     required GetAllAvatarsUseCase getAllAvatarsUseCase,
     required RemoveBlockUseCase removeBlockUseCase,
     required DeleteUserUseCase deleteUserUseCase,
+    required Future<AntiSwearing> antiSwearingFuture,
+    required GetConnectivityChangeStreamUseCase getConnectivityChangeStreamUseCase,
   })  : _getBlocksUseCase = getBlocksUseCase,
         _getUserUseCase = getUserUseCase,
         _updateUserUseCase = updateUserUseCase,
         _getAllAvatarsUseCase = getAllAvatarsUseCase,
         _removeBlockUseCase = removeBlockUseCase,
         _deleteUserUseCase = deleteUserUseCase,
-        super(const SettingsState.loading()) {
+        _antiSwearingFuture = antiSwearingFuture,
+        _connectivityChangeStreamUseCase = getConnectivityChangeStreamUseCase,
+        super(const SettingsState.settings()) {
     on<SettingsEvent>(
       (event, emit) => event.maybeMap<Future<void>>(
         orElse: () async {},
@@ -59,6 +68,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     );
 
     on<_DeleteUser>(_onDeleteUser);
+    on<_OnConnectivityChanged>(_onOnConnectivityChanged);
 
     add(const SettingsEvent.init());
   }
@@ -69,57 +79,89 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final FocusNode _userNameFocusNode = FocusNode();
   FocusNode get userNameFocusNode => _userNameFocusNode;
 
+  /// Stored data
+  List<User>? _blocks;
+  User? _user;
+  ConnectivityResult? _connectivityResult;
+
   Future<void> _init(_Init event, Emitter<SettingsState> emit) async {
+    _connectivityResult = await Connectivity().checkConnectivity();
+    _connectivityChangeStreamUseCase.call().listen((connectivityResult) {
+      add(SettingsEvent.onConnectivityChanged(connectivityResult));
+    });
+
+    if (_connectivityResult != ConnectionState.none) {
+      await Future.wait([
+        _loadBlocks(emit),
+        _loadProfile(emit),
+      ]);
+    }
+  }
+
+  Future<void> _loadBlocks(Emitter<SettingsState> emit) async {
     final result = await _getBlocksUseCase();
     if (result.isSuccess) {
-      return emit(SettingsState.settings(blocks: result.successValue.initiator));
+      _blocks = result.successValue.initiator;
+
+      if (state is _Settings) {
+        return emit(SettingsState.settings(blocks: _blocks));
+      }
+
+      if (state is _BlockUsers) {
+        return emit(SettingsState.blackList(blocks: _blocks));
+      }
+    }
+  }
+
+  Future<void> _loadProfile(Emitter<SettingsState> emit) async {
+    final result = await _getUserUseCase.call();
+
+    if (result.isSuccess) {
+      _user = result.successValue.user;
+
+      if (state is _Profile) {
+        return emit(SettingsState.profile(user: _user));
+      }
     }
   }
 
   Future<void> _toBlackList(_ToBlackList event, Emitter<SettingsState> emit) async {
-    emit(SettingsState.blackList(blocks: event.blocks));
+    emit(SettingsState.blackList(blocks: _blocks));
   }
 
   Future<void> _toProfile(_ToProfile event, Emitter<SettingsState> emit) async {
-    emit(const SettingsState.loading());
-
-    final result = await _getUserUseCase.call();
-
-    if (result.isSuccess) {
-      return emit(SettingsState.profile(
-        blocks: event.blocks,
-        user: result.successValue.user,
-      ));
-    }
+    return emit(SettingsState.profile(user: _user));
   }
 
   Future<void> _backToSettings(_BackToSettings event, Emitter<SettingsState> emit) async {
-    emit(SettingsState.settings(blocks: event.blocks));
+    emit(SettingsState.settings(blocks: _blocks));
   }
 
   Future<void> _toAvatarPicker(_ToAvatarPicker event, Emitter<SettingsState> emit) async {
+    if (_connectivityResult == ConnectivityResult.none || _connectivityResult == null) return;
+
     final avatarsResult = await _getAllAvatarsUseCase.call();
 
     if (avatarsResult.isError) {
       return;
     }
 
+    if (_user == null) return;
+
     emit(SettingsState.avatarPicker(
-      blocks: event.blocks,
-      user: event.user,
       avatars: avatarsResult.successValue,
-      selectedAvatar: event.user.avatar,
+      selectedAvatar: _user!.avatar,
       isAvatarChanged: false,
     ));
   }
 
   Future<void> _selectAvatar(_SelectAvatar event, Emitter<SettingsState> emit) async {
+    if (_user == null) return;
+
     emit(SettingsState.avatarPicker(
-      blocks: event.blocks,
       avatars: event.avatars,
-      user: event.user,
       selectedAvatar: event.selectedAvatar,
-      isAvatarChanged: event.selectedAvatar != event.user.avatar,
+      isAvatarChanged: event.selectedAvatar != _user!.avatar,
     ));
   }
 
@@ -128,30 +170,41 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     await _updateUserUseCase.call(pic: newPic);
 
+    if (_user == null) return;
+
+    _user = _user!.copyWith(pic: newPic);
+
     emit(SettingsState.profile(
-      blocks: event.blocks,
-      user: event.user.copyWith(pic: newPic),
+      user: _user,
     ));
   }
 
   Future<void> _backToProfile(_BackToProfile event, Emitter<SettingsState> emit) async {
-    emit(SettingsState.profile(blocks: event.blocks, user: event.user));
+    emit(SettingsState.profile(user: _user));
   }
 
   Future<void> _showInput(_ShowInput event, Emitter<SettingsState> emit) async {
+    if (_connectivityResult == ConnectivityResult.none || _connectivityResult == null) return;
+
+    if (_user == null) return;
+
     userNameFocusNode.requestFocus();
-    userNameTextEditingController.text = event.user.name;
-    emit(SettingsState.inputEditor(blocks: event.blocks, user: event.user));
+    userNameTextEditingController.text = _user!.name;
+    emit(const SettingsState.inputEditor());
   }
 
   Future<void> _submitInput(_SubmitInput event, Emitter<SettingsState> emit) async {
     final userName = UserName.dirty(_userNameTextEditingController.text);
 
-    if (userName.invalid) {
+    final isSwearing = (await _antiSwearingFuture).containsSwearing(userName.value);
+
+    if (userName.invalid || isSwearing) {
       return;
     }
 
-    if (event.user.name != userName.value) {
+    if (_user == null) return;
+
+    if (_user!.name != userName.value) {
       final result = await _updateUserUseCase(name: userName.value);
 
       if (result.isError) {
@@ -159,26 +212,27 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
     }
 
-    emit(SettingsState.profile(
-      blocks: event.blocks,
-      user: event.user.copyWith(name: userName.value),
-    ));
+    _user = _user!.copyWith(name: userName.value);
+
+    emit(SettingsState.profile(user: _user));
   }
 
   Future<void> _showUnblockDialog(_ShowUnblockDialog event, Emitter<SettingsState> emit) async {
     await showDialog(
+      useRootNavigator: false,
       context: event.context,
       builder: (context) => ConfirmDialog(
         confirmButtonText: 'Разблокировать',
-        titleText: 'Разблокировать ${event.user.name}?',
+        titleText: 'Разблокировать ${event.block.name}?',
         onConfirm: () async {
-          final result = await _removeBlockUseCase(targetId: event.user.id);
+          final result = await _removeBlockUseCase(targetId: event.block.id);
 
           if (result.isError) {
             return;
           }
 
-          emit(SettingsState.blackList(blocks: event.blocks.toList()..remove(event.user)));
+          _blocks!..remove(event.block);
+          emit(SettingsState.blackList(blocks: _blocks));
 
           Navigator.pop(context);
 
@@ -214,6 +268,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Emitter<SettingsState> emit,
   ) async {
     await showDialog(
+      useRootNavigator: false,
       context: event.context,
       builder: (context) => ConfirmDialog(
         titleText: 'Удаление профиля',
@@ -227,8 +282,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             return;
           }
 
-          Navigator.of(context).maybePop();
-          Navigator.of(event.context).maybePop();
+          Navigator.of(context)..pop();
+          Navigator.of(event.context)..popUntil((route) => route.isFirst);
+
           event.context.read<OnboardingBloc>().add(const OnboardingEvent.showDeleted());
         },
         onCancel: () {
@@ -236,5 +292,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         },
       ),
     );
+  }
+
+  Future<void> _onOnConnectivityChanged(
+      _OnConnectivityChanged event, Emitter<SettingsState> emit) async {
+    _connectivityResult = event.connectivityResult;
+    if (event.connectivityResult != ConnectionState.none) {
+      await Future.wait([
+        if (_blocks == null) _loadBlocks(emit),
+        if (_user == null) _loadProfile(emit),
+      ]);
+    }
   }
 }

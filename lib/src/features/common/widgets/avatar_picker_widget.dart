@@ -50,9 +50,9 @@ class AvatarPickerWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        const Text(
+        Text(
           'Выбрать другой:',
-          style: TextStyles.secondary,
+          style: TextStyles.secondary(),
         ),
         const SizedBox(height: 12),
         Wrap(

@@ -7,7 +7,6 @@ watchers_widget:
   git:
      ref: master
      url: https://gitlab.com/watchershub/fluttersdk/
-     path: watchers_widget
 ```
 
 ## Usage

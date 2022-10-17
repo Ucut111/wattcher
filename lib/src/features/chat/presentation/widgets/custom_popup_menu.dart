@@ -265,7 +265,7 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
       );
     } else {
       contentOffset = Offset(
-        childOffset.dx - max(0, contentSize.width - childSize.width),
+        childOffset.dx + (childSize.width - contentSize.width),
         yOffset,
       );
     }

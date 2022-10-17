@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:watchers_widget/src/core/constants/custom_colors.dart';
 import 'package:watchers_widget/src/core/constants/resources.dart';
 import 'package:watchers_widget/src/core/constants/text_styles.dart';
+import 'package:watchers_widget/src/core/style/figma_sizer.dart';
 import 'package:watchers_widget/src/core/svg_icon.dart';
 
 enum ReportType { spam, abuse, porn }
@@ -54,18 +55,16 @@ class ReportTypeWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.fromLTRB(16, 16, 12, 16),
                         child: Row(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SvgIcon(
                               Resources.report_badge,
                               size: 48,
                             ),
-                            const SizedBox(width: 10),
+                            SizedBox(width: 10.fw),
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,17 +73,22 @@ class ReportTypeWidget extends StatelessWidget {
                                   'Сообщить о нарушении',
                                   style: TextStyles.title(),
                                 ),
-                                const Text(
+                                Text(
                                   'Жалобы отправляются анонимно',
-                                  style: TextStyles.secondary,
+                                  style: TextStyles.secondary(),
                                 ),
                               ],
                             ),
                             const Spacer(),
-                            IconButton(
-                              padding: const EdgeInsets.only(bottom: 16.0),
-                              onPressed: () => Navigator.maybePop(context),
-                              icon: const SvgIcon(Resources.close, color: CustomColors.danger),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: InkWell(
+                                  onTap: () => Navigator.maybePop(context),
+                                  child: const SvgIcon(Resources.close, color: CustomColors.danger),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -110,8 +114,9 @@ class ReportTypeWidget extends StatelessWidget {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    onSelected(reportType);
-                                    Navigator.of(context).maybePop();
+                                    Navigator.of(context)
+                                        .maybePop()
+                                        .then((value) => onSelected(reportType));
                                   },
                                   child: Text(
                                     reportType.title,

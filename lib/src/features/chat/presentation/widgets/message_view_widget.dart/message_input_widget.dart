@@ -6,13 +6,13 @@ import 'package:watchers_widget/src/core/style/figma_sizer.dart';
 import 'package:watchers_widget/src/core/svg_icon.dart';
 import 'package:watchers_widget/src/features/chat/domain/models/emotion.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/emoji_widget.dart';
-import 'package:watchers_widget/src/features/chat/presentation/widgets/emotion_panel.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/message_view_widget.dart/message_input_overhang_widget.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/message_view_widget.dart/message_input_state.dart';
+import 'package:watchers_widget/src/features/tooltips/domain/models/tooltip_trigger.dart';
+import 'package:watchers_widget/src/features/tooltips/tooltip_widget.dart';
 
 class MessageInputWidget extends StatefulWidget {
   final void Function() onSettingsTap;
-  final void Function(Emotion) onEmotionSelected;
   final void Function() onSendTap;
   final List<Emotion> emotions;
   final TextEditingController controller;
@@ -22,15 +22,22 @@ class MessageInputWidget extends StatefulWidget {
   final OutlineInputBorder? outlineInputBorder;
   final InputDecoration? inputDecoration;
   final bool enabled;
+  final Emotion selectedEmotion;
+  final void Function() onSendEmotion;
+  final void Function() onLongPressEmotion;
+  final bool largeMessage;
 
   const MessageInputWidget({
+    required this.largeMessage,
     required this.onSettingsTap,
-    required this.onEmotionSelected,
     required this.controller,
     required this.onSendTap,
     required this.focusNode,
     required this.emotions,
     required this.enabled,
+    required this.selectedEmotion,
+    required this.onSendEmotion,
+    required this.onLongPressEmotion,
     this.outlineInputBorder,
     this.inputDecoration,
     this.onSubmitted,
@@ -87,128 +94,78 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
 
     return Container(
       color: CustomColors.onPrimary,
-      child: AnimatedPadding(
-        padding: MediaQuery.of(context).viewInsets,
-        duration: const Duration(milliseconds: 100),
-        curve: Curves.decelerate,
-        child: Column(
-          children: [
-            const MessageInputOverhangWidget(),
-            const Divider(height: 1, thickness: 1, color: CustomColors.divider),
-            SizedBox(height: 8.fh),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                _state.maybeMap(
-                  hasFocus: (_) => const SizedBox.shrink(),
-                  orElse: () => Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      onTap: widget.onSettingsTap,
-                      child: const CircleAvatar(
-                        radius: 18,
-                        backgroundColor: CustomColors.secondary,
-                        child: SvgIcon(
-                          Resources.settings,
-                          size: 20,
-                          color: CustomColors.gray400,
+      child: Column(
+        children: [
+          const MessageInputOverhangWidget(),
+          const Divider(height: 1, thickness: 1, color: CustomColors.divider),
+          SizedBox(height: 8.fh),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              _state.maybeMap(
+                hasFocus: (_) => const SizedBox.shrink(),
+                orElse: () => Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: widget.onSettingsTap,
+                    child: const CircleAvatar(
+                      radius: 18,
+                      backgroundColor: CustomColors.secondary,
+                      child: SvgIcon(
+                        Resources.settings,
+                        size: 20,
+                        color: CustomColors.gray400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: TextField(
+                    minLines: 1,
+                    maxLines: 1,
+                    enabled: widget.enabled,
+                    onSubmitted: widget.onSubmitted,
+                    focusNode: widget.focusNode,
+                    controller: widget.controller,
+                    decoration: widget.inputDecoration ??
+                        InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 20.0,
+                          ),
+                          hintText: widget.hintText ?? 'Сообщение...',
+                          border: inputBorder,
+                          disabledBorder: inputBorder,
+                          enabledBorder: inputBorder,
+                          focusedBorder: inputBorder,
+                          hintStyle: TextStyles.hint,
+                          filled: true,
+                          fillColor: CustomColors.inputFilling,
                         ),
-                      ),
-                    ),
+                    style: TextStyles.input,
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _state.maybeMap(
-                    emoji: (_) => EmotionPannel(
-                      emotions: widget.emotions,
-                      onEmotionSelected: widget.onEmotionSelected,
-                    ),
-                    orElse: () => Padding(
-                      padding: const EdgeInsets.only(left: 4),
-                      child: TextField(
-                        enabled: widget.enabled,
-                        onSubmitted: widget.onSubmitted,
-                        focusNode: widget.focusNode,
-                        controller: widget.controller,
-                        decoration: widget.inputDecoration ??
-                            InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10.0,
-                                horizontal: 20.0,
-                              ),
-                              hintText: widget.hintText ?? 'Сообщение...',
-                              border: inputBorder,
-                              disabledBorder: inputBorder,
-                              enabledBorder: inputBorder,
-                              focusedBorder: inputBorder,
-                              hintStyle: TextStyles.hint,
-                              filled: true,
-                              fillColor: CustomColors.inputFilling,
-                            ),
-                        style: TextStyles.input,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                _state.maybeMap(
-                  hasFocus: (state) => Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: state.showSend
-                        ? InkWell(
-                            splashColor: Colors.transparent,
-                            onTap: widget.onSendTap,
-                            child: const CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child: SvgIcon(
-                                Resources.send,
-                                size: 36,
-                                color: CustomColors.primary,
-                              ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                  ),
-                  emoji: (_) => Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      onTap: () {
-                        setState(() {
-                          _state = MessageInputState.unfocused();
-                        });
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: CustomColors.danger.withOpacity(0.2),
-                        child: const SvgIcon(Resources.close),
-                      ),
-                    ),
-                  ),
-                  orElse: () => Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      onTap: () {
-                        setState(() {
-                          _state = MessageInputState.emoji();
-                        });
-                      },
-                      child: const CircleAvatar(
-                        radius: 18,
-                        backgroundColor: CustomColors.secondary,
-                        child: EmojiWidget('thumbs_up'),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 6.fh)
-          ],
-        ),
+              ),
+              const SizedBox(width: 8),
+              MessageButtonWidget(
+                largeMessage: widget.largeMessage,
+                hasFocus: _state.isHasFocus,
+                onLongPressEmotion: widget.onLongPressEmotion,
+                onSendEmotion: widget.onSendEmotion,
+                onSendTap: widget.onSendTap,
+                selectedEmotion: widget.selectedEmotion,
+                showSend: _state.map(unfocused: (_) => false, hasFocus: (s) => s.showSend),
+              ),
+            ],
+          ),
+          SizedBox(height: 6.fh)
+        ],
       ),
     );
   }
@@ -218,5 +175,76 @@ class _MessageInputWidgetState extends State<MessageInputWidget> {
     widget.focusNode.removeListener(_updateFocusStatus);
     widget.controller.removeListener(_updateShowSendStatus);
     super.dispose();
+  }
+}
+
+class MessageButtonWidget extends StatefulWidget {
+  final bool hasFocus;
+  final bool showSend;
+  final VoidCallback onSendTap;
+  final VoidCallback onSendEmotion;
+  final VoidCallback onLongPressEmotion;
+  final Emotion selectedEmotion;
+  final bool largeMessage;
+
+  const MessageButtonWidget({
+    required this.hasFocus,
+    required this.showSend,
+    required this.onSendTap,
+    required this.onSendEmotion,
+    required this.onLongPressEmotion,
+    required this.selectedEmotion,
+    required this.largeMessage
+  });
+
+  @override
+  State<MessageButtonWidget> createState() => _MessageButtonWidgetState();
+}
+
+class _MessageButtonWidgetState extends State<MessageButtonWidget> {
+  @override
+  Widget build(BuildContext context) {
+    if (widget.hasFocus) {
+      return Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: widget.showSend
+            ? InkWell(
+                splashColor: Colors.transparent,
+                onTap: widget.onSendTap,
+                child:  CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: SvgIcon(
+                    Resources.send,
+                    size: 36,
+                    color: widget.largeMessage
+                        ?CustomColors.textSecondary:CustomColors.primary,
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
+      );
+    }
+
+    return TooltipWidget(
+      tooltipTrigger: TooltipTrigger.longTapEmoji,
+      preferredDirection: AxisDirection.up,
+      offset: 10,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: InkWell(
+          splashColor: Colors.transparent,
+          onTap: widget.onSendEmotion,
+          onLongPress: widget.onLongPressEmotion,
+          child: CircleAvatar(
+            radius: 18,
+            backgroundColor: CustomColors.secondary,
+            child: EmojiWidget(
+              emotionPath: widget.selectedEmotion.path,
+              isShort: true,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

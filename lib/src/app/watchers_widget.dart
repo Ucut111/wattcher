@@ -29,6 +29,12 @@ class _WatchersWidgetState extends State<WatchersWidget> {
   }
 
   @override
+  void dispose() {
+    locator.reset();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
 

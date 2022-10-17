@@ -4,6 +4,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:watchers_widget/src/features/common/anti_swearing/anti_swearing.dart';
 import 'package:watchers_widget/src/features/common/domain/models/avatar.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/auth/register_user_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/avatar/get_all_avatars_use_case.dart';
@@ -22,16 +23,19 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final UpdateUserUseCase _updateUserUseCase;
   final GetAllAvatarsUseCase _getAllAvatarsUseCase;
   final OnboardingBlocParams _params;
+  final Future<AntiSwearing> _antiSwearingFuture;
 
   OnboardingBloc({
     required OnboardingBlocParams params,
     required RegisterUserUseCase registerUserUseCase,
     required UpdateUserUseCase updateUserUseCase,
     required GetAllAvatarsUseCase getAllAvatarsUseCase,
+    required Future<AntiSwearing> antiSwearingFuture,
   })  : _params = params,
         _registerUserUseCase = registerUserUseCase,
         _updateUserUseCase = updateUserUseCase,
         _getAllAvatarsUseCase = getAllAvatarsUseCase,
+        _antiSwearingFuture = antiSwearingFuture,
         super(OnboardingState.loading()) {
     on<OnboardingEvent>(
       (event, emit) => event.mapOrNull<Future<void>>(
@@ -81,12 +85,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       if (registerResponse.isNew ||
           registerResponse.user.user.name.isEmpty ||
           registerResponse.user.user.pic.isEmpty) {
-        emit(OnboardingState.main());
+        emit(OnboardingState.form(userName: '',hideChangeButton: registerResponse.isNew ||
+            registerResponse.user.user.name.isEmpty));
+        //emit(OnboardingState.main());
         return;
       }
 
       emit(OnboardingState.showChat());
+      return;
     }
+
+    emit(OnboardingState.showError());
   }
 
   Future<void> _showLicence(_ShowLicence event, Emitter<OnboardingState> emit) async {
@@ -111,11 +120,14 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   Future<void> _submitInput(_SubmitInput event, Emitter<OnboardingState> emit) async {
+    _userNameTextEditingController.text = _userNameTextEditingController.text.trim();
     final userName = UserName.dirty(_userNameTextEditingController.text);
+
+    final isSwearing = (await _antiSwearingFuture).containsSwearing(userName.value);
 
     emit(OnboardingState.form(
       userName: userName.value,
-      errorDescription: userName.error.description,
+      errorDescription: isSwearing ? 'Непустимое имя' : userName.error.description,
     ));
   }
 

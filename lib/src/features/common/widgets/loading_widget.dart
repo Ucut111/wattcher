@@ -32,7 +32,6 @@ class LoadingScreen extends StatelessWidget {
     return const Scaffold(
       backgroundColor: CustomColors.chatBackground,
       body: SafeArea(
-        top: false,
         child: Center(
           child: _loader,
         ),

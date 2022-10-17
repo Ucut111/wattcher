@@ -20,21 +20,18 @@ mixin _$MessageInputState {
   TResult when<TResult extends Object?>({
     required TResult Function() unfocused,
     required TResult Function(dynamic showSend) hasFocus,
-    required TResult Function() emoji,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unfocused,
     TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unfocused,
     TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +39,18 @@ mixin _$MessageInputState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Unfocused value) unfocused,
     required TResult Function(_HasFocus value) hasFocus,
-    required TResult Function(_Emoji value) emoji,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unfocused value)? unfocused,
     TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unfocused value)? unfocused,
     TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -100,8 +94,8 @@ class __$$_UnfocusedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Unfocused implements _Unfocused {
-  _$_Unfocused();
+class _$_Unfocused extends _Unfocused {
+  _$_Unfocused() : super._();
 
   @override
   String toString() {
@@ -122,7 +116,6 @@ class _$_Unfocused implements _Unfocused {
   TResult when<TResult extends Object?>({
     required TResult Function() unfocused,
     required TResult Function(dynamic showSend) hasFocus,
-    required TResult Function() emoji,
   }) {
     return unfocused();
   }
@@ -132,7 +125,6 @@ class _$_Unfocused implements _Unfocused {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unfocused,
     TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
   }) {
     return unfocused?.call();
   }
@@ -142,7 +134,6 @@ class _$_Unfocused implements _Unfocused {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unfocused,
     TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
     required TResult orElse(),
   }) {
     if (unfocused != null) {
@@ -156,7 +147,6 @@ class _$_Unfocused implements _Unfocused {
   TResult map<TResult extends Object?>({
     required TResult Function(_Unfocused value) unfocused,
     required TResult Function(_HasFocus value) hasFocus,
-    required TResult Function(_Emoji value) emoji,
   }) {
     return unfocused(this);
   }
@@ -166,7 +156,6 @@ class _$_Unfocused implements _Unfocused {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unfocused value)? unfocused,
     TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
   }) {
     return unfocused?.call(this);
   }
@@ -176,7 +165,6 @@ class _$_Unfocused implements _Unfocused {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unfocused value)? unfocused,
     TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
     required TResult orElse(),
   }) {
     if (unfocused != null) {
@@ -186,8 +174,9 @@ class _$_Unfocused implements _Unfocused {
   }
 }
 
-abstract class _Unfocused implements MessageInputState {
+abstract class _Unfocused extends MessageInputState {
   factory _Unfocused() = _$_Unfocused;
+  _Unfocused._() : super._();
 }
 
 /// @nodoc
@@ -221,8 +210,8 @@ class __$$_HasFocusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HasFocus implements _HasFocus {
-  _$_HasFocus({this.showSend = false});
+class _$_HasFocus extends _HasFocus {
+  _$_HasFocus({this.showSend = false}) : super._();
 
   @override
   @JsonKey()
@@ -255,7 +244,6 @@ class _$_HasFocus implements _HasFocus {
   TResult when<TResult extends Object?>({
     required TResult Function() unfocused,
     required TResult Function(dynamic showSend) hasFocus,
-    required TResult Function() emoji,
   }) {
     return hasFocus(showSend);
   }
@@ -265,7 +253,6 @@ class _$_HasFocus implements _HasFocus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? unfocused,
     TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
   }) {
     return hasFocus?.call(showSend);
   }
@@ -275,7 +262,6 @@ class _$_HasFocus implements _HasFocus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unfocused,
     TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
     required TResult orElse(),
   }) {
     if (hasFocus != null) {
@@ -289,7 +275,6 @@ class _$_HasFocus implements _HasFocus {
   TResult map<TResult extends Object?>({
     required TResult Function(_Unfocused value) unfocused,
     required TResult Function(_HasFocus value) hasFocus,
-    required TResult Function(_Emoji value) emoji,
   }) {
     return hasFocus(this);
   }
@@ -299,7 +284,6 @@ class _$_HasFocus implements _HasFocus {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Unfocused value)? unfocused,
     TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
   }) {
     return hasFocus?.call(this);
   }
@@ -309,7 +293,6 @@ class _$_HasFocus implements _HasFocus {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unfocused value)? unfocused,
     TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
     required TResult orElse(),
   }) {
     if (hasFocus != null) {
@@ -319,119 +302,12 @@ class _$_HasFocus implements _HasFocus {
   }
 }
 
-abstract class _HasFocus implements MessageInputState {
+abstract class _HasFocus extends MessageInputState {
   factory _HasFocus({final dynamic showSend}) = _$_HasFocus;
+  _HasFocus._() : super._();
 
   dynamic get showSend;
   @JsonKey(ignore: true)
   _$$_HasFocusCopyWith<_$_HasFocus> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_EmojiCopyWith<$Res> {
-  factory _$$_EmojiCopyWith(_$_Emoji value, $Res Function(_$_Emoji) then) =
-      __$$_EmojiCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_EmojiCopyWithImpl<$Res> extends _$MessageInputStateCopyWithImpl<$Res>
-    implements _$$_EmojiCopyWith<$Res> {
-  __$$_EmojiCopyWithImpl(_$_Emoji _value, $Res Function(_$_Emoji) _then)
-      : super(_value, (v) => _then(v as _$_Emoji));
-
-  @override
-  _$_Emoji get _value => super._value as _$_Emoji;
-}
-
-/// @nodoc
-
-class _$_Emoji implements _Emoji {
-  _$_Emoji();
-
-  @override
-  String toString() {
-    return 'MessageInputState.emoji()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Emoji);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() unfocused,
-    required TResult Function(dynamic showSend) hasFocus,
-    required TResult Function() emoji,
-  }) {
-    return emoji();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? unfocused,
-    TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
-  }) {
-    return emoji?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unfocused,
-    TResult Function(dynamic showSend)? hasFocus,
-    TResult Function()? emoji,
-    required TResult orElse(),
-  }) {
-    if (emoji != null) {
-      return emoji();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Unfocused value) unfocused,
-    required TResult Function(_HasFocus value) hasFocus,
-    required TResult Function(_Emoji value) emoji,
-  }) {
-    return emoji(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Unfocused value)? unfocused,
-    TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
-  }) {
-    return emoji?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unfocused value)? unfocused,
-    TResult Function(_HasFocus value)? hasFocus,
-    TResult Function(_Emoji value)? emoji,
-    required TResult orElse(),
-  }) {
-    if (emoji != null) {
-      return emoji(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Emoji implements MessageInputState {
-  factory _Emoji() = _$_Emoji;
 }

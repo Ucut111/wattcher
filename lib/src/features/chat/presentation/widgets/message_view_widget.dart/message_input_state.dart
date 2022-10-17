@@ -4,9 +4,12 @@ part 'message_input_state.freezed.dart';
 
 @freezed
 class MessageInputState with _$MessageInputState {
+  MessageInputState._();
+
   factory MessageInputState.unfocused() = _Unfocused;
   factory MessageInputState.hasFocus({
     @Default(false) showSend,
   }) = _HasFocus;
-  factory MessageInputState.emoji() = _Emoji;
+
+  bool get isHasFocus => this is _HasFocus;
 }

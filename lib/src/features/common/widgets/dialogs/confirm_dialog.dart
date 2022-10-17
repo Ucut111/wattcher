@@ -23,6 +23,8 @@ class ConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 38),
+      alignment: Alignment.topCenter,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
@@ -45,7 +47,7 @@ class ConfirmDialog extends StatelessWidget {
                 const SizedBox(height: 7),
                 Text(
                   subtitleText!,
-                  style: TextStyles.secondary,
+                  style: TextStyles.secondary(),
                   textAlign: TextAlign.center,
                 ),
               ],

@@ -5,6 +5,7 @@ import 'package:watchers_widget/src/core/constants/custom_colors.dart';
 import 'package:watchers_widget/src/core/constants/resources.dart';
 import 'package:watchers_widget/src/core/constants/text_styles.dart';
 import 'package:watchers_widget/src/core/svg_icon.dart';
+import 'package:watchers_widget/src/core/utils/transitions.dart';
 import 'package:watchers_widget/src/features/chat/presentation/chat_screen.dart';
 import 'package:watchers_widget/src/features/common/widgets/avatar_picker_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/contribution_widget.dart';
@@ -16,6 +17,7 @@ import 'package:watchers_widget/src/features/common/widgets/user_name_input_widg
 import 'package:watchers_widget/src/features/common/widgets/user_name_widget.dart';
 import 'package:watchers_widget/src/features/deleted_profile/deleted_profile_screen.dart';
 import 'package:watchers_widget/src/features/deleted_profile/logic/deleted_profile_bloc_params.dart';
+import 'package:watchers_widget/src/features/error/error_screen.dart';
 import 'package:watchers_widget/src/features/onboarding/domain/licence.dart';
 import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc_params.dart';
 
@@ -34,12 +36,10 @@ class OnboardingScreen extends StatefulWidget {
     required String externalRoomId,
     required OnboardingBlocParams onboardingBlocParams,
   }) =>
-      MaterialPageRoute(
-        builder: (_) => OnboardingScreen(
-          onboardingBlocParams: onboardingBlocParams,
-          externalRoomId: externalRoomId,
-        ),
-      );
+      Transitions.buildFadeTranstion(OnboardingScreen(
+        onboardingBlocParams: onboardingBlocParams,
+        externalRoomId: externalRoomId,
+      ));
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState(onboardingBlocParams);
@@ -52,6 +52,7 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
   @override
   Widget builder(BuildContext context, OnboardingState state) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: CustomColors.chatBackground,
       body: SafeArea(
         top: false,
@@ -103,7 +104,7 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
                       child: SingleChildScrollView(
                         child: Text(
                           state.licenceText + state.licenceText,
-                          style: TextStyles.secondary,
+                          style: TextStyles.secondary(),
                         ),
                       ),
                     ),
@@ -112,11 +113,9 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
               },
               form: (state) {
                 return ModalWidget(
-                  title: ModalTitleWidget(
-                    onBackTap: () => bloc.add(
-                      const OnboardingEvent.backToMain(),
-                    ),
-                    titleText: 'Имя в чате',
+                  title: Text(
+                    'Имя в чате',
+                    style: TextStyles.title(),
                   ),
                   submitButton: SubmitButton.textual(
                     text: 'Сохранить и продолжить',
@@ -127,6 +126,7 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
                     UserNameWidget(
                       onTap: () => bloc.add(const OnboardingEvent.showInput()),
                       userName: state.userName,
+                      showChangeTrailing: false,
                     ),
                     if (state.errorDescription != null)
                       Padding(
@@ -174,6 +174,9 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
                   externalRoomId: widget.externalRoomId,
                 );
               },
+              showError: (state) {
+                return const ErrorScreen();
+              },
               showDeleted: (state) {
                 return DeletedProfileScreen(DeletedProfileBlocParams(
                   deletedAt: state.deletedAt,
@@ -188,7 +191,7 @@ class _OnboardingScreenState extends BlocInjectableState<OnboardingScreen, Onboa
     return Text.rich(
       TextSpan(
         text: 'Я принимаю условия ',
-        style: TextStyles.secondary,
+        style: TextStyles.secondary(),
         children: [
           TextSpan(
             text: 'Лицензионного соглашения',

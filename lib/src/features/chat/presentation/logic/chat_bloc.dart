@@ -1,14 +1,18 @@
 import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:uuid/uuid.dart';
+
 import 'package:watchers_widget/src/core/constants/resources.dart';
 import 'package:watchers_widget/src/core/log/i_log.dart';
+import 'package:watchers_widget/src/core/utils/concurrency.dart';
 import 'package:watchers_widget/src/features/chat/data/request/delete_message_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/edit_message_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/report_message_request.dart';
@@ -16,6 +20,7 @@ import 'package:watchers_widget/src/features/chat/data/request/send_message_requ
 import 'package:watchers_widget/src/features/chat/data/request/set_ban_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/set_message_visible_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/set_messages_visible_request.dart';
+import 'package:watchers_widget/src/features/chat/data/request/set_pinned_message_request.dart';
 import 'package:watchers_widget/src/features/chat/domain/models/emotion.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/check_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/close_socket_use_case.dart';
@@ -26,14 +31,18 @@ import 'package:watchers_widget/src/features/chat/domain/use_cases/emotion/get_e
 import 'package:watchers_widget/src/features/chat/domain/use_cases/get_message_array_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/get_pinned_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/join_room_use_case.dart';
+import 'package:watchers_widget/src/features/chat/domain/use_cases/on_connectivity_changed_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/report_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/send_emotion_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/send_message_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/set_ban_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/set_message_visible_use_case.dart';
 import 'package:watchers_widget/src/features/chat/domain/use_cases/set_messages_visible_request.dart';
+import 'package:watchers_widget/src/features/chat/domain/use_cases/set_pinned_message_use_case.dart';
+import 'package:watchers_widget/src/features/chat/presentation/widgets/chat_toast_widget.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/emoji_widget.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/report_type_widget.dart';
+import 'package:watchers_widget/src/features/common/anti_swearing/anti_swearing.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/block/add_block_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/block/get_blocks_use_case.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/talker/get_talkers_use_case.dart';
@@ -42,7 +51,6 @@ import 'package:watchers_widget/src/features/common/models/talker.dart';
 import 'package:watchers_widget/src/features/common/models/user.dart';
 import 'package:watchers_widget/src/features/common/widgets/dialogs/confirm_dialog.dart';
 import 'package:watchers_widget/src/features/common/widgets/emoji_animation.dart';
-import 'package:watchers_widget/src/features/common/widgets/snacks/info_snackbar.dart';
 
 part 'chat_bloc.freezed.dart';
 part 'chat_event.dart';
@@ -67,46 +75,36 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final SetBanUseCase _setBanUseCase;
   final GetBlocksUseCase _getBlocksUseCase;
   final CloseSocketUseCase _closeSocketUseCase;
+  final GetConnectivityChangeStreamUseCase _getConnectivityChangeStreamUseCase;
+  final SetPinnedMessageUseCase _setPinnedMessageUseCase;
+  final Future<AntiSwearing> _antiSwearingFuture;
 
-  ChatBloc({
-    required GetMessageArrayUseCase getMessageArrayUseCase,
-    required GetPinnedMessageUseCase getPinnedMessageUseCase,
-    required JoinRoomUseCase joinRoomUseCase,
-    required SendMessageUseCase sendMessageUseCase,
-    required CheckMessageUseCase checkMessageUseCase,
+  final List<StreamSubscription> _subscriptions = [];
+
+  ChatBloc(
+    this._addBlockUseCase,
+    this._checkMessageUseCase,
+    this._closeSocketUseCase,
+    this._deleteMessageUseCase,
+    this._editMessageUseCase,
+    this._getAllEmotionsUseCase,
+    this._getConnectivityChangeStreamUseCase,
+    this._getEmotionByNameScenario,
+    this._getMessageArrayUseCase,
+    this._getBlocksUseCase,
+    this._getPinnedMessageUseCase,
+    this._setMessageVisibleUseCase,
+    this._reportMessageUseCase,
+    this._getTalkersUseCase,
+    this._joinRoomUseCase,
+    this._sendEmotionUseCase,
+    this._sendMessageUseCase,
+    this._setBanUseCase,
+    this._setMessagesVisibleUseCase,
+    this._setPinnedMessageUseCase,
+    this._antiSwearingFuture, {
     required String externalRoomId,
-    required SendEmotionUseCase sendEmotionUseCase,
-    required GetAllEmotionsUseCase getAllEmotionsUseCase,
-    required GetEmotionByNameScenario getEmotionByNameScenario,
-    required GetTalkersUseCase getTalkersUseCase,
-    required EditMessageUseCase editMessageUseCase,
-    required DeleteMessageUseCase deleteMessageUseCase,
-    required ReportMessageUseCase reportMessageUseCase,
-    required AddBlockUseCase addBlockUseCase,
-    required SetMessageVisibleUseCase setMessageVisibleUseCase,
-    required SetMessagesVisibleUseCase setMessagesVisibleUseCase,
-    required SetBanUseCase setBanUseCase,
-    required GetBlocksUseCase getBlocksUseCase,
-    required CloseSocketUseCase closeSocketUseCase,
-  })  : _getMessageArrayUseCase = getMessageArrayUseCase,
-        _getPinnedMessageUseCase = getPinnedMessageUseCase,
-        _joinRoomUseCase = joinRoomUseCase,
-        _sendMessageUseCase = sendMessageUseCase,
-        _checkMessageUseCase = checkMessageUseCase,
-        _sendEmotionUseCase = sendEmotionUseCase,
-        _getAllEmotionsUseCase = getAllEmotionsUseCase,
-        _getEmotionByNameScenario = getEmotionByNameScenario,
-        _getTalkersUseCase = getTalkersUseCase,
-        _editMessageUseCase = editMessageUseCase,
-        _deleteMessageUseCase = deleteMessageUseCase,
-        _reportMessageUseCase = reportMessageUseCase,
-        _addBlockUseCase = addBlockUseCase,
-        _setMessageVisibleUseCase = setMessageVisibleUseCase,
-        _setMessagesVisibleUseCase = setMessagesVisibleUseCase,
-        _setBanUseCase = setBanUseCase,
-        _getBlocksUseCase = getBlocksUseCase,
-        _closeSocketUseCase = closeSocketUseCase,
-        super(ChatState.loading()) {
+  }) : super(ChatState.loading()) {
     on<ChatEvent>(
       (event, emit) => event.mapOrNull(
         init: (event) => _onInit(event, emit),
@@ -122,6 +120,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         reportMessage: (event) => _onReportMessage(event, emit),
         blockUser: (event) => _onBlockUser(event, emit),
         scrollToMessage: (event) => _onScrollToMessage(event, emit),
+        setMessageRead: (event) => _onSetMessageRead(event, emit),
+        setLargeMessage: (event) => _onSetLargeMessage(event, emit),
       ),
       transformer: bloc_concurrency.concurrent(),
     );
@@ -129,9 +129,23 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<_ChangeMessagesVisibility>(_onChangeMessagesVisibility);
     on<_FinishLoading>(_finishLoading);
     on<_SetBan>(_setBan);
+    on<_ConnectivityChanged>(_onConnectivityChanged);
+    on<ChatEventSetPinnedMessage>(_onSetPinnedMessage);
+    on<_UpdatePinnedMessage>(_onUpdatePinnedMessage);
+    on<ChangeSelectedEmotion>(_changeSelectedEmotion);
+    on<SetEmotionPannelVisibility>(_setEmotionPannelVisibility);
+    on<SendSelectedEmotion>(_sendSelectedEmotion);
+
+    _subscriptions.add(
+      _getConnectivityChangeStreamUseCase.call().listen(
+            (connectivityResult) => add(_ConnectivityChanged(connectivityResult)),
+          ),
+    );
 
     _init(externalRoomId);
   }
+
+  bool fixScroll = false;
 
   final TextEditingController _controller = TextEditingController();
   TextEditingController get controller => _controller;
@@ -139,27 +153,29 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final FocusNode _focusNode = FocusNode();
   FocusNode get focusNode => _focusNode;
 
-  final AutoScrollController _scrollController = AutoScrollController();
+  final AutoScrollController _scrollController = AutoScrollController(initialScrollOffset: 20000);
   AutoScrollController get scrollController => _scrollController;
+
+  final FToast _fToast = FToast();
+
+  void _showToast({required BuildContext context, required String text, required String iconPath}) {
+    _fToast.init(context);
+    _fToast.removeCustomToast();
+    _fToast.showToast(
+        toastDuration: const Duration(milliseconds: 1500),
+        gravity: ToastGravity.BOTTOM,
+        child: ChatToastWidget(
+          onClose: () {
+            _fToast.removeCustomToast();
+          },
+          iconPath: iconPath,
+          text: text,
+        ));
+  }
 
   void _init(String externalRoomId) => add(ChatEvent.init(externalRoomId: externalRoomId));
   Future<void> _onInit(_Init event, Emitter<ChatState> emit) async {
     emit(ChatState.loading());
-
-    final talkersResult = await _getTalkersUseCase.call(event.externalRoomId);
-
-    if (talkersResult.isError) return;
-
-    final pinnedMessageResult =
-        await _getPinnedMessageUseCase.call(externalRoomId: event.externalRoomId);
-
-    if (pinnedMessageResult.isError) return;
-
-    final messagesResult = await _getMessageArrayUseCase.call(
-      externalRoomId: event.externalRoomId,
-    );
-
-    if (messagesResult.isError) return;
 
     final blockResult = await _getBlocksUseCase.call();
     if (blockResult.isError) return;
@@ -172,12 +188,38 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         log.debug('Recieved <<< event: $socketEvent, data: $data');
 
         if (socketEvent == 'successfullyJoined') {
+          final tupleResult = await waitConcurrently3(
+            _getMessageArrayUseCase.call(externalRoomId: event.externalRoomId),
+            _getTalkersUseCase.call(event.externalRoomId),
+            _getPinnedMessageUseCase.call(externalRoomId: event.externalRoomId),
+          );
+
+          if (tupleResult.item1.isError || tupleResult.item2.isError || tupleResult.item3.isError) {
+            return;
+          }
+          _controller.addListener(() {
+            if (state is ChatStateLoaded) {
+              final loadedState = state.as<ChatStateLoaded>();
+              if (_controller.text.length > 500) {
+                if (loadedState.largeMessage == false) {
+                  add(const ChatEvent.setLargeMessage(largeMessage: true));
+                }
+              } else {
+                if (loadedState.largeMessage == true) {
+                  Future.delayed(const Duration(seconds: 2), () {
+                    add(const ChatEvent.setLargeMessage(largeMessage: false));
+                  });
+                }
+              }
+            }
+          });
+
           add(_FinishLoading(
-            pinnedMessage: pinnedMessageResult.successValue,
-            messages: messagesResult.successValue
+            messages: tupleResult.item1.successValue
                 .map((e) => _setMessageVisibility(e, initiatorids, targetIds))
                 .toList(),
-            talkers: talkersResult.successValue,
+            talkers: tupleResult.item2.successValue,
+            pinnedMessage: tupleResult.item3.successValue,
             talker: Talker.fromMap(data['talker']),
             externalRoomId: event.externalRoomId,
             initiatorIds: initiatorids,
@@ -211,30 +253,46 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
           final messages = <Message>[...loadedState.messages, checkedMessage];
 
-          add(ChatEvent.update(loadedState.copyWith(messages: messages)));
+          if (scrollController.hasClients &&
+                  scrollController.position.maxScrollExtent == scrollController.offset ||
+              checkedMessage.isMyMessage == true) {
+            add(ChatEvent.update(loadedState.copyWith(messages: messages)));
+          } else {
+            add(ChatEvent.update(loadedState.copyWith(
+                unreadMentions: checkedMessage.isMentionMe == true
+                    ? loadedState.unreadMentions + 1
+                    : loadedState.unreadMentions,
+                messages: messages,
+                firstUnreadMessageIndex: loadedState.firstUnreadMessageIndex ?? messages.length - 1,
+                unreadMessages: [...loadedState.unreadMessages, checkedMessage])));
+          }
+
+          if (scrollController.hasClients &&
+              scrollController.position.maxScrollExtent == scrollController.offset) {
+            scrollController.animateTo(
+              scrollController.position.maxScrollExtent + 1000,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.ease,
+            );
+          }
           return;
         }
 
         if (socketEvent == 'userJoined') {
           final Talker newTalker = Talker.fromMap(data['talker']);
-          final talkers = <Talker>[...loadedState.talkers, newTalker];
+          final talkers = <Talker>{...loadedState.talkers, newTalker};
 
-          add(ChatEvent.update(loadedState.copyWith(talkers: talkers)));
+          add(ChatEvent.update(loadedState.copyWith(talkers: talkers.toList())));
           return;
         }
 
         if (socketEvent == 'userLeft') {
-          final talkers = <Talker>[];
-          talkers.addAll(loadedState.talkers);
+          final talkers = Set<Talker>.from(loadedState.talkers);
 
-          // Это значит, что юзер уже удален, можно попросить бек быстрее отвечать на удаление юзера
-          // чтобы мы могли закрыть чат до 'userLeft'
-          if (data['user'] == null) return;
+          final int leftTalkerId = data['id'];
+          talkers.removeWhere((element) => element.id == leftTalkerId);
 
-          final Talker leftTalker = Talker.fromMap(data);
-          talkers.removeWhere((element) => element.id == leftTalker.id);
-
-          add(ChatEvent.update(loadedState.copyWith(talkers: talkers)));
+          add(ChatEvent.update(loadedState.copyWith(talkers: talkers.toList())));
           return;
         }
 
@@ -260,12 +318,21 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           messages.removeWhere((message) => message.id.toString() == data['messageId'].toString());
 
           add(ChatEvent.update(loadedState.copyWith(messages: messages)));
+          final int indexInUnread = loadedState.unreadMessages
+              .indexWhere((element) => element.id.toString() == data['messageId'].toString());
+          if (indexInUnread != -1) {
+            add(ChatEvent.setMessageRead(message: loadedState.unreadMessages[indexInUnread]));
+          }
           return;
         }
 
         if (socketEvent == 'messageVisibleSet') {
           final messages = List<Message>.from(loadedState.messages);
           final updatedMessage = Message.fromMap(data['message']);
+
+          if (loadedState.talker == updatedMessage.talker) {
+            return;
+          }
 
           final updatedIndex = messages.indexWhere((message) => message.id == updatedMessage.id);
           if (updatedIndex == -1) return;
@@ -436,6 +503,72 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             targetIds: targetIds,
           )));
         }
+
+        if (socketEvent == 'messagePinned') {
+          // Открепляем
+          if (data['message'] == null) {
+            final updatedMessages = List<Message>.from(loadedState.messages);
+            final index = updatedMessages.indexWhere((m) => m.isPinned);
+
+            if (index != -1) {
+              updatedMessages[index] = updatedMessages[index].copyWith(isPinned: false);
+            }
+
+            _updatePinnedMessage(_UpdatePinnedMessage(
+              pinnedMessage: null,
+              messages: updatedMessages,
+            ));
+            return;
+          }
+
+          // Закрепляем
+          final Message pinnedMessage = Message.fromMap(data['message']);
+          final updatedMessages = List<Message>.from(loadedState.messages);
+          final index = updatedMessages.indexWhere((m) => m.id == pinnedMessage.id);
+
+          if (index != -1) {
+            updatedMessages[index] = pinnedMessage
+              ..isMyMessage = updatedMessages[index].isMyMessage;
+          }
+
+          _updatePinnedMessage(_UpdatePinnedMessage(
+            pinnedMessage: pinnedMessage,
+            messages: updatedMessages,
+          ));
+        }
+        if (socketEvent == 'userUpdated') {
+          final user = User.fromMap(data['user']);
+          final messages = List<Message>.from(loadedState.messages);
+
+          // Update messages
+          for (int i = 0; i < messages.length; i++) {
+            final message = messages[i];
+            if (message.talker.user.id == user.id) {
+              messages[i] = message.copyWith(
+                talker: message.talker.copyWith(user: user),
+              );
+            }
+          }
+
+          // Update talkers
+          final talkerIndex = loadedState.talkers.indexWhere(
+            (e) => e.user.id == user.id,
+          );
+          final talkers = List<Talker>.from(loadedState.talkers);
+          if (talkerIndex != -1) {
+            talkers[talkerIndex] = talkers[talkerIndex].copyWith(user: user);
+          }
+
+          add(ChatEvent.update(loadedState.copyWith(
+            messages: messages,
+            talkers: talkers,
+
+            // Update talker
+            talker: user.id == loadedState.talker.user.id
+                ? loadedState.talker.copyWith(user: user)
+                : loadedState.talker,
+          )));
+        }
       },
     );
   }
@@ -443,16 +576,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   /// [ChatEvent.finishLoading]
   void finishLoading(ChatEvent event) => add(event);
   void _finishLoading(_FinishLoading event, Emitter<ChatState> emit) {
+    final allEmotions = _getAllEmotionsUseCase.call();
+
     emit(ChatState.loaded(
       pinnedMessage: event.pinnedMessage,
       messages: event.messages,
       talkers: event.talkers,
       emojis: {},
-      allEmotions: _getAllEmotionsUseCase.call(),
+      allEmotions: allEmotions,
+      selectedEmotion: allEmotions.first,
       externalRoomId: event.externalRoomId,
       talker: event.talker,
       initiatorIds: event.initiatorIds,
       targetIds: event.targetIds,
+      noneConnection: false,
     ));
   }
 
@@ -463,8 +600,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     final loadedState = state.as<ChatStateLoaded>();
 
     if (loadedState.isLoadedAllMessages) return;
-
-    emit(loadedState.copyWith(isLoadingMoreMessages: true));
+    if (event.scrollToMessage == null) {
+      fixScroll = true;
+    }
+    emit(loadedState.copyWith(
+      isLoadingMoreMessages: true,
+    ));
 
     final lastMessageId = event.lastMessageId != null
         ? event.lastMessageId.toString()
@@ -502,11 +643,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
     if (mentionIndex != -1) {
       _scrollController
-          .scrollToIndex(loadedState.messages.length - mentionIndex - 1,
-              duration: const Duration(microseconds: 100),
-              preferPosition: AutoScrollPosition.middle)
-          .whenComplete(() => scrollController.highlight(
-              loadedState.messages.length - mentionIndex - 1,
+          .scrollToIndex(
+            mentionIndex,
+            duration: const Duration(microseconds: 100),
+            preferPosition: AutoScrollPosition.begin,
+          )
+          .whenComplete(() => scrollController.highlight(mentionIndex,
               highlightDuration: const Duration(seconds: 3)));
     } else {
       add(
@@ -517,27 +659,56 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
   }
 
+  Future<void> _onSetMessageRead(_SetMessageRead event, Emitter<ChatState> emit) async {
+    if (state.isNotA<ChatStateLoaded>()) return;
+    final loadedState = state.as<ChatStateLoaded>();
+
+    final List<Message> currentUnreadMessages = [];
+    int unreadMentionsCount = 0;
+    for (int i = 0; i < loadedState.unreadMessages.length; i++) {
+      if (loadedState.unreadMessages.indexOf(event.message) < i) {
+        currentUnreadMessages.add(loadedState.unreadMessages[i]);
+        if (loadedState.unreadMessages[i].isMentionMe == true) {
+          unreadMentionsCount++;
+        }
+      }
+    }
+
+    add(ChatEvent.update(loadedState.copyWith(
+      firstUnreadMessageIndex:
+          currentUnreadMessages.isEmpty ? null : loadedState.firstUnreadMessageIndex,
+      unreadMentions: unreadMentionsCount,
+      unreadMessages: currentUnreadMessages,
+    )));
+  }
+
+  final Map<String, Widget> _emojis = {};
+
   Future<void> _showEmotion(_ShowEmotion event, Emitter<ChatState> emit) async {
     if (state.isNotA<ChatStateLoaded>()) return;
     final loadedState = state.as<ChatStateLoaded>();
 
-    final emojis = Map<String, Widget>.from(loadedState.emojis);
-
     final animationId = const Uuid().v4();
 
-    emojis.addAll({
-      animationId: Align(
+    _emojis.addAll({
+      animationId: Padding(
         key: ValueKey(animationId),
-        alignment: Alignment.bottomRight,
-        child: EmojiAnimation(
-          animationId: animationId,
-          onCompleted: (animationId) {
-            emojis.removeWhere((id, _) => id == animationId);
-          },
-          mirror: !loadedState.mirrorEmotion,
-          child: EmojiWidget(event.emotion.path),
+        padding: const EdgeInsets.only(right: 12),
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: EmojiAnimation(
+            animationId: animationId,
+            onCompleted: (animationId) {
+              _emojis.remove(animationId);
+            },
+            mirror: !loadedState.mirrorEmotion,
+            child: EmojiWidget(
+              emotionPath: event.emotion.path,
+              isTransparentBackground: true,
+            ),
+          ),
         ),
-      )
+      ),
     });
 
     if (event.isMyEmotion) {
@@ -548,14 +719,26 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
 
     emit(loadedState.copyWith(
-      emojis: emojis,
+      emojis: _emojis,
       mirrorEmotion: !loadedState.mirrorEmotion,
     ));
+
+    // add(const _CleanEmojis());
   }
 
   Future<void> _sendMessage(_SendMessage event, Emitter<ChatState> emit) async {
     if (state.isNotA<ChatStateLoaded>()) return;
     final loaded = state.as<ChatStateLoaded>();
+    if (event.text.length > 500) {
+      return;
+    }
+    if ((await _antiSwearingFuture).containsSwearing(event.text)) {
+      _showToast(
+          context: event.context,
+          text: 'Попробуйте переформулировать',
+          iconPath: Resources.disabled);
+      return;
+    }
 
     // Edit message
     final messageInputType = loaded.messageInputType;
@@ -595,22 +778,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   void _copyMessage(_CopyMessage event, Emitter<ChatState> emit) {
     Clipboard.setData(ClipboardData(text: event.message.text));
 
-    _showSnackbar(
+    _showToast(
       context: event.context,
-      snackBar: const InfoSnackbar(
-        leadingIconPath: Resources.copy,
-        titleText: 'Текст сообщения скопирован',
-      ).build(),
-    );
-  }
-
-  void _showSnackbar({
-    required BuildContext context,
-    required SnackBar snackBar,
-  }) {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      snackBar,
+      text: 'Текст сообщения скопирован',
+      iconPath: Resources.copy,
     );
   }
 
@@ -634,6 +805,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     _focusNode.requestFocus();
   }
 
+  void _onSetLargeMessage(_SetLargeMessage event, Emitter<ChatState> emit) {
+    if (state.isNotA<ChatStateLoaded>()) return;
+    emit(state.as<ChatStateLoaded>().copyWith(largeMessage: event.largeMessage));
+  }
+
   void _onCloseOverhang(_CloseOverhang event, Emitter<ChatState> emit) {
     if (state.isNotA<ChatStateLoaded>()) return;
     _controller.clear();
@@ -655,12 +831,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           );
           Navigator.pop(context);
 
-          _showSnackbar(
+          _showToast(
             context: event.context,
-            snackBar: const InfoSnackbar(
-              leadingIconPath: Resources.remove,
-              titleText: 'Сообщение удалено',
-            ).build(),
+            text: 'Сообщение удалено',
+            iconPath: Resources.remove,
           );
         },
         onCancel: () {
@@ -680,9 +854,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         return ReportTypeWidget(
           onSelected: (reportType) async {
             await showDialog(
+              useRootNavigator: false,
               context: event.context,
               builder: (context) => ConfirmDialog(
-                titleText: 'Сообщить о неприемлемом контенте от ${event.message.user.name}',
+                titleText: 'Сообщить о неприемлемом контенте от ${event.message.talker.user.name}',
                 confirmButtonText: 'Отправить',
                 onConfirm: () async {
                   _reportMessageUseCase.call(
@@ -693,12 +868,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                   );
                   Navigator.pop(context);
 
-                  _showSnackbar(
+                  _showToast(
                     context: event.context,
-                    snackBar: const InfoSnackbar(
-                      leadingIconPath: Resources.report_badge_simple,
-                      titleText: 'Мы получили вашу жалобу',
-                    ).build(),
+                    text: 'Мы получили вашу жалобу',
+                    iconPath: Resources.report_badge_simple,
                   );
                 },
                 onCancel: () {
@@ -716,19 +889,17 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     await showDialog(
       context: event.context,
       builder: (context) => ConfirmDialog(
-        titleText: 'Заблокировать ${event.message.user.name}?',
+        titleText: 'Заблокировать ${event.message.talker.user.name}?',
         confirmButtonText: 'Заблокировать',
         subtitleText: 'Пользователь не сможет с вами общаться',
         onConfirm: () async {
           await _addBlockUseCase.call(targetId: event.message.creatorId);
           Navigator.pop(context);
 
-          _showSnackbar(
+          _showToast(
             context: event.context,
-            snackBar: const InfoSnackbar(
-              leadingIconPath: Resources.block,
-              titleText: 'Пользователь заблокирован',
-            ).build(),
+            text: 'Пользователь заблокирован',
+            iconPath: Resources.block,
           );
         },
         onCancel: () {
@@ -756,9 +927,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
 
     await showDialog(
+      useRootNavigator: false,
       context: event.context,
       builder: (context) => ConfirmDialog(
-        titleText: 'Скрыть сообщение от ${event.message.user.name}?',
+        titleText: 'Скрыть сообщение от ${event.message.talker.user.name}?',
         confirmButtonText: 'Скрыть',
         subtitleText: 'Другие пользователи больше не смогут видеть сообщение от этого пользователя',
         onConfirm: () async {
@@ -766,12 +938,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
           await action();
 
-          _showSnackbar(
+          _showToast(
             context: event.context,
-            snackBar: const InfoSnackbar(
-              leadingIconPath: Resources.hide_message,
-              titleText: 'Сообщение скрыто',
-            ).build(),
+            text: 'Сообщение скрыто',
+            iconPath: Resources.hide_message,
           );
         },
         onCancel: () {
@@ -801,6 +971,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
 
     await showDialog(
+      useRootNavigator: false,
       context: event.context,
       builder: (context) => ConfirmDialog(
         titleText: 'Скрыть сообщения от ${event.talker.user.name}?',
@@ -811,12 +982,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
           await action();
 
-          _showSnackbar(
+          _showToast(
             context: event.context,
-            snackBar: const InfoSnackbar(
-              leadingIconPath: Resources.hide_message,
-              titleText: 'Сообщения скрыты',
-            ).build(),
+            text: 'Сообщения скрыты',
+            iconPath: Resources.hide_message,
           );
         },
         onCancel: () {
@@ -843,6 +1012,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     }
 
     await showDialog(
+      useRootNavigator: false,
       context: event.context,
       builder: (context) => ConfirmDialog(
         titleText: 'Заблокировать ${event.talker.user.name}?',
@@ -853,12 +1023,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
           await action();
 
-          _showSnackbar(
+          _showToast(
             context: event.context,
-            snackBar: const InfoSnackbar(
-              leadingIconPath: Resources.block,
-              titleText: 'Пользователь заблокирован',
-            ).build(),
+            text: 'Пользователь заблокирован',
+            iconPath: Resources.block,
           );
         },
         onCancel: () {
@@ -894,6 +1062,94 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   @override
   Future<void> close() async {
     await _closeSocketUseCase.call();
+    for (final sub in _subscriptions) {
+      sub.cancel();
+    }
     return super.close();
+  }
+
+  /// [ChatEvent.connectivityChanged]
+  Future<void> _onConnectivityChanged(_ConnectivityChanged event, Emitter<ChatState> emit) async {
+    await state.mapOrNull(
+      loaded: (state) async {
+        emit(state.copyWith(
+          noneConnection:
+              event.connectivityResult == ConnectivityResult.none || state.noneConnection,
+        ));
+      },
+    );
+  }
+
+  /// [ChatEvent.setPinnedMessage]
+  void setPinnedMessage(ChatEventSetPinnedMessage event) => add(event);
+  Future<void> _onSetPinnedMessage(ChatEventSetPinnedMessage event, Emitter<ChatState> emit) async {
+    final actionName = event.isPinned ? 'Закрепить' : 'Открепить';
+    final snackbarActionName = event.isPinned ? 'закреплено' : 'откреплено';
+    final leadingIconPath = event.isPinned ? Resources.pin : Resources.unpin;
+
+    await showDialog(
+      useRootNavigator: false,
+      context: event.context,
+      builder: (context) => ConfirmDialog(
+        titleText: '$actionName сообщение?',
+        confirmButtonText: actionName,
+        onConfirm: () async {
+          state.mapOrNull(
+            loaded: (state) => _setPinnedMessageUseCase.call(
+              setPinnedMessageRequest: SetPinnedMessageRequest(
+                messageId: event.isPinned ? event.message.id.toString() : null,
+                externalRoomId: state.externalRoomId,
+              ),
+            ),
+          );
+          Navigator.pop(context);
+
+          _showToast(
+            context: event.context,
+            text: 'Сообщение $snackbarActionName',
+            iconPath: leadingIconPath,
+          );
+        },
+        onCancel: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  /// [ChatEvent.updatePinnedMessage]
+  void _updatePinnedMessage(_UpdatePinnedMessage event) => add(event);
+  void _onUpdatePinnedMessage(_UpdatePinnedMessage event, Emitter<ChatState> emit) {
+    state.mapOrNull(
+      loaded: (state) => emit(state.copyWith(
+        pinnedMessage: event.pinnedMessage,
+        messages: event.messages,
+      )),
+    );
+  }
+
+  void changeSelectedEmotion(ChangeSelectedEmotion event) => add(event);
+  void _changeSelectedEmotion(ChangeSelectedEmotion event, Emitter<ChatState> emit) {
+    state.mapOrNull(loaded: (state) {
+      emit(state.copyWith(selectedEmotion: event.emotion, showEmojiPannel: false));
+    });
+  }
+
+  void setEmotionPannelVisibility(SetEmotionPannelVisibility event) => add(event);
+  void _setEmotionPannelVisibility(SetEmotionPannelVisibility event, Emitter<ChatState> emit) {
+    state.mapOrNull(
+      loaded: (state) {
+        emit(state.copyWith(showEmojiPannel: event.isVisible));
+      },
+    );
+  }
+
+  void sendSelectedEmotion(SendSelectedEmotion event) => add(event);
+  void _sendSelectedEmotion(SendSelectedEmotion event, Emitter<ChatState> emit) {
+    state.mapOrNull(
+      loaded: (state) {
+        add(ChatEvent.showEmotion(emotion: state.selectedEmotion, isMyEmotion: true));
+      },
+    );
   }
 }

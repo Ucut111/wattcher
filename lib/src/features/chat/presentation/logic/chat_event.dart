@@ -7,6 +7,7 @@ class ChatEvent with _$ChatEvent {
   }) = _Init;
 
   const factory ChatEvent.sendMessage({
+    required BuildContext context,
     required String text,
   }) = _SendMessage;
 
@@ -90,5 +91,40 @@ class ChatEvent with _$ChatEvent {
     Message? scrollToMessage,
   }) = _LoadMoreMessages;
 
-  const factory ChatEvent.scrollToMessage({required Message message}) = _ScrollToMessage;
+  const factory ChatEvent.setMessageRead({
+    required Message message,
+  }) = _SetMessageRead;
+
+  const factory ChatEvent.scrollToMessage({
+    required Message message,
+  }) = _ScrollToMessage;
+
+  const factory ChatEvent.connectivityChanged(
+    ConnectivityResult connectivityResult,
+  ) = _ConnectivityChanged;
+
+  const factory ChatEvent.setPinnedMessage({
+    required BuildContext context,
+    required Message message,
+    required bool isPinned,
+  }) = ChatEventSetPinnedMessage;
+
+  const factory ChatEvent.updatePinnedMessage({
+    required Message? pinnedMessage,
+    required List<Message> messages,
+  }) = _UpdatePinnedMessage;
+
+  const factory ChatEvent.changeSelectedEmotion({
+    required Emotion emotion,
+  }) = ChangeSelectedEmotion;
+
+  const factory ChatEvent.setEmotionPannelVisibility({
+    required bool isVisible,
+  }) = SetEmotionPannelVisibility;
+
+  const factory ChatEvent.setLargeMessage({
+    required bool largeMessage,
+  }) = _SetLargeMessage;
+
+  const factory ChatEvent.sendSelectedEmotion() = SendSelectedEmotion;
 }

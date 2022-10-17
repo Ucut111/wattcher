@@ -2529,9 +2529,12 @@ mixin _$OnboardingState {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -2543,9 +2546,12 @@ mixin _$OnboardingState {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2557,9 +2563,12 @@ mixin _$OnboardingState {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2572,6 +2581,7 @@ mixin _$OnboardingState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -2584,6 +2594,7 @@ mixin _$OnboardingState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -2596,6 +2607,7 @@ mixin _$OnboardingState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -2665,9 +2677,12 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -2682,9 +2697,12 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2699,9 +2717,12 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2720,6 +2741,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -2735,6 +2757,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -2750,6 +2773,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -2809,9 +2833,12 @@ class _$_Main implements _Main {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -2826,9 +2853,12 @@ class _$_Main implements _Main {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2843,9 +2873,12 @@ class _$_Main implements _Main {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2864,6 +2897,7 @@ class _$_Main implements _Main {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -2879,6 +2913,7 @@ class _$_Main implements _Main {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -2894,6 +2929,7 @@ class _$_Main implements _Main {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -2956,9 +2992,12 @@ class _$_ShowChat implements _ShowChat {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -2973,9 +3012,12 @@ class _$_ShowChat implements _ShowChat {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -2990,9 +3032,12 @@ class _$_ShowChat implements _ShowChat {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3011,6 +3056,7 @@ class _$_ShowChat implements _ShowChat {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -3026,6 +3072,7 @@ class _$_ShowChat implements _ShowChat {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3041,6 +3088,7 @@ class _$_ShowChat implements _ShowChat {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3057,6 +3105,165 @@ class _$_ShowChat implements _ShowChat {
 
 abstract class _ShowChat implements OnboardingState {
   factory _ShowChat() = _$_ShowChat;
+}
+
+/// @nodoc
+abstract class _$$_ShowErrorCopyWith<$Res> {
+  factory _$$_ShowErrorCopyWith(
+          _$_ShowError value, $Res Function(_$_ShowError) then) =
+      __$$_ShowErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShowErrorCopyWithImpl<$Res>
+    extends _$OnboardingStateCopyWithImpl<$Res>
+    implements _$$_ShowErrorCopyWith<$Res> {
+  __$$_ShowErrorCopyWithImpl(
+      _$_ShowError _value, $Res Function(_$_ShowError) _then)
+      : super(_value, (v) => _then(v as _$_ShowError));
+
+  @override
+  _$_ShowError get _value => super._value as _$_ShowError;
+}
+
+/// @nodoc
+
+class _$_ShowError implements _ShowError {
+  _$_ShowError();
+
+  @override
+  String toString() {
+    return 'OnboardingState.showError()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ShowError);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() main,
+    required TResult Function() showChat,
+    required TResult Function() showError,
+    required TResult Function(DateTime deletedAt) showDeleted,
+    required TResult Function(String licenceText) licenceDetails,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
+    required TResult Function() input,
+    required TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)
+        avatarPicker,
+  }) {
+    return showError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? main,
+    TResult Function()? showChat,
+    TResult Function()? showError,
+    TResult Function(DateTime deletedAt)? showDeleted,
+    TResult Function(String licenceText)? licenceDetails,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
+    TResult Function()? input,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        avatarPicker,
+  }) {
+    return showError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? main,
+    TResult Function()? showChat,
+    TResult Function()? showError,
+    TResult Function(DateTime deletedAt)? showDeleted,
+    TResult Function(String licenceText)? licenceDetails,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
+    TResult Function()? input,
+    TResult Function(
+            Avatar selectedAvatar, List<Avatar> avatars, String userName)?
+        avatarPicker,
+    required TResult orElse(),
+  }) {
+    if (showError != null) {
+      return showError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Main value) main,
+    required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
+    required TResult Function(_ShowDeleted value) showDeleted,
+    required TResult Function(_LicenceDetails value) licenceDetails,
+    required TResult Function(_Form value) form,
+    required TResult Function(_Input value) input,
+    required TResult Function(_AvatarPicker value) avatarPicker,
+  }) {
+    return showError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Main value)? main,
+    TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
+    TResult Function(_ShowDeleted value)? showDeleted,
+    TResult Function(_LicenceDetails value)? licenceDetails,
+    TResult Function(_Form value)? form,
+    TResult Function(_Input value)? input,
+    TResult Function(_AvatarPicker value)? avatarPicker,
+  }) {
+    return showError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Main value)? main,
+    TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
+    TResult Function(_ShowDeleted value)? showDeleted,
+    TResult Function(_LicenceDetails value)? licenceDetails,
+    TResult Function(_Form value)? form,
+    TResult Function(_Input value)? input,
+    TResult Function(_AvatarPicker value)? avatarPicker,
+    required TResult orElse(),
+  }) {
+    if (showError != null) {
+      return showError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowError implements OnboardingState {
+  factory _ShowError() = _$_ShowError;
 }
 
 /// @nodoc
@@ -3127,9 +3334,12 @@ class _$_ShowDeleted implements _ShowDeleted {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -3144,9 +3354,12 @@ class _$_ShowDeleted implements _ShowDeleted {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3161,9 +3374,12 @@ class _$_ShowDeleted implements _ShowDeleted {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3182,6 +3398,7 @@ class _$_ShowDeleted implements _ShowDeleted {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -3197,6 +3414,7 @@ class _$_ShowDeleted implements _ShowDeleted {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3212,6 +3430,7 @@ class _$_ShowDeleted implements _ShowDeleted {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3304,9 +3523,12 @@ class _$_LicenceDetails implements _LicenceDetails {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -3321,9 +3543,12 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3338,9 +3563,12 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3359,6 +3587,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -3374,6 +3603,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3389,6 +3619,7 @@ class _$_LicenceDetails implements _LicenceDetails {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3417,7 +3648,7 @@ abstract class _LicenceDetails implements OnboardingState {
 abstract class _$$_FormCopyWith<$Res> {
   factory _$$_FormCopyWith(_$_Form value, $Res Function(_$_Form) then) =
       __$$_FormCopyWithImpl<$Res>;
-  $Res call({String userName, String? errorDescription});
+  $Res call({String userName, bool hideChangeButton, String? errorDescription});
 }
 
 /// @nodoc
@@ -3432,6 +3663,7 @@ class __$$_FormCopyWithImpl<$Res> extends _$OnboardingStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userName = freezed,
+    Object? hideChangeButton = freezed,
     Object? errorDescription = freezed,
   }) {
     return _then(_$_Form(
@@ -3439,6 +3671,10 @@ class __$$_FormCopyWithImpl<$Res> extends _$OnboardingStateCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      hideChangeButton: hideChangeButton == freezed
+          ? _value.hideChangeButton
+          : hideChangeButton // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorDescription: errorDescription == freezed
           ? _value.errorDescription
           : errorDescription // ignore: cast_nullable_to_non_nullable
@@ -3450,16 +3686,22 @@ class __$$_FormCopyWithImpl<$Res> extends _$OnboardingStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Form implements _Form {
-  _$_Form({required this.userName, this.errorDescription});
+  _$_Form(
+      {required this.userName,
+      this.hideChangeButton = false,
+      this.errorDescription});
 
   @override
   final String userName;
+  @override
+  @JsonKey()
+  final bool hideChangeButton;
   @override
   final String? errorDescription;
 
   @override
   String toString() {
-    return 'OnboardingState.form(userName: $userName, errorDescription: $errorDescription)';
+    return 'OnboardingState.form(userName: $userName, hideChangeButton: $hideChangeButton, errorDescription: $errorDescription)';
   }
 
   @override
@@ -3469,6 +3711,8 @@ class _$_Form implements _Form {
             other is _$_Form &&
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality()
+                .equals(other.hideChangeButton, hideChangeButton) &&
+            const DeepCollectionEquality()
                 .equals(other.errorDescription, errorDescription));
   }
 
@@ -3476,6 +3720,7 @@ class _$_Form implements _Form {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(userName),
+      const DeepCollectionEquality().hash(hideChangeButton),
       const DeepCollectionEquality().hash(errorDescription));
 
   @JsonKey(ignore: true)
@@ -3489,15 +3734,18 @@ class _$_Form implements _Form {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
         avatarPicker,
   }) {
-    return form(userName, errorDescription);
+    return form(userName, hideChangeButton, errorDescription);
   }
 
   @override
@@ -3506,15 +3754,18 @@ class _$_Form implements _Form {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
         avatarPicker,
   }) {
-    return form?.call(userName, errorDescription);
+    return form?.call(userName, hideChangeButton, errorDescription);
   }
 
   @override
@@ -3523,9 +3774,12 @@ class _$_Form implements _Form {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3533,7 +3787,7 @@ class _$_Form implements _Form {
     required TResult orElse(),
   }) {
     if (form != null) {
-      return form(userName, errorDescription);
+      return form(userName, hideChangeButton, errorDescription);
     }
     return orElse();
   }
@@ -3544,6 +3798,7 @@ class _$_Form implements _Form {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -3559,6 +3814,7 @@ class _$_Form implements _Form {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3574,6 +3830,7 @@ class _$_Form implements _Form {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3591,9 +3848,11 @@ class _$_Form implements _Form {
 abstract class _Form implements OnboardingState {
   factory _Form(
       {required final String userName,
+      final bool hideChangeButton,
       final String? errorDescription}) = _$_Form;
 
   String get userName;
+  bool get hideChangeButton;
   String? get errorDescription;
   @JsonKey(ignore: true)
   _$$_FormCopyWith<_$_Form> get copyWith => throw _privateConstructorUsedError;
@@ -3640,9 +3899,12 @@ class _$_Input implements _Input {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -3657,9 +3919,12 @@ class _$_Input implements _Input {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3674,9 +3939,12 @@ class _$_Input implements _Input {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3695,6 +3963,7 @@ class _$_Input implements _Input {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -3710,6 +3979,7 @@ class _$_Input implements _Input {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3725,6 +3995,7 @@ class _$_Input implements _Input {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3840,9 +4111,12 @@ class _$_AvatarPicker implements _AvatarPicker {
     required TResult Function() loading,
     required TResult Function() main,
     required TResult Function() showChat,
+    required TResult Function() showError,
     required TResult Function(DateTime deletedAt) showDeleted,
     required TResult Function(String licenceText) licenceDetails,
-    required TResult Function(String userName, String? errorDescription) form,
+    required TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)
+        form,
     required TResult Function() input,
     required TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)
@@ -3857,9 +4131,12 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3874,9 +4151,12 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function()? loading,
     TResult Function()? main,
     TResult Function()? showChat,
+    TResult Function()? showError,
     TResult Function(DateTime deletedAt)? showDeleted,
     TResult Function(String licenceText)? licenceDetails,
-    TResult Function(String userName, String? errorDescription)? form,
+    TResult Function(
+            String userName, bool hideChangeButton, String? errorDescription)?
+        form,
     TResult Function()? input,
     TResult Function(
             Avatar selectedAvatar, List<Avatar> avatars, String userName)?
@@ -3895,6 +4175,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Main value) main,
     required TResult Function(_ShowChat value) showChat,
+    required TResult Function(_ShowError value) showError,
     required TResult Function(_ShowDeleted value) showDeleted,
     required TResult Function(_LicenceDetails value) licenceDetails,
     required TResult Function(_Form value) form,
@@ -3910,6 +4191,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,
@@ -3925,6 +4207,7 @@ class _$_AvatarPicker implements _AvatarPicker {
     TResult Function(_Loading value)? loading,
     TResult Function(_Main value)? main,
     TResult Function(_ShowChat value)? showChat,
+    TResult Function(_ShowError value)? showError,
     TResult Function(_ShowDeleted value)? showDeleted,
     TResult Function(_LicenceDetails value)? licenceDetails,
     TResult Function(_Form value)? form,

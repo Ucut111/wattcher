@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class CustomColors {
   CustomColors._();
 
+  static const tooltipBackground = Color(0xff05ac4d);
+
+  static const emojiBackground = Color(0xfff1f1f1);
+
   static const primary = Color(0xFF00AB4E);
 
   static const onPrimary = Colors.white;
@@ -12,6 +16,8 @@ class CustomColors {
   static const gray200 = Color(0xFF555555);
 
   static const gray400 = Color(0xFF8A8B8A);
+
+  static const gray600 = Color(0xFFE4E4E4);
 
   static const gray800 = Color(0xFFE9E9E9);
 
@@ -34,6 +40,8 @@ class CustomColors {
   static const textTertiary = Color(0xFFA1A3A1);
 
   static const paragraphTextColor = Color.fromRGBO(0, 0, 0, 0.8);
+
+  static const dateTextColor = Color.fromRGBO(0, 0, 0, 0.3);
 
   static const contributionTextColor = Color.fromRGBO(255, 255, 255, 0.4);
 

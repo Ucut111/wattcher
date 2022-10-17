@@ -32,7 +32,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
       isLTR: !isSentByUser,
       position: PreferredPosition.top,
       controller: _controller,
-      pressType: PressType.singleClick,
+      pressType: PressType.longPress,
       menuBuilder: () {
         return ClipRRect(
           borderRadius: BorderRadius.circular(12),
@@ -68,11 +68,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
             });
           },
         ),
-        const Divider(
-          indent: 12,
-          height: 1,
-          color: CustomColors.divider,
-        ),
+        _buildDivider(),
         PopupMenuItemWidget(
           titleText: 'Копировать',
           iconPath: Resources.copy,
@@ -85,12 +81,9 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
             });
           },
         ),
-        const Divider(
-          indent: 12,
-          height: 1,
-          color: CustomColors.divider,
-        ),
+        _buildDivider(),
         if (isModer) ...[
+          ..._buildPinnedMessageMenu(isPinned: message.isPinned, bloc: bloc, context: context),
           if (message.isVisible)
             PopupMenuItemWidget(
               titleText: 'Скрыть сообщение',
@@ -121,11 +114,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
                 });
               },
             ),
-          const Divider(
-            indent: 12,
-            height: 1,
-            color: CustomColors.divider,
-          ),
+          _buildDivider(),
         ],
         PopupMenuItemWidget(
           titleText: 'Сообщить о нарушении',
@@ -152,11 +141,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
             });
           },
         ),
-        const Divider(
-          indent: 12,
-          height: 1,
-          color: CustomColors.divider,
-        ),
+        _buildDivider(),
         PopupMenuItemWidget(
           titleText: 'Изменить',
           iconPath: Resources.edit,
@@ -166,11 +151,7 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
             });
           },
         ),
-        const Divider(
-          indent: 12,
-          height: 1,
-          color: CustomColors.divider,
-        ),
+        _buildDivider(),
         PopupMenuItemWidget(
           titleText: 'Копировать',
           iconPath: Resources.copy,
@@ -183,11 +164,9 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
             });
           },
         ),
-        const Divider(
-          indent: 12,
-          height: 1,
-          color: CustomColors.divider,
-        ),
+        _buildDivider(),
+        if (isModer)
+          ..._buildPinnedMessageMenu(isPinned: message.isPinned, bloc: bloc, context: context),
         PopupMenuItemWidget(
           titleText: 'Удалить',
           iconPath: Resources.remove,
@@ -198,5 +177,51 @@ class MessagePopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent,
             });
           },
         ),
+      ];
+
+  Widget _buildDivider() {
+    return const Divider(
+      indent: 12,
+      height: 1,
+      thickness: 1,
+      color: CustomColors.divider,
+    );
+  }
+
+  List<Widget> _buildPinnedMessageMenu({
+    required bool isPinned,
+    required ChatBloc bloc,
+    required BuildContext context,
+  }) =>
+      [
+        if (message.isPinned)
+          PopupMenuItemWidget(
+            titleText: 'Открепить',
+            iconPath: Resources.unpin,
+            onTap: () {
+              _onMenuTap(() {
+                bloc.setPinnedMessage(ChatEventSetPinnedMessage(
+                  context: context,
+                  message: message,
+                  isPinned: false,
+                ));
+              });
+            },
+          )
+        else
+          PopupMenuItemWidget(
+            titleText: 'Закрепить',
+            iconPath: Resources.pin,
+            onTap: () {
+              _onMenuTap(() {
+                bloc.setPinnedMessage(ChatEventSetPinnedMessage(
+                  context: context,
+                  message: message,
+                  isPinned: true,
+                ));
+              });
+            },
+          ),
+        _buildDivider(),
       ];
 }

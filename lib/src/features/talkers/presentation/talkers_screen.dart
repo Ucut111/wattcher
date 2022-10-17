@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watchers_widget/src/core/base/bloc_injectable_state.dart';
+import 'package:watchers_widget/src/core/utils/transitions.dart';
 import 'package:watchers_widget/src/features/chat/presentation/logic/chat_bloc.dart';
 import 'package:watchers_widget/src/features/common/widgets/loading_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/modal_title_widget.dart';
@@ -26,13 +27,11 @@ class TalkersScreen extends StatefulWidget {
     required void Function(Talker talker, bool isBanned) onToggleUserBan,
     required void Function(Talker talker, bool isVisible) onToggleMessagesVisibility,
   }) =>
-      MaterialPageRoute(
-        builder: (_) => TalkersScreen(
-          bloc: bloc,
-          onToggleUserBan: onToggleUserBan,
-          onToggleMessagesVisibility: onToggleMessagesVisibility,
-        ),
-      );
+      Transitions.buildFadeTranstion(TalkersScreen(
+        bloc: bloc,
+        onToggleUserBan: onToggleUserBan,
+        onToggleMessagesVisibility: onToggleMessagesVisibility,
+      ));
 
   @override
   State<TalkersScreen> createState() => _TalkersScreenState();

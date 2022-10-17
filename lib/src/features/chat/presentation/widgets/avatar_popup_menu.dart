@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:watchers_widget/src/core/base/dependent_stateless_widget.dart';
 import 'package:watchers_widget/src/core/constants/custom_colors.dart';
 import 'package:watchers_widget/src/core/constants/resources.dart';
+import 'package:watchers_widget/src/core/constants/text_styles.dart';
 import 'package:watchers_widget/src/features/chat/presentation/logic/chat_bloc.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/custom_popup_menu.dart';
 import 'package:watchers_widget/src/features/chat/presentation/widgets/popup_menu_item.dart';
@@ -30,7 +31,7 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
       isLTR: true,
       position: PreferredPosition.top,
       controller: _controller,
-      pressType: PressType.singleClick,
+      pressType: PressType.longPress,
       menuBuilder: () {
         return ClipRRect(
           borderRadius: BorderRadius.circular(12),
@@ -56,6 +57,17 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
   }
 
   List<Widget> _userMenu(ChatBloc bloc, BuildContext context) => [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(message.talker.user.name,
+                  style: TextStyles.title(fontWeight: FontWeight.w400, fontSize: 17)),
+            ],
+          ),
+        ),
         PopupMenuItemWidget(
           titleText: 'Заблокировать',
           iconPath: Resources.report,
@@ -69,6 +81,17 @@ class AvatarPopupMenu extends BlocDependentStatelessWidget<ChatBloc, ChatEvent, 
       ];
 
   List<Widget> _moderMenu(ChatBloc bloc, BuildContext context) => [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(message.talker.user.name,
+                  style: TextStyles.title(fontWeight: FontWeight.w400, fontSize: 17)),
+            ],
+          ),
+        ),
         if (message.talker.isSupressed)
           PopupMenuItemWidget(
             titleText: 'Показать сообщения',

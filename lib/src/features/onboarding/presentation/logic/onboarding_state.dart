@@ -8,6 +8,8 @@ class OnboardingState with _$OnboardingState {
 
   factory OnboardingState.showChat() = _ShowChat;
 
+  factory OnboardingState.showError() = _ShowError;
+
   factory OnboardingState.showDeleted({
     required DateTime deletedAt,
   }) = _ShowDeleted;
@@ -18,6 +20,7 @@ class OnboardingState with _$OnboardingState {
 
   factory OnboardingState.form({
     required String userName,
+    @Default(false) bool hideChangeButton,
     String? errorDescription,
   }) = _Form;
 

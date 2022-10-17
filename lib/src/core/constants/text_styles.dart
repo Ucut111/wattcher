@@ -14,7 +14,7 @@ class TextStyles {
 
   static TextStyle title({
     double fontSize = 17,
-    FontWeight fontWeight = FontWeight.w500,
+    FontWeight fontWeight = FontWeight.w400,
     Color color = CustomColors.textMain,
   }) =>
       TextStyle(
@@ -52,12 +52,15 @@ class TextStyles {
     fontSize: 14,
   );
 
-  static const secondary = TextStyle(
-    color: CustomColors.textSecondary,
-    fontFamily: 'Inter',
-    fontSize: 15,
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle secondary({
+    double fontSize = 15,
+  }) =>
+      TextStyle(
+        color: CustomColors.textSecondary,
+        fontFamily: 'Inter',
+        fontSize: fontSize,
+        fontWeight: FontWeight.w400,
+      );
 
   static TextStyle onPrimary({
     double fontSize = 15,
@@ -83,6 +86,7 @@ class TextStyles {
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
     fontSize: 15,
+    decoration: TextDecoration.none
   );
 
   static TextStyle errorTextStyle({

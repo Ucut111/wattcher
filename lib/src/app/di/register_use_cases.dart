@@ -34,6 +34,8 @@ void _registerUseCases() {
   locator.registerFactory(() => SetMessagesVisibleUseCase(chatRepository: locator()));
   locator.registerFactory(() => SetBanUseCase(chatRepository: locator()));
   locator.registerFactory(() => CloseSocketUseCase(chatRepository: locator()));
+  locator.registerFactory(() => GetConnectivityChangeStreamUseCase(chatRepository: locator()));
+  locator.registerFactory(() => SetPinnedMessageUseCase(locator()));
 
   // Emotions
   locator.registerFactory(() => const GetAllEmotionsUseCase());
@@ -47,4 +49,8 @@ void _registerUseCases() {
 
   //
   locator.registerFactory(() => GetSocketUseCase(chatRepository: locator()));
+
+  // Tooltips
+  locator.registerFactory(() => IsShowTooltipUseCase(locator()));
+  locator.registerFactory(() => CompleteTooltipUseCase(locator()));
 }

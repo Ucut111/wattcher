@@ -18,6 +18,8 @@ class Resources {
   static const brick = 'assets/icons/brick.svg';
   static const speaker = 'assets/icons/speaker.svg';
   static const send = 'assets/icons/send.svg';
+  static const email = 'assets/icons/email.svg';
+  static const arrow_down = 'assets/icons/arrow_down.svg';
 
   // popup menu
   static const reply = 'assets/icons/answer.svg';
@@ -33,4 +35,9 @@ class Resources {
 
   static const loader = 'assets/icons/loader.svg';
   static const be_first = 'assets/icons/be_first.svg';
+
+  static const no_internet = 'assets/icons/no_internet.svg';
+  static const unpin = 'assets/icons/unpin.svg';
+
+  static const info = 'assets/icons/info.svg';
 }

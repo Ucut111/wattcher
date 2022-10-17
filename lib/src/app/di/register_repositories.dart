@@ -7,4 +7,5 @@ void _registerRepositories() {
   locator.registerLazySingleton<IChatRepository>(() => ChatRepository(locator(), locator()));
   locator.registerLazySingleton<IRoomRepository>(() => RoomRepository(locator()));
   locator.registerLazySingleton<ITalkerRepository>(() => TalkerRepository(locator()));
+  locator.registerLazySingleton<IWordlistRepository>(() => WordlistRepository(locator()));
 }

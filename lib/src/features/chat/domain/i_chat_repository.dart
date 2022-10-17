@@ -1,8 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:watchers_widget/src/features/chat/data/request/report_message_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/set_ban_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/set_message_visible_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/set_messages_visible_request.dart';
+import 'package:watchers_widget/src/features/chat/data/request/set_pinned_message_request.dart';
 import 'package:watchers_widget/src/features/chat/domain/models/emotion.dart';
 import 'package:watchers_widget/src/features/common/models/message.dart';
 
@@ -38,17 +40,11 @@ abstract class IChatRepository {
     required Function(String, dynamic) eventHandler,
   });
 
-  void sendMessage({
-    required SendMessageRequest sendMessageRequest,
-  });
+  void sendMessage({required SendMessageRequest sendMessageRequest});
 
-  void editMessage({
-    required EditMessageRequest editMessageRequest,
-  });
+  void editMessage({required EditMessageRequest editMessageRequest});
 
-  void deleteMessage({
-    required DeleteMessageRequest deleteMessageRequest,
-  });
+  void deleteMessage({required DeleteMessageRequest deleteMessageRequest});
 
   Future<Message> checkMessage({
     required Message message,
@@ -59,21 +55,17 @@ abstract class IChatRepository {
     required String externalRoomId,
   });
 
-  void setMessageVisible({
-    required SetMessageVisibleRequest setMessageVisibleRequest,
-  });
+  void setMessageVisible({required SetMessageVisibleRequest setMessageVisibleRequest});
 
-  void setMessagesVisible({
-    required SetMessagesVisibleRequest setMessagesVisibleRequest,
-  });
+  void setMessagesVisible({required SetMessagesVisibleRequest setMessagesVisibleRequest});
 
-  void setBan({
-    required SetBanRequest setBanRequest,
-  });
+  void setBan({required SetBanRequest setBanRequest});
 
-  Future<void> reportMessage({
-    required ReportMessageRequest reportMessageRequest,
-  });
+  void setPinnedMessage({required SetPinnedMessageRequest setPinnedMessageRequest});
+
+  Future<void> reportMessage({required ReportMessageRequest reportMessageRequest});
 
   void close();
+
+  Stream<ConnectivityResult> get onConnectivityChanged$;
 }

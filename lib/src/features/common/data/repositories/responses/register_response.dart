@@ -7,6 +7,7 @@ class RegisterResponse {
   final bool isDeleted;
   final String accessToken;
   final AuthUser user;
+
   RegisterResponse({
     required this.isNew,
     required this.isDeleted,

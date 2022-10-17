@@ -92,7 +92,7 @@ class _TalkerActionMenuState extends State<TalkerActionMenu> {
                               'admin',
                               style: TextStyles.title(
                                 fontSize: 15,
-                                color: CustomColors.contributionTextColor,
+                                color: CustomColors.textSecondary,
                               ),
                             ),
                           ],

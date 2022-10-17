@@ -5,6 +5,7 @@ void _registerBlocs() {
         registerUserUseCase: locator(),
         updateUserUseCase: locator(),
         getAllAvatarsUseCase: locator(),
+        antiSwearingFuture: locator.getAsync(),
         params: params,
       ));
 
@@ -15,32 +16,39 @@ void _registerBlocs() {
         updateUserUseCase: locator(),
         removeBlockUseCase: locator(),
         deleteUserUseCase: locator(),
+        antiSwearingFuture: locator.getAsync(),
+        getConnectivityChangeStreamUseCase: locator(),
       ));
 
   locator.registerFactoryParam<ChatBloc, String, void>((externalRoomId, _) => ChatBloc(
-        getMessageArrayUseCase: locator(),
-        getPinnedMessageUseCase: locator(),
-        joinRoomUseCase: locator(),
-        sendMessageUseCase: locator(),
-        checkMessageUseCase: locator(),
-        sendEmotionUseCase: locator(),
         externalRoomId: externalRoomId,
-        getAllEmotionsUseCase: locator(),
-        getEmotionByNameScenario: locator(),
-        getTalkersUseCase: locator(),
-        deleteMessageUseCase: locator(),
-        editMessageUseCase: locator(),
-        reportMessageUseCase: locator(),
-        addBlockUseCase: locator(),
-        setMessageVisibleUseCase: locator(),
-        setMessagesVisibleUseCase: locator(),
-        setBanUseCase: locator(),
-        getBlocksUseCase: locator(),
-        closeSocketUseCase: locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator.getAsync(),
       ));
 
   locator.registerFactoryParam((DeletedProfileBlocParams params, _) => DeletedProfileBloc(
         params,
         locator(),
       ));
+
+  locator.registerFactory(() => TooltipCubit(locator(), locator()));
 }

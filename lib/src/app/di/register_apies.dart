@@ -7,4 +7,5 @@ void _registerApies() {
   locator.registerLazySingleton(() => ChatApi.create(locator()));
   locator.registerLazySingleton(() => TalkerApi(locator()));
   locator.registerLazySingleton(() => RoomApi(locator()));
+  locator.registerLazySingleton(() => WordlistApi(locator()));
 }

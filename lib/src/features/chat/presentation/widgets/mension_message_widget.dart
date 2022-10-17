@@ -15,14 +15,13 @@ class MentionMessageWidget extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.translucent,
       child: Row(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             width: 3,
             height: 36,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: CustomColors.textMain,
+              color: CustomColors.gray400,
             ),
           ),
           const SizedBox(width: 5),
@@ -32,7 +31,7 @@ class MentionMessageWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                mentionMessage.user.name,
+                mentionMessage.talker.user.name,
                 style: TextStyles.title(fontSize: 13),
               ),
               Flexible(

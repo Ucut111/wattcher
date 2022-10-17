@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:intl/intl.dart';
+import 'package:watchers_widget/src/app/di/locator.dart';
 
 import 'package:watchers_widget/src/features/common/models/talker.dart';
 import 'package:watchers_widget/src/features/common/models/user.dart';
@@ -15,13 +14,14 @@ class Message {
   final String externalRoomId;
   final int creatorId;
   final Message? mentionMessage;
-  final User user;
   final Talker talker;
   final String? updatedAt;
   final String createdAt;
+  final String serverDateTime;
 
   // Todo(Dartloli): add message factory (check user.id before constuctor)
   bool? isMyMessage;
+  bool? isMentionMe;
 
   Message({
     required this.id,
@@ -32,27 +32,21 @@ class Message {
     required this.hasPreview,
     required this.externalRoomId,
     required this.creatorId,
+    required this.serverDateTime,
     this.mentionMessage,
     required this.talker,
     this.updatedAt,
     required this.createdAt,
-    required this.user,
+    this.isMyMessage,
+    this.isMentionMe,
   });
 
   Map<String, dynamic> toMap() {
     return {
       //'id': id,
       'text': text,
-      //'type': type,
-      //'isVisible': isVisible,
-      //'isPinned': isPinned,
-      //'hasPreview': hasPreview,
       'externalRoomId': externalRoomId,
-      //'creatorId': creatorId,
       'mentionMessageId': mentionMessage?.id,
-      //'talker': talker.toJson(),
-      //'updatedAt': updatedAt,
-      //'createdAt': createdAt,
     };
   }
 
@@ -66,9 +60,9 @@ class Message {
         if ((serverDateTime.day == today.day) &&
             (serverDateTime.month == today.month) &&
             (serverDateTime.year == today.year)) {
-          return DateFormat('HH:mm').format(serverDateTime.toLocal());
+          return buildDateFormat('HH:mm').format(serverDateTime.toLocal());
         } else {
-          return DateFormat('HH:mm, dd MMMM').format(serverDateTime.toLocal());
+          return buildDateFormat('HH:mm, dd MMMM').format(serverDateTime.toLocal());
         }
       }
     }
@@ -84,9 +78,9 @@ class Message {
       creatorId: map['creatorId']?.toInt() ?? 0,
       mentionMessage: map['mentionMessage'] != null ? Message.fromMap(map['mentionMessage']) : null,
       talker: Talker.fromMap(map['talker']),
-      user: User.fromMap(map['user'] as Map<String, dynamic>),
       updatedAt: _formatDate(map['updatedAt']),
       createdAt: _formatDate(map['createdAt']) ?? '',
+      serverDateTime: map['createdAt'],
     );
   }
 
@@ -108,6 +102,7 @@ class Message {
     User? user,
     String? updatedAt,
     String? createdAt,
+    String? serverDateTime,
   }) {
     return Message(
         id: id ?? this.id,
@@ -120,8 +115,10 @@ class Message {
         creatorId: creatorId ?? this.creatorId,
         mentionMessage: mentionMessage ?? this.mentionMessage,
         talker: talker ?? this.talker,
-        user: user ?? this.user,
         updatedAt: updatedAt ?? this.updatedAt,
-        createdAt: createdAt ?? this.createdAt);
+        createdAt: createdAt ?? this.createdAt,
+        serverDateTime: serverDateTime ?? this.serverDateTime,
+        isMyMessage: isMyMessage,
+        isMentionMe: isMentionMe);
   }
 }

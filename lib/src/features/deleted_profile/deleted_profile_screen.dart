@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watchers_widget/src/core/base/bloc_injectable_state.dart';
 import 'package:watchers_widget/src/core/constants/text_styles.dart';
+import 'package:watchers_widget/src/core/utils/transitions.dart';
 import 'package:watchers_widget/src/features/common/widgets/contribution_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/loading_widget.dart';
 import 'package:watchers_widget/src/features/common/widgets/modal_widget.dart';
@@ -13,9 +14,8 @@ class DeletedProfileScreen extends StatefulWidget {
 
   final DeletedProfileBlocParams params;
 
-  static Route route(DeletedProfileBlocParams params) => MaterialPageRoute(
-        builder: (_) => DeletedProfileScreen(params),
-      );
+  static Route route(DeletedProfileBlocParams params) =>
+      Transitions.buildFadeTranstion(DeletedProfileScreen(params));
 
   @override
   State<DeletedProfileScreen> createState() => _DeletedProfileScreenState(params);
@@ -34,7 +34,7 @@ class _DeletedProfileScreenState extends BlocInjectableState<DeletedProfileScree
           title: Center(
             child: Text(
               'Профиль удален',
-              style: TextStyles.title(),
+              style: TextStyles.title(fontWeight: FontWeight.w600),
             ),
           ),
           submitButton: Column(
@@ -48,7 +48,10 @@ class _DeletedProfileScreenState extends BlocInjectableState<DeletedProfileScree
             ],
           ),
           children: [
-            Text('Вы можете восстановить свой профиль до ${state.formatedDate}'),
+            Text(
+              'Вы можете восстановить свой профиль до ${state.formatedDate}',
+              style: TextStyles.primary,
+            ),
           ],
         ),
       ),

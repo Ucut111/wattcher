@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:watchers_widget/src/features/common/models/user.dart';
 
-class Talker {
+class Talker extends Equatable {
   final int id;
   final bool hand;
   final bool isActive;
@@ -80,4 +81,7 @@ class Talker {
       user: user ?? this.user,
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }

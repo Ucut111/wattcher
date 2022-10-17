@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:watchers_widget/src/features/chat/data/chat_api.dart';
 import 'package:watchers_widget/src/features/chat/data/request/delete_message_request.dart';
@@ -15,6 +16,8 @@ import 'package:watchers_widget/src/features/common/data/shared_preferences_stor
 import 'package:watchers_widget/src/features/common/models/app_settings.dart';
 import 'package:watchers_widget/src/features/common/models/message.dart';
 import 'package:watchers_widget/src/features/common/models/room.dart';
+
+import 'request/set_pinned_message_request.dart';
 
 class ChatRepository implements IChatRepository {
   final SharedPreferencesEntityStorage _entityStorage;
@@ -48,11 +51,14 @@ class ChatRepository implements IChatRepository {
     ).then((response) => response.data);
 
     final userMap = jsonDecode(await _entityStorage.get(AppSettings.user));
-
     return (responseData as List).map<Message>((messageData) {
       final message = Message.fromMap(messageData);
-      message.isMyMessage = userMap['id'] == message.user.id;
-      return message;
+      message.isMyMessage = userMap['id'] == message.talker.user.id;
+      if (userMap['id'] == message.talker.user.id) {
+        return message.copyWith(isVisible: true);
+      } else {
+        return message;
+      }
     }).toList();
   }
 
@@ -80,9 +86,7 @@ class ChatRepository implements IChatRepository {
   }
 
   @override
-  Future<void> reportMessage({
-    required ReportMessageRequest reportMessageRequest,
-  }) async {
+  Future<void> reportMessage({required ReportMessageRequest reportMessageRequest}) async {
     await _chatApi.reportMessage(reportMessageRequest);
   }
 
@@ -96,9 +100,7 @@ class ChatRepository implements IChatRepository {
   }
 
   @override
-  void sendMessage({
-    required SendMessageRequest sendMessageRequest,
-  }) {
+  void sendMessage({required SendMessageRequest sendMessageRequest}) {
     _chatApi.sendMessage(sendMessageRequest);
   }
 
@@ -108,6 +110,8 @@ class ChatRepository implements IChatRepository {
   }) async {
     final userMap = jsonDecode(await _entityStorage.get(AppSettings.user));
     message.isMyMessage = message.creatorId == userMap['id'];
+    message.isMentionMe =
+        message.mentionMessage != null && message.mentionMessage!.creatorId == userMap['id'];
     return message;
   }
 
@@ -120,38 +124,33 @@ class ChatRepository implements IChatRepository {
   }
 
   @override
-  void setMessageVisible({
-    required SetMessageVisibleRequest setMessageVisibleRequest,
-  }) {
+  void setMessageVisible({required SetMessageVisibleRequest setMessageVisibleRequest}) {
     _chatApi.setMessageVisible(setMessageVisibleRequest);
   }
 
   @override
-  void setMessagesVisible({
-    required SetMessagesVisibleRequest setMessagesVisibleRequest,
-  }) {
+  void setMessagesVisible({required SetMessagesVisibleRequest setMessagesVisibleRequest}) {
     _chatApi.setMessagesVisible(setMessagesVisibleRequest);
   }
 
   @override
-  void setBan({
-    required SetBanRequest setBanRequest,
-  }) {
+  void setBan({required SetBanRequest setBanRequest}) {
     _chatApi.setBan(setBanRequest);
   }
 
   @override
-  void editMessage({
-    required EditMessageRequest editMessageRequest,
-  }) {
+  void editMessage({required EditMessageRequest editMessageRequest}) {
     _chatApi.editMessage(editMessageRequest);
   }
 
   @override
-  void deleteMessage({
-    required DeleteMessageRequest deleteMessageRequest,
-  }) {
+  void deleteMessage({required DeleteMessageRequest deleteMessageRequest}) {
     _chatApi.deleteMessage(deleteMessageRequest);
+  }
+
+  @override
+  void setPinnedMessage({required SetPinnedMessageRequest setPinnedMessageRequest}) {
+    return _chatApi.setPinnedMessage(setPinnedMessageRequest);
   }
 
   @override
@@ -163,4 +162,7 @@ class ChatRepository implements IChatRepository {
   void close() {
     _chatApi.close();
   }
+
+  @override
+  Stream<ConnectivityResult> get onConnectivityChanged$ => _chatApi.onConnectivityChanged$;
 }

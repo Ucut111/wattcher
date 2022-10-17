@@ -19,6 +19,18 @@ class CustomBlocObserver extends BlocObserver {
   }
 
   @override
+  void onChange(BlocBase bloc, Change change) {
+    if (bloc.runtimeType is Cubit) {
+      final message = "${bloc.runtimeType}'s state changed\n"
+          '  From:      ${_toString(change.currentState)}\n'
+          '  To:        ${_toString(change.nextState)}\n';
+
+      log.debug(message);
+    }
+    super.onChange(bloc, change);
+  }
+
+  @override
   void onTransition(Bloc bloc, Transition transition) {
     final nextState = transition.nextState;
 

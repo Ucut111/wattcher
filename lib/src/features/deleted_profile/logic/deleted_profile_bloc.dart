@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+import 'package:watchers_widget/src/app/di/locator.dart';
 import 'package:watchers_widget/src/features/common/domain/use_cases/user/restore_user_use_case.dart';
-import 'package:watchers_widget/src/features/common/widgets/dialogs/confirm_dialog.dart';
 import 'package:watchers_widget/src/features/common/widgets/dialogs/info_dialog.dart';
 import 'package:watchers_widget/src/features/deleted_profile/logic/deleted_profile_bloc_params.dart';
 import 'package:watchers_widget/src/features/onboarding/presentation/logic/onboarding_bloc.dart';
@@ -28,8 +26,7 @@ class DeletedProfileBloc extends Bloc<DeletedProfileEvent, DeletedProfileState> 
   }
 
   Future<void> _onInit(_Init event, Emitter<DeletedProfileState> emit) async {
-    initializeDateFormatting('ru', null);
-    final DateFormat dateFormat = DateFormat('hh:mm d MMMM y', 'ru');
+    final dateFormat = buildDateFormat('hh:mm d MMMM y');
     final formatedDate = dateFormat.format(_params.deletedAt.add(const Duration(days: 30)));
 
     emit(DeletedProfileState.loaded(formatedDate: formatedDate));
@@ -48,6 +45,7 @@ class DeletedProfileBloc extends Bloc<DeletedProfileEvent, DeletedProfileState> 
     context.read<OnboardingBloc>().add(const OnboardingEvent.showChat());
 
     showDialog(
+      useRootNavigator: false,
       context: context,
       builder: (_) => const InfoDialog(
         titleText: 'Профиль востановлен',

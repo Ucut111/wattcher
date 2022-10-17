@@ -6,9 +6,13 @@ class ChatState with _$ChatState {
 
   factory ChatState.loading() = _Loading;
   factory ChatState.loaded({
+    @Default(false) bool largeMessage,
     Message? pinnedMessage,
     @Default(false) bool isLoadingMoreMessages,
     @Default(false) bool isLoadedAllMessages,
+    int? firstUnreadMessageIndex,
+    @Default([]) List<Message> unreadMessages,
+    @Default(0) int unreadMentions,
     required String externalRoomId,
     required List<Talker> talkers,
     required List<Message> messages,
@@ -19,6 +23,9 @@ class ChatState with _$ChatState {
     MessageInputType? messageInputType,
     required List<int> initiatorIds,
     required List<int> targetIds,
+    @Default(false) bool noneConnection,
+    @Default(false) bool showEmojiPannel,
+    required Emotion selectedEmotion,
   }) = ChatStateLoaded;
 
   bool get isChatEmpty => maybeMap(

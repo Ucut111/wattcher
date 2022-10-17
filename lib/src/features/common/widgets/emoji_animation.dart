@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watchers_widget/src/core/constants/constants.dart';
 
 class EmojiAnimation extends StatefulWidget {
   final Widget child;
@@ -24,7 +25,7 @@ class _EmojiAnimationState extends State<EmojiAnimation> with SingleTickerProvid
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: Constants.emojiAnimationDuration,
     )..addStatusListener(
         (status) {
           if (status == AnimationStatus.completed) {
@@ -33,6 +34,7 @@ class _EmojiAnimationState extends State<EmojiAnimation> with SingleTickerProvid
         },
       );
     _startAnimation();
+
     super.initState();
   }
 
@@ -46,7 +48,7 @@ class _EmojiAnimationState extends State<EmojiAnimation> with SingleTickerProvid
 
   @override
   void didUpdateWidget(covariant EmojiAnimation oldWidget) {
-    _startAnimation();
+    // _startAnimation();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -277,5 +279,11 @@ class _EmojiAnimationState extends State<EmojiAnimation> with SingleTickerProvid
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

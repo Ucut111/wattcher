@@ -27,9 +27,9 @@ class UserBannedWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20.fh),
-              const Text(
-                'Если у вас есть вопросы напишите нам help@partner_name.com',
-                style: TextStyles.secondary,
+              Text(
+                'Если у вас есть вопросы напишите нам ligastavok@watchers.io',
+                style: TextStyles.secondary(),
                 textAlign: TextAlign.center,
               ),
             ],

@@ -16,6 +16,7 @@ dependencies:
   formz: ^0.4.1
   flutter_linkify: ^5.0.2
   scroll_to_index: ^3.0.1
+  visibility_detector: ^0.3.3
   url_launcher: ^6.1.5
   socket_io_client: ^2.0.0
   freezed: ^2.1.0+1
@@ -34,6 +35,11 @@ dependencies:
   uuid: ^3.0.6
   flutter_lints: ^2.0.1
   flare_flutter: ^3.0.1
+  rxdart: ^0.27.5
+  connectivity_plus: ^2.3.8
+  just_the_tooltip: ^0.0.12
+  fluttertoast: ^8.0.9
+  tuple: ^2.0.1
 
 dev_dependencies:
   flutter_test:
