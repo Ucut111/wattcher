@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:watchers_widget/src/features/chat/domain/i_chat_repository.dart';
 
 class GetConnectivityChangeStreamUseCase {

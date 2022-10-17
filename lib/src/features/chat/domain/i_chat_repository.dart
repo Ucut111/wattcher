@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:watchers_widget/src/features/chat/data/request/report_message_request.dart';
 import 'package:watchers_widget/src/features/chat/data/request/set_ban_request.dart';

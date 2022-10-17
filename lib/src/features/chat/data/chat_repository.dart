@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:watchers_widget/src/features/chat/data/chat_api.dart';
 import 'package:watchers_widget/src/features/chat/data/request/delete_message_request.dart';
